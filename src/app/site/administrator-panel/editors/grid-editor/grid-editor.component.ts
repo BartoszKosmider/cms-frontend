@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { getNewGuid } from 'src/app/shared/models/app.model';
 import { getBlockComponent } from 'src/app/shared/models/default-components.model';
 import { IGrid } from 'src/app/shared/models/site.model';
 import { BaseEditor } from '../base-editor';
@@ -12,7 +11,7 @@ import { BaseEditor } from '../base-editor';
   inputs: BaseEditor.genericInputs,
 })
 export class GridEditorComponent extends BaseEditor<IGrid> {
-
+  public availableComponents = [getBlockComponent()];
 
   constructor(
     private store: Store,

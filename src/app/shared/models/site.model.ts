@@ -28,10 +28,10 @@ export interface IRow extends IBaseComponent {
 }
 
 export interface IGrid extends IBaseComponent {
-  components: GridComponent[];
+  components: GridComponentType[];
 }
 
-export type GridComponent = IBlockComponent | IImageComponent;
+export type GridComponentType = IBlockComponent | IImageComponent;
 
 export interface IBlockComponent extends IBaseComponent, IBaseGridComponent {
   text?: string;

@@ -29,6 +29,7 @@ import { RowEditorComponent } from './site/administrator-panel/editors/row-edito
 import { GridEditorComponent } from './site/administrator-panel/editors/grid-editor/grid-editor.component';
 import { SharedComponentsModule } from './shared/components/shared-components.module';
 import { SharedDirectivesModule } from './shared/directives/shared-directives.module';
+import { MaterialModule } from './shared/modules/material.module';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { SharedDirectivesModule } from './shared/directives/shared-directives.mo
     NgxEditorModule,
     SharedComponentsModule,
     SharedDirectivesModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

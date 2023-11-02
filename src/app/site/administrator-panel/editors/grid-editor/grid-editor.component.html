@@ -1,1 +1,8 @@
 <button (click)="addBlockComponent()">add block component</button>
+
+<div id="addComponentsList"
+  cdkDropList
+  [cdkDropListData]="availableComponents"
+  [cdkDropListConnectedTo]="'componentsList' + value.id">
+  <div *ngFor="let availableComponent of availableComponents" cdkDrag>{{availableComponent.type}}</div>
+</div>
