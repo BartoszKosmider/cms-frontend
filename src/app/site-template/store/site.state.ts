@@ -2,14 +2,13 @@ import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext, createSelector } from "@ngxs/store";
 import { ISite, siteTest, IMenuItem, IBaseComponent, IHeader, IFooter, IRow, ComponentType } from '../../shared/models/site.model';
 import { AddNewRow, GetSite, SetComponentToEdit, SetPageId, ToggleEditMode, UpdateRowColumns } from './site.actions';
-import { append, iif, patch, updateItem } from "@ngxs/store/operators";
-import { produce } from "immer";
+import { append, patch, updateItem } from "@ngxs/store/operators";
 import { getGrid, getRow } from '../../shared/models/default-components.model';
 import * as _ from "lodash";
 
 export interface ISiteState {
   site: ISite;
-  pageId?: string;
+  pageId: string;
   componentToEdit?: IBaseComponent;
   isEditMode: boolean;
 }
@@ -18,6 +17,7 @@ export interface ISiteState {
   name: 'SiteState',
   defaults: {
     site: siteTest,
+    pageId: '',
     isEditMode: true,
   },
 })
@@ -42,7 +42,7 @@ export class SiteState {
 
   @Selector()
   public static pageId(state: ISiteState): string {
-    return state.pageId ?? '1';
+    return state.pageId;
   }
 
   @Selector()
@@ -143,7 +143,5 @@ export class SiteState {
     ctx.patchState({
       isEditMode: !isEditMode,
     });
-
-    console.log('toggle', ctx.getState().isEditMode)
   }
 }
