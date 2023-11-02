@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext, createSelector } from "@ngxs/store";
 import { ISite, siteTest, IMenuItem, IBaseComponent, IHeader, IFooter, IRow, ComponentType } from '../../shared/models/site.model';
-import { AddNewRow, GetSite, SetComponentToEdit, SetPageId, UpdateRowColumns } from './site.actions';
+import { AddNewRow, GetSite, SetComponentToEdit, SetPageId, ToggleEditMode, UpdateRowColumns } from './site.actions';
 import { append, iif, patch, updateItem } from "@ngxs/store/operators";
 import { produce } from "immer";
 import { getGrid, getRow } from '../../shared/models/default-components.model';
@@ -11,12 +11,14 @@ export interface ISiteState {
   site: ISite;
   pageId?: string;
   componentToEdit?: IBaseComponent;
+  isEditMode: boolean;
 }
 
 @State<ISiteState>({
   name: 'SiteState',
   defaults: {
     site: siteTest,
+    isEditMode: true,
   },
 })
 @Injectable()
@@ -62,6 +64,11 @@ export class SiteState {
   @Selector()
   public static componentToEdit(state: ISiteState): IBaseComponent | undefined {
     return state.componentToEdit;
+  }
+
+  @Selector()
+  public static isEditMode(state: ISiteState): boolean {
+    return state.isEditMode;
   }
 
   @Action(GetSite)
@@ -128,5 +135,15 @@ export class SiteState {
         })),
       }),
     }));
+  }
+
+  @Action(ToggleEditMode)
+  public toggleEditMode(ctx: StateContext<ISiteState>): void {
+    const isEditMode = ctx.getState().isEditMode;
+    ctx.patchState({
+      isEditMode: !isEditMode,
+    });
+
+    console.log('toggle', ctx.getState().isEditMode)
   }
 }

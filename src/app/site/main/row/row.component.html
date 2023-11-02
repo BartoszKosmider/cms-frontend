@@ -1,7 +1,16 @@
-<button (click)="setRowToEdit()">edit row</button>
+<app-edit-button
+  [text]="'Row'"
+  [clickAction]="setRowToEdit()">
+</app-edit-button>
 <div class="row">
   <div [class]="'col'" *ngFor="let grid of row.gridItems; trackBy: trackByIndex">
-    <button (click)="setGridToEdit(grid)">edit grid</button>
+    <app-edit-button
+      [text]="'Grid'"
+      [clickAction]="setGridToEdit(grid)">
+    </app-edit-button>
+    <app-delete-button
+      [clickAction]="deleteGrid(grid)">
+    </app-delete-button>
     <app-grid [grid]="grid"></app-grid>
   </div>
 </div>

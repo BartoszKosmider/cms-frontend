@@ -1,6 +1,12 @@
 <div *ngFor="let component of grid.components; trackBy: trackByIndex">
   <div [ngSwitch]="component.type">
-    <button (click)="setComponentToEdit(component)">edit component</button>
+    <app-edit-button
+      [text]="'Component'"
+      [clickAction]="setComponentToEdit(component)">
+    </app-edit-button>
+    <app-delete-button
+      [clickAction]="deleteComponent(component)">
+    </app-delete-button>
     <app-block *ngSwitchCase="baseComponentType.Block" [component]="component"></app-block>
     <app-image *ngSwitchCase="baseComponentType.Image" [component]="component"></app-image>
   </div>

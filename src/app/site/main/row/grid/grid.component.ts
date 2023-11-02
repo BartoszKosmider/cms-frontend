@@ -21,7 +21,13 @@ export class GridComponent {
     private store: Store,
   ) { }
 
-  public setComponentToEdit(component: IBaseComponent) {
-    this.store.dispatch(new SetComponentToEdit(component));
+  public setComponentToEdit(component: IBaseComponent): () => void {
+    return () => this.store.dispatch(new SetComponentToEdit(component));
+  }
+
+  public deleteComponent(component: IBaseComponent): () => void {
+    return () => {
+      this.grid.components = this.grid.components.filter(c => c.id !== component.id);
+    };
   }
 }

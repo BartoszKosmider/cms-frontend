@@ -25,11 +25,20 @@ export class RowComponent {
     this.store.select(SiteState.isRowSelected).pipe(tap(value => this.isRowSelected = value))
   }
 
-  public setRowToEdit(): void {
-    this.store.dispatch(new SetComponentToEdit(this.row));
+  public setRowToEdit(): () => void {
+    return () => this.store.dispatch(new SetComponentToEdit(this.row));
   }
 
-  public setGridToEdit(grid: IGrid): void {
-    this.store.dispatch(new SetComponentToEdit(grid));
+  public setGridToEdit(grid: IGrid): () => void {
+    return () => this.store.dispatch(new SetComponentToEdit(grid));
+  }
+
+  public deleteGrid(grid: IGrid): () => void {
+    return () => {
+      if (this.row.gridItems.length === 1) {
+        return;
+      }
+      this.row.gridItems = this.row.gridItems.filter(r => r.id !== grid.id)
+    };
   }
 }

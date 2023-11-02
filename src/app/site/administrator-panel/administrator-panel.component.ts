@@ -5,7 +5,7 @@ import { ComponentType, IBaseComponent } from 'src/app/shared/models/site.model'
 import * as _ from 'lodash';
 import { trackByIndex } from 'src/app/shared/models/app.model';
 import { SiteState } from 'src/app/site-template/store/site.state';
-import { AddNewRow, SetComponentToEdit } from '../../site-template/store/site.actions';
+import { AddNewRow, SetComponentToEdit, ToggleEditMode } from '../../site-template/store/site.actions';
 
 @Component({
   selector: 'app-administrator-panel',
@@ -29,10 +29,12 @@ export class AdministratorPanelComponent {
   }
 
   public addNewRow(): void {
-    // dodaje nowy wiersz do strony po id
     const pageId = this.store.selectSnapshot(SiteState.pageId);
-
     this.store.dispatch(new AddNewRow(pageId));
+  }
+
+  public toggleEditMode(): void {
+    this.store.dispatch(new ToggleEditMode());
   }
 
   public clear(): void {

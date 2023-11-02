@@ -24,3 +24,7 @@ export class UpdateRowColumns {
   public static readonly type = '[Site] Update row columns';
   public constructor(public rowId: string, public numberOfColumns: number) { }
 }
+
+export class ToggleEditMode {
+  public static readonly type = '[Site] Toggle edit mode';
+}

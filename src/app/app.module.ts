@@ -27,6 +27,8 @@ import { BlockEditorComponent } from './site/administrator-panel/editors/block-e
 import { FooterEditorComponent } from './site/administrator-panel/editors/footer-editor/footer-editor.component';
 import { RowEditorComponent } from './site/administrator-panel/editors/row-editor/row-editor.component';
 import { GridEditorComponent } from './site/administrator-panel/editors/grid-editor/grid-editor.component';
+import { SharedComponentsModule } from './shared/components/shared-components.module';
+import { SharedDirectivesModule } from './shared/directives/shared-directives.module';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { GridEditorComponent } from './site/administrator-panel/editors/grid-edi
     CommonModule,
     ReactiveFormsModule,
     NgxEditorModule,
+    SharedComponentsModule,
+    SharedDirectivesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
