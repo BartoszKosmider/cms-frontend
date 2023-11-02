@@ -1,12 +1,8 @@
-<div class="container">
-  <app-header></app-header>
-  <app-menu></app-menu>
-</div>
-
-<div class="container">
-  <app-main></app-main>
-</div>
-
-<div>
-  <app-footer></app-footer>
+<div class="row">
+  <div [ngClass]="isLogged ? 'col-9' : 'col-12'">
+    <app-main></app-main>
+  </div>
+  <div [ngClass]="isLogged ? 'col-3' : null" *ngIf="isLogged">
+    <app-administrator-panel></app-administrator-panel>
+  </div>
 </div>

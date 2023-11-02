@@ -1,0 +1,10 @@
+<div class="nav-scroller py-1 mb-3 border-bottom">
+  <nav class="nav nav-underline justify-content-between">
+    <a class="nav-item nav-link link-body-emphasis"
+      [href]="'#' + menuItem.id "
+      *ngFor="let menuItem of menuItems$ | async; trackBy: trackByIndex"
+      (click)="setPageId(menuItem.id)">
+    {{ menuItem.title }}
+    </a>
+  </nav>
+</div>

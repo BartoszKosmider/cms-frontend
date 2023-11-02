@@ -1,0 +1,8 @@
+<button (click)="setRowToEdit()">edit row</button>
+<div class="row">
+  <div [class]="'col'" *ngFor="let grid of row.gridItems; trackBy: trackByIndex">
+    <button (click)="setGridToEdit(grid)">edit grid</button>
+    <app-grid [grid]="grid"></app-grid>
+  </div>
+</div>
+

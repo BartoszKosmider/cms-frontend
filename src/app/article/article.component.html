@@ -1,0 +1,17 @@
+<div>
+  <form [formGroup]="form">
+    title:
+    <input formControlName="title">
+    cateogry:
+    <input formControlName="category">
+    <div class="editor">
+      <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+      </ngx-editor-menu>
+      <ngx-editor [editor]="editor" formControlName="editorContent">
+      </ngx-editor>
+    </div>
+  </form>
+
+  <button (click)="saveArticle()">Zapis</button>
+  <div [innerHTML]="editorXml | sanitizeHtml"></div>
+</div>
