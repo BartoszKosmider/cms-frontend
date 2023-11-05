@@ -2,7 +2,22 @@
   [text]="'Row'"
   [clickAction]="setRowToEdit()">
 </app-edit-button>
-<div class="row">
+<div class="row"
+  [style.border-border-width]="row.borderWidth + 'px'"
+  [style.border-style]="row.borderStyle"
+  [style.border-color]="row.borderColor"
+
+  [style.margin-top]="row.marginTop + 'px'"
+  [style.margin-right]="row.marginRight + 'px'"
+  [style.margin-bottom]="row.marginBottom + 'px'"
+  [style.margin-left]="row.marginLeft + 'px'"
+
+  [style.padding-top]="row.paddingTop + 'px'"
+  [style.padding-right]="row.paddingRight + 'px'"
+  [style.padding-bottom]="row.paddingBottom + 'px'"
+  [style.padding-left]="row.paddingLeft + 'px'"
+
+  [style.background-color]="row.backgroundColor">
   <div [class]="'col'" *ngFor="let grid of row.gridItems; trackBy: trackByIndex">
     <app-edit-button
       [text]="'Grid'"
