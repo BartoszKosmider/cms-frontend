@@ -1,8 +1,32 @@
-<button (click)="addBlockComponent()">add block component</button>
+<div>
+  <app-base-editor [value]="value"></app-base-editor>
 
-<div id="addComponentsList"
-  cdkDropList
-  [cdkDropListData]="availableComponents"
-  [cdkDropListConnectedTo]="'componentsList' + value.id">
-  <div *ngFor="let availableComponent of availableComponents" cdkDrag>{{availableComponent.type}}</div>
+  <div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#gridEdtior-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+          Add new component
+        </button>
+      </h2>
+      <div id="gridEdtior-collapseOne" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <h6>Drag & drop components to grid</h6>
+
+          <ul class="list-group"
+            id="addComponentsList"
+            cdkDropList
+            [cdkDropListData]="availableComponents"
+            [cdkDropListConnectedTo]="'componentsList' + value.id"
+            >
+            <li class="list-group-item"
+              *ngFor="let availableComponent of availableComponents"
+              cdkDrag>
+              <i [class]="iconsDictionary[availableComponent.type]"></i>
+              {{availableComponent.type}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,17 +1,40 @@
 <div [id]="'componentsList' + grid.id"
+  [style.border-border-width]="grid.borderWidth + 'px'"
+  [style.border-style]="grid.borderStyle"
+  [style.border-color]="grid.borderColor"
+
+  [style.margin-top]="grid.marginTop + 'px'"
+  [style.margin-right]="grid.marginRight + 'px'"
+  [style.margin-bottom]="grid.marginBottom + 'px'"
+  [style.margin-left]="grid.marginLeft + 'px'"
+
+  [style.padding-top]="grid.paddingTop + 'px'"
+  [style.padding-right]="grid.paddingRight + 'px'"
+  [style.padding-bottom]="grid.paddingBottom + 'px'"
+  [style.padding-left]="grid.paddingLeft + 'px'"
+
+  [style.background-color]="grid.backgroundColor"
+
   cdkDropList
   [cdkDropListData]="grid.components"
   cdkDropListConnectedTo="addComponentsList"
-  (cdkDropListDropped)="drop($event)">
+  (cdkDropListDropped)="drop($event)"
+  >
   <div cdkDrag *ngFor="let component of grid.components; trackBy: trackByIndex">
-    <div [ngSwitch]="component.type">
-      <app-edit-button
-        [text]="'Component'"
-        [clickAction]="setComponentToEdit(component)">
-      </app-edit-button>
-      <app-delete-button
-        [clickAction]="deleteComponent(component)">
-      </app-delete-button>
+    <div style="display: flex; justify-content: center;">
+      <span class="component-buttons">
+        <app-edit-button
+          [text]="'Component'"
+          [clickAction]="setComponentToEdit(component)">
+        </app-edit-button>
+        <app-delete-button
+          [clickAction]="deleteComponent(component)">
+        </app-delete-button>
+      </span>
+    </div>
+
+    <div [ngSwitch]="component.type"
+      class="component">
       <app-block *ngSwitchCase="baseComponentType.Block" [component]="component"></app-block>
       <app-image *ngSwitchCase="baseComponentType.Image" [component]="component"></app-image>
     </div>

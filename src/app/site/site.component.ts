@@ -6,5 +6,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./site.component.scss']
 })
 export class SiteComponent {
-  public isLogged = true;
 }

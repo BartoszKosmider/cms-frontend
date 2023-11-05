@@ -19,6 +19,9 @@ export class AdministratorPanelComponent {
   @Select(SiteState.componentToEdit)
   public componentToEdit$!: Observable<IBaseComponent | undefined>;
 
+  @Select(SiteState.isEditMode)
+  public isEditMode$?: Observable<boolean>;
+
   constructor(
     private store: Store,
   ) {
@@ -37,7 +40,7 @@ export class AdministratorPanelComponent {
     this.store.dispatch(new ToggleEditMode());
   }
 
-  public clear(): void {
+  public return(): void {
     this.store.dispatch(new SetComponentToEdit());
   }
 }

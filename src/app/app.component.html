@@ -1,3 +1,10 @@
-<div class="app-container">
-  <app-site-template></app-site-template>
+<div class="container-fluid">
+  <div class="row">
+    <div [ngClass]="isLogged ? 'col-9' : 'col-12'">
+      <app-site-template></app-site-template>
+    </div>
+    <div [ngClass]="isLogged ? 'col-3' : null" *ngIf="isLogged">
+      <app-administrator-panel></app-administrator-panel>
+    </div>
+  </div>
 </div>

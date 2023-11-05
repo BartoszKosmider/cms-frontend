@@ -1,4 +1,24 @@
 <div *ngIf="component"
-  [style.background-color]="component.backgroundColor">
-  {{ component.text }}
-</div>
+  class="block-component"
+  [style.border-width]="component.borderWidth + 'px'"
+  [style.border-style]="component.borderStyle"
+  [style.border-color]="component.borderColor"
+  [style.border-radius]="component.borderRadius + 'px'"
+
+  [style.margin-top]="component.marginTop + 'px'"
+  [style.margin-right]="component.marginRight + 'px'"
+  [style.margin-bottom]="component.marginBottom + 'px'"
+  [style.margin-left]="component.marginLeft + 'px'"
+
+  [style.padding-top]="component.paddingTop + 'px'"
+  [style.padding-right]="component.paddingRight + 'px'"
+  [style.padding-bottom]="component.paddingBottom + 'px'"
+  [style.padding-left]="component.paddingLeft + 'px'"
+
+  [style.background-color]="component.backgroundColor"
+  [style.font-size]="component.fontSize + 'px'"
+  [style.font-family]="component.fontFamily"
+  [style.color]="component.fontColor"
+  [style.text-align]="component.textAlign"
+  [style.vertical-align]="component.verticalAlign"
+  >{{ component.text }}</div>

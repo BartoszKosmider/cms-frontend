@@ -30,6 +30,7 @@ import { GridEditorComponent } from './site/administrator-panel/editors/grid-edi
 import { SharedComponentsModule } from './shared/components/shared-components.module';
 import { SharedDirectivesModule } from './shared/directives/shared-directives.module';
 import { MaterialModule } from './shared/modules/material.module';
+import { BaseEditorComponent } from './site/administrator-panel/editors/base-editor/base-editor.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MaterialModule } from './shared/modules/material.module';
     FooterEditorComponent,
     RowEditorComponent,
     GridEditorComponent,
+    BaseEditorComponent,
   ],
   imports: [
     BrowserModule,

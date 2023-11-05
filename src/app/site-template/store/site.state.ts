@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext, createSelector } from "@ngxs/store";
-import { ISite, siteTest, IMenuItem, IBaseComponent, IHeader, IFooter, IRow, ComponentType } from '../../shared/models/site.model';
+import { ISite, siteTest, IMenuItem, IBaseComponent, IHeader, IFooter, IRow } from '../../shared/models/site.model';
 import { AddNewRow, GetSite, SetComponentToEdit, SetPageId, ToggleEditMode, UpdateRowColumns } from './site.actions';
 import { append, patch, updateItem } from "@ngxs/store/operators";
 import { getGrid, getRow } from '../../shared/models/default-components.model';
@@ -11,6 +11,7 @@ export interface ISiteState {
   pageId: string;
   componentToEdit?: IBaseComponent;
   isEditMode: boolean;
+  clickedComponent?: IBaseComponent;
 }
 
 @State<ISiteState>({
@@ -18,7 +19,7 @@ export interface ISiteState {
   defaults: {
     site: siteTest,
     pageId: '',
-    isEditMode: true,
+    isEditMode: false,
   },
 })
 @Injectable()
@@ -46,8 +47,8 @@ export class SiteState {
   }
 
   @Selector()
-  public static isRowSelected(state: ISiteState): boolean {
-    return state.componentToEdit?.type === ComponentType.Row;
+  public static clickedComponent(state: ISiteState): IBaseComponent | undefined {
+    return state.clickedComponent;
   }
 
   public static mainPage(pageId: string): (state: ISiteState) => IMenuItem | undefined {

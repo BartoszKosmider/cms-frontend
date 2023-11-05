@@ -1,4 +1,5 @@
-import { getNewGuid } from "./app.model";
+import { BLACK_COLOR, getNewGuid } from "./app.model";
+import { getBaseComponent } from './default-components.model';
 
 export interface ISite {
   menuItems: IMenuItem[];
@@ -35,6 +36,11 @@ export type GridComponentType = IBlockComponent | IImageComponent;
 
 export interface IBlockComponent extends IBaseComponent, IBaseGridComponent {
   text?: string;
+  fontSize?: number;
+  fontFamily?: string;
+  fontColor?: string;
+  textAlign?: string;
+  verticalAlign?: string;
 }
 
 export interface IImageComponent extends IBaseComponent, IBaseGridComponent {
@@ -42,12 +48,24 @@ export interface IImageComponent extends IBaseComponent, IBaseGridComponent {
 }
 
 export interface IBaseGridComponent {
-  backgroundColor: string;
 }
 
 export interface IBaseComponent {
   type: ComponentType;
   id: string;
+  marginTop: number;
+  marginRight: number;
+  marginBottom: number;
+  marginLeft: number;
+  paddingTop: number;
+  paddingRight: number;
+  paddingBottom: number;
+  paddingLeft: number;
+  backgroundColor: string;
+  borderWidth: number;
+  borderStyle: string;
+  borderColor: string;
+  borderRadius: number;
 }
 
 export enum ComponentType {
@@ -61,14 +79,12 @@ export enum ComponentType {
 
 export const siteTest: ISite = {
   header: {
-    id: getNewGuid(),
-    type: ComponentType.Header,
+    ...getBaseComponent(ComponentType.Header),
     text: 'cms projekt header',
     backgroundColor: '#123123',
   },
   footer: {
-    id: getNewGuid(),
-    type: ComponentType.Footer,
+    ...getBaseComponent(ComponentType.Footer),
     text: 'cms projekt footer',
     backgroundColor: '#101010',
   },
@@ -78,29 +94,35 @@ export const siteTest: ISite = {
       title: 'test title',
       rowItems: [
         {
-          type: ComponentType.Row,
-          id: getNewGuid(),          gridItems: [
+          ...getBaseComponent(ComponentType.Row),
+          gridItems: [
             {
-              id: getNewGuid(),
-              type: ComponentType.Grid,
+              ...getBaseComponent(ComponentType.Grid),
               components: [
                 <IBlockComponent>{
-                  id: getNewGuid(),
+                  ...getBaseComponent(ComponentType.Block),
                   backgroundColor: '#FF0000',
                   text: 'test text 1',
-                  type: ComponentType.Block,
+                  fontSize: 12,
+                  fontFamily: 'sans-serif',
+                  fontColor: BLACK_COLOR,
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
                 },
               ],
             },
             {
-              id: getNewGuid(),
-              type: ComponentType.Grid,
+              ...getBaseComponent(ComponentType.Grid),
               components: [
                 <IBlockComponent>{
-                  id: getNewGuid(),
+                  ...getBaseComponent(ComponentType.Block),
                   backgroundColor: '#0000FF',
                   text: 'test text 2',
-                  type: ComponentType.Block,
+                  fontSize: 12,
+                  fontFamily: 'sans-serif',
+                  fontColor: BLACK_COLOR,
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
                 },
               ],
             },
@@ -123,84 +145,100 @@ export const siteTest: ISite = {
       title: 'About us 3',
       rowItems: [
         {
-          type: ComponentType.Row,
-          id: getNewGuid(),
+          ...getBaseComponent(ComponentType.Row),
           gridItems: [
             {
-              id: getNewGuid(),
-              type: ComponentType.Grid,
+              ...getBaseComponent(ComponentType.Grid),
               components: [
                 <IBlockComponent>{
-                  id: getNewGuid(),
+                  ...getBaseComponent(ComponentType.Block),
                   backgroundColor: '#aaaaaa',
                   text: 'test text 1',
-                  type: ComponentType.Block,
+                  fontSize: 12,
+                  fontFamily: 'sans-serif',
+                  fontColor: BLACK_COLOR,
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
                 },
               ],
             },
             {
-              id: getNewGuid(),
-              type: ComponentType.Grid,
+              ...getBaseComponent(ComponentType.Grid),
               components: [
                 <IBlockComponent>{
-                  id: getNewGuid(),
+                  ...getBaseComponent(ComponentType.Block),
                   backgroundColor: '#321321',
                   text: 'test text 2',
-                  type: ComponentType.Block,
+                  fontSize: 12,
+                  fontFamily: 'sans-serif',
+                  fontColor: BLACK_COLOR,
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
                 },
               ],
             },
             {
-              type: ComponentType.Grid,
-              id: getNewGuid(),
+              ...getBaseComponent(ComponentType.Grid),
               components: [
                 <IBlockComponent>{
-                  id: getNewGuid(),
+                  ...getBaseComponent(ComponentType.Block),
                   backgroundColor: '#123123',
                   text: 'test text 2',
-                  type: ComponentType.Block,
+                  fontSize: 12,
+                  fontFamily: 'sans-serif',
+                  fontColor: BLACK_COLOR,
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
                 },
               ],
             },
           ],
         },
         {
-          type: ComponentType.Row,
-          id: getNewGuid(),
+          ...getBaseComponent(ComponentType.Row),
           gridItems: [
             {
-              id: getNewGuid(),
-              type: ComponentType.Grid,
+              ...getBaseComponent(ComponentType.Grid),
               components: [
                 <IBlockComponent>{
-                  id: getNewGuid(),
+                  ...getBaseComponent(ComponentType.Block),
                   backgroundColor: '#aaaaaa',
                   text: 'test text 1',
-                  type: ComponentType.Block,
+                  fontSize: 12,
+                  fontFamily: 'sans-serif',
+                  fontColor: BLACK_COLOR,
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
                 },
               ],
             },
             {
-              type: ComponentType.Grid,
-              id: getNewGuid(),
+              ...getBaseComponent(ComponentType.Grid),
               components: [
                 <IBlockComponent>{
-                  id: getNewGuid(),
+                  ...getBaseComponent(ComponentType.Block),
                   backgroundColor: '#321321',
                   text: 'test text 2',
-                  type: ComponentType.Block,
+                  fontSize: 12,
+                  fontFamily: 'sans-serif',
+                  fontColor: BLACK_COLOR,
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
                 },
               ],
             },
             {
-              id: getNewGuid(),
-              type: ComponentType.Grid,
+              ...getBaseComponent(ComponentType.Grid),
               components: [
                 <IBlockComponent>{
-                  id: getNewGuid(),
+                  ...getBaseComponent(ComponentType.Block),
                   backgroundColor: '#123123',
                   text: 'test text 2',
-                  type: ComponentType.Block,
+                  fontSize: 12,
+                  fontFamily: 'sans-serif',
+                  fontColor: BLACK_COLOR,
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
                 },
               ],
             },

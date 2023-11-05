@@ -1,0 +1,167 @@
+<div>
+  <form [formGroup]="form">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+            Margin
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <div class="mb-3">
+              <label for="marginTop">Margin-top(px)</label>
+              <input class="form-control form-control-sm"
+                id="marginTop"
+                type="number"
+                min="0"
+                max="1000"
+                formControlName="marginTop">
+            </div>
+            <div class="mb-3">
+              <label for="marginRight">Margin-right(px)</label>
+              <input class="form-control form-control-sm"
+                id="marginRight"
+                type="number"
+                min="0"
+                max="1000"
+                formControlName="marginRight">
+            </div>
+            <div class="mb-3">
+              <label for="marginBottom">Margin-bottom(px)</label>
+              <input class="form-control form-control-sm"
+                id="marginBottom"
+                type="number"
+                min="0"
+                max="1000"
+                formControlName="marginBottom">
+            </div>
+            <div class="mb-3">
+              <label for="marginLeft">Margin-left(px)</label>
+              <input class="form-control form-control-sm"
+                id="marginLeft"
+                type="number"
+                min="0"
+                max="1000"
+                formControlName="marginLeft">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+            Padding
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <div class="mb-3">
+              <label for="paddingTop">Padding-top(px)</label>
+              <input class="form-control form-control-sm"
+                id="paddingTop"
+                type="number"
+                min="0"
+                max="1000"
+                formControlName="paddingTop">
+            </div>
+            <div class="mb-3">
+              <label for="paddingRight">Padding-right(px)</label>
+              <input class="form-control form-control-sm"
+                id="paddingRight"
+                type="number"
+                min="0"
+                max="1000"
+                formControlName="paddingRight">
+            </div>
+            <div class="mb-3">
+              <label for="paddingBottom">Padding-bottom(px)</label>
+              <input class="form-control form-control-sm"
+                id="paddingBottom"
+                type="number"
+                min="0"
+                max="1000"
+                formControlName="paddingBottom">
+            </div>
+            <div class="mb-3">
+              <label for="paddingLeft">Padding-left(px)</label>
+              <input class="form-control form-control-sm"
+                id="paddingLeft"
+                type="number"
+                min="0"
+                max="1000"
+                formControlName="paddingLeft">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+            Background
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <div class="mb-3">
+              <label for="backgroundColor">Background color</label>
+              <input class="form-control form-control-sm"
+                id="backgroundColor"
+                type="color"
+                min="0"
+                max="1000"
+                formControlName="backgroundColor">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+            Border
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            <div class="mb-3">
+              <label for="borderWidth">Size(px)</label>
+              <input class="form-control form-control-sm"
+                id="borderWidth"
+                type="number"
+                min="0"
+                max="1000"
+                formControlName="borderWidth">
+            </div>
+
+            <div class="mb-3">
+              <label for="borderColor">Color</label>
+              <input class="form-control form-control-sm"
+                id="borderColor"
+                type="color"
+                formControlName="borderColor">
+            </div>
+
+            <div class="mb-3">
+              <label for="borderStyle">Style</label>
+              <select class="form-select form-select-sm"
+                id="borderStyle"
+                formControlName="borderStyle">
+                <option *ngFor="let borderStyle of borderStyles" [value]="borderStyle">{{ borderStyle }}</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="borderRadius">Radius(px)</label>
+              <input class="form-control form-control-sm"
+                id="borderRadius"
+                type="number"
+                min="0"
+                max="100"
+                formControlName="borderRadius">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

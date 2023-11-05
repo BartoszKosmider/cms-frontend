@@ -1,8 +1,5 @@
 <div class="row">
-  <div [ngClass]="isLogged ? 'col-9' : 'col-12'">
+  <div [ngClass]="'col-12'">
     <app-main></app-main>
-  </div>
-  <div [ngClass]="isLogged ? 'col-3' : null" *ngIf="isLogged">
-    <app-administrator-panel></app-administrator-panel>
   </div>
 </div>

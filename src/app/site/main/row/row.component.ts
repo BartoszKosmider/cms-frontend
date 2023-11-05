@@ -13,7 +13,6 @@ import { SiteState } from 'src/app/site-template/store/site.state';
 })
 export class RowComponent {
   public trackByIndex = trackByIndex;
-  public isRowSelected = false;
 
   @Input()
   public row!: IRow;
@@ -21,8 +20,6 @@ export class RowComponent {
   public constructor(
     private store: Store,
   ) {
-
-    this.store.select(SiteState.isRowSelected).pipe(tap(value => this.isRowSelected = value))
   }
 
   public setRowToEdit(): () => void {
