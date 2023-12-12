@@ -31,6 +31,7 @@ import { SharedComponentsModule } from './shared/components/shared-components.mo
 import { SharedDirectivesModule } from './shared/directives/shared-directives.module';
 import { MaterialModule } from './shared/modules/material.module';
 import { BaseEditorComponent } from './site/administrator-panel/editors/base-editor/base-editor.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { BaseEditorComponent } from './site/administrator-panel/editors/base-edi
     SharedComponentsModule,
     SharedDirectivesModule,
     MaterialModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

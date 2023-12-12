@@ -9,3 +9,11 @@
   margin-left: 30px;
 }
 
+.grid-container {
+  min-height: 20px;
+  min-width: 100%;
+}
+
+.grid-container:hover {
+  border: 1px solid green !important;
+}

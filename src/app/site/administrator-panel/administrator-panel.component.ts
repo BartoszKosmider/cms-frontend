@@ -5,7 +5,7 @@ import { ComponentType, IBaseComponent } from 'src/app/shared/models/site.model'
 import * as _ from 'lodash';
 import { trackByIndex } from 'src/app/shared/models/app.model';
 import { SiteState } from 'src/app/site-template/store/site.state';
-import { AddNewRow, SetComponentToEdit, ToggleEditMode } from '../../site-template/store/site.actions';
+import { AddNewPage, AddNewRow, SetComponentToEdit, ToggleEditMode } from '../../site-template/store/site.actions';
 
 @Component({
   selector: 'app-administrator-panel',
@@ -28,7 +28,7 @@ export class AdministratorPanelComponent {
   }
 
   public addNewPage(): void {
-    // dodaje nowa stone do menu
+    this.store.dispatch(new AddNewPage());
   }
 
   public addNewRow(): void {

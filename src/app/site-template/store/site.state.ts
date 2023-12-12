@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext, createSelector } from "@ngxs/store";
 import { ISite, siteTest, IMenuItem, IBaseComponent, IHeader, IFooter, IRow } from '../../shared/models/site.model';
-import { AddNewRow, GetSite, SetComponentToEdit, SetPageId, ToggleEditMode, UpdateRowColumns } from './site.actions';
-import { append, patch, updateItem } from "@ngxs/store/operators";
-import { getGrid, getRow } from '../../shared/models/default-components.model';
+import { AddNewPage, AddNewRow, GetSite, SetComponentToEdit, SetPageId, ToggleEditMode, UpdateRowColumns } from './site.actions';
+import { append, insertItem, patch, updateItem } from "@ngxs/store/operators";
+import { getGrid, getRow, getBaseComponent, getMenuItem } from '../../shared/models/default-components.model';
 import * as _ from "lodash";
 
 export interface ISiteState {
@@ -144,5 +144,16 @@ export class SiteState {
     ctx.patchState({
       isEditMode: !isEditMode,
     });
+  }
+
+  @Action(AddNewPage)
+  public addNewPage(ctx: StateContext<ISiteState>): void {
+    ctx.setState(
+      patch<ISiteState>({
+        site: patch({
+          menuItems: append<IMenuItem>([getMenuItem()]),
+        }),
+      }),
+    );
   }
 }

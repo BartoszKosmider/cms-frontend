@@ -1,6 +1,13 @@
 import { BLACK_COLOR, WHITE_COLOR, getNewGuid } from './app.model';
 import { ComponentType, IGrid, IMenuItem, IRow, IBlockComponent, IBaseComponent, IImageComponent } from './site.model';
 
+export const getMenuItem = (): IMenuItem => <IMenuItem>{
+  id: getNewGuid(),
+  title: 'New Page',
+  rowItems: [
+    getRow(),
+  ],
+};
 
 export const getBaseComponent = (type: ComponentType): IBaseComponent => <IBaseComponent> {
   id: getNewGuid(),
@@ -18,12 +25,6 @@ export const getBaseComponent = (type: ComponentType): IBaseComponent => <IBaseC
   borderStyle: 'hidden',
   borderColor: BLACK_COLOR,
   borderRadius: 0,
-};
-
-export const MENU_DEFAULT = <IMenuItem> {
-  id: undefined,
-  title: '',
-  rowItems: [],
 };
 
 export const getGrid = (): IGrid => <IGrid>{
@@ -49,6 +50,6 @@ export const getBlockComponent = (): IBlockComponent => <IBlockComponent>{
 
 export const getImageComponent = (): IImageComponent => <IImageComponent>{
   ...getBaseComponent(ComponentType.Image),
-  imgPath: 'https://static3.redcart.pl/templates/images/thumb/2732/1500/1500/pl/0/templates/images/products/2732/a8f4fb0f325842496ed0b824aeaf9711.jpg',
+  imgPath: 'https://png.pngtree.com/png-vector/20210604/ourmid/pngtree-gray-network-placeholder-png-image_3416659.jpg',
   backgroundColor: '#ffffff',
 };

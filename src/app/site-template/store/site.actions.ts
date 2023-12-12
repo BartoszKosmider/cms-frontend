@@ -28,3 +28,8 @@ export class UpdateRowColumns {
 export class ToggleEditMode {
   public static readonly type = '[Site] Toggle edit mode';
 }
+
+export class AddNewPage {
+  public static readonly type = '[Site] Add new page';
+  // public constructor(public pageId: string) { }
+}

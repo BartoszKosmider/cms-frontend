@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { GridComponentType, IBaseComponent, IGrid } from 'src/app/shared/models/site.model';
 import { ComponentType } from '../../../../shared/models/site.model';
 import { Store } from '@ngxs/store';
@@ -15,12 +15,21 @@ import * as _ from 'lodash';
 export class GridComponent {
   public baseComponentType = ComponentType;
   public trackByIndex = trackByIndex;
+  public selectedComponent?: string;
+
+  @HostListener('document:mousedown', ['$event'])
+  public onGlobalClick(event: { target: any; }): void {
+     if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.selectedComponent = undefined;
+     }
+  }
 
   @Input()
   public grid!: IGrid;
 
   public constructor(
     private store: Store,
+    private elementRef: ElementRef
   ) { }
 
   public setComponentToEdit(component: IBaseComponent): () => void {

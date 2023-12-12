@@ -1,3 +1,31 @@
-<div>
+<div *ngIf="component"
+  class="block-component"
+  [style.border-width]="component.borderWidth + 'px'"
+  [style.border-style]="component.borderStyle"
+  [style.border-color]="component.borderColor"
+  [style.border-radius]="component.borderRadius + 'px'"
 
+  [style.margin-top]="component.marginTop + 'px'"
+  [style.margin-right]="component.marginRight + 'px'"
+  [style.margin-bottom]="component.marginBottom + 'px'"
+  [style.margin-left]="component.marginLeft + 'px'"
+
+  [style.padding-top]="component.paddingTop + 'px'"
+  [style.padding-right]="component.paddingRight + 'px'"
+  [style.padding-bottom]="component.paddingBottom + 'px'"
+  [style.padding-left]="component.paddingLeft + 'px'"
+
+  [style.background-color]="component.backgroundColor"
+
+
+  >
+  <div *ngIf="component.imgPath; else placeholder">
+    <img [src]="component.imgPath"/>
+  </div>
 </div>
+
+
+
+<ng-template #placeholder>
+  <img src="https://png.pngtree.com/png-vector/20210604/ourmid/pngtree-gray-network-placeholder-png-image_3416659.jpg"/>
+</ng-template>

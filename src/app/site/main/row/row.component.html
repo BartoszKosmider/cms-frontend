@@ -1,8 +1,6 @@
-<app-edit-button
-  [text]="'Row'"
-  [clickAction]="setRowToEdit()">
-</app-edit-button>
-<div class="row"
+<div class="row row-container"
+  (click)="selectedRow = row.id"
+
   [style.border-border-width]="row.borderWidth + 'px'"
   [style.border-style]="row.borderStyle"
   [style.border-color]="row.borderColor"
@@ -19,14 +17,27 @@
 
   [style.background-color]="row.backgroundColor">
   <div [class]="'col'" *ngFor="let grid of row.gridItems; trackBy: trackByIndex">
+    <app-grid
+      (click)="selectedGrid = grid.id"
+      [grid]="grid">
+    </app-grid>
+    <div
+      class="grid-buttons"
+      *ngIf="selectedGrid === grid.id">
+      <app-edit-button
+        [text]="'Grid'"
+        [clickAction]="setGridToEdit(grid)">
+      </app-edit-button>
+      <app-delete-button
+        [clickAction]="deleteGrid(grid)">
+      </app-delete-button>
+    </div>
+  </div>
+  <div class="row-buttons"
+    *ngIf="selectedRow === row.id">
     <app-edit-button
-      [text]="'Grid'"
-      [clickAction]="setGridToEdit(grid)">
+      [text]="'Row'"
+      [clickAction]="setRowToEdit()">
     </app-edit-button>
-    <app-delete-button
-      [clickAction]="deleteGrid(grid)">
-    </app-delete-button>
-    <app-grid [grid]="grid"></app-grid>
   </div>
 </div>
-

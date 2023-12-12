@@ -1,10 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef, HostListener } from '@angular/core';
 import { trackByIndex } from 'src/app/shared/models/app.model';
 import { IGrid, IRow } from 'src/app/shared/models/site.model';
-import { Select, Store } from '@ngxs/store';
+import { Store } from '@ngxs/store';
 import { SetComponentToEdit } from 'src/app/site-template/store/site.actions';
-import { Observable, tap } from 'rxjs';
-import { SiteState } from 'src/app/site-template/store/site.state';
 
 @Component({
   selector: 'app-row',
@@ -13,12 +11,23 @@ import { SiteState } from 'src/app/site-template/store/site.state';
 })
 export class RowComponent {
   public trackByIndex = trackByIndex;
+  public selectedGrid?: string;
+  public selectedRow?: string;
+
+  @HostListener('document:mousedown', ['$event'])
+  public onGlobalClick(event: { target: any; }): void {
+     if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.selectedGrid = undefined;
+      this.selectedRow = undefined;
+     }
+  }
 
   @Input()
   public row!: IRow;
 
   public constructor(
     private store: Store,
+    private elementRef: ElementRef,
   ) {
   }
 

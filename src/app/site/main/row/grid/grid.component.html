@@ -1,4 +1,5 @@
 <div [id]="'componentsList' + grid.id"
+  class="grid-container"
   [style.border-border-width]="grid.borderWidth + 'px'"
   [style.border-style]="grid.borderStyle"
   [style.border-color]="grid.borderColor"
@@ -21,7 +22,8 @@
   (cdkDropListDropped)="drop($event)"
   >
   <div cdkDrag *ngFor="let component of grid.components; trackBy: trackByIndex">
-    <div style="display: flex; justify-content: center;">
+    <div *ngIf="selectedComponent === component.id"
+      style="display: flex; justify-content: center;" >
       <span class="component-buttons">
         <app-edit-button
           [text]="'Component'"
@@ -34,7 +36,8 @@
     </div>
 
     <div [ngSwitch]="component.type"
-      class="component">
+      class="component"
+      (click)="selectedComponent = component.id">
       <app-block *ngSwitchCase="baseComponentType.Block" [component]="component"></app-block>
       <app-image *ngSwitchCase="baseComponentType.Image" [component]="component"></app-image>
     </div>
