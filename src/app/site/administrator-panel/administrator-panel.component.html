@@ -5,14 +5,30 @@
     </button>
   </div>
   <div [ngSwitch]="componentToEdit.type">
-    <!-- site definition -->
-    <app-header-editor *ngSwitchCase="componentType.Header" [value]="componentToEdit"></app-header-editor>
-    <app-footer-editor *ngSwitchCase="componentType.Footer" [value]="componentToEdit"></app-footer-editor>
-    <app-row-editor *ngSwitchCase="componentType.Row" [value]="componentToEdit"></app-row-editor>
-    <app-grid-editor *ngSwitchCase="componentType.Grid" [value]="componentToEdit"></app-grid-editor>
+    @switch (componentToEdit.type) {
+      <!-- site definition -->
+      @case (componentType.Header) {
+        <app-header-editor [value]="componentToEdit"></app-header-editor>
+      }
+      @case (componentType.Row) {
+        <app-row-editor [value]="componentToEdit"></app-row-editor>
+      }
+      @case (componentType.Grid) {
+        <app-grid-editor [value]="componentToEdit"></app-grid-editor>
+      }
 
-    <!-- components -->
-    <app-block-editor *ngSwitchCase="componentType.Block" [value]="componentToEdit"></app-block-editor>
+      <!-- components -->
+      @case (componentType.Block) {
+        <app-block-editor [value]="componentToEdit"></app-block-editor>
+      }
+      @case (componentType.Image) {
+        <app-image-editor [value]="componentToEdit"></app-image-editor>
+      }
+
+      @default {
+        Not defined yet!!!
+      }
+    }
   </div>
 </div>
 

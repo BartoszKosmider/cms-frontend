@@ -1,5 +1,5 @@
 import { BLACK_COLOR, getNewGuid } from "./app.model";
-import { getBaseComponent } from './default-components.model';
+import { getBaseComponent, getImageComponent } from './default-components.model';
 
 export interface ISite {
   menuItems: IMenuItem[];
@@ -30,6 +30,7 @@ export interface IRow extends IBaseComponent {
 
 export interface IGrid extends IBaseComponent {
   components: GridComponentType[];
+  width: number;
 }
 
 export type GridComponentType = IBlockComponent | IImageComponent;
@@ -45,6 +46,9 @@ export interface IBlockComponent extends IBaseComponent, IBaseGridComponent {
 
 export interface IImageComponent extends IBaseComponent, IBaseGridComponent {
   imgPath?: string;
+  description?: string;
+  width?: number;
+  height?: number;
 }
 
 export interface IBaseGridComponent {
@@ -66,6 +70,8 @@ export interface IBaseComponent {
   borderStyle: string;
   borderColor: string;
   borderRadius: number;
+  widthPx: number;
+  heightPx: number;
 }
 
 export enum ComponentType {
@@ -98,7 +104,9 @@ export const siteTest: ISite = {
           gridItems: [
             {
               ...getBaseComponent(ComponentType.Grid),
+              width: 6,
               components: [
+                getImageComponent(),
                 <IBlockComponent>{
                   ...getBaseComponent(ComponentType.Block),
                   backgroundColor: '#FF0000',
@@ -113,6 +121,7 @@ export const siteTest: ISite = {
             },
             {
               ...getBaseComponent(ComponentType.Grid),
+              width: 6,
               components: [
                 <IBlockComponent>{
                   ...getBaseComponent(ComponentType.Block),
@@ -149,6 +158,7 @@ export const siteTest: ISite = {
           gridItems: [
             {
               ...getBaseComponent(ComponentType.Grid),
+              width: 4,
               components: [
                 <IBlockComponent>{
                   ...getBaseComponent(ComponentType.Block),
@@ -164,6 +174,7 @@ export const siteTest: ISite = {
             },
             {
               ...getBaseComponent(ComponentType.Grid),
+              width: 4,
               components: [
                 <IBlockComponent>{
                   ...getBaseComponent(ComponentType.Block),
@@ -179,6 +190,7 @@ export const siteTest: ISite = {
             },
             {
               ...getBaseComponent(ComponentType.Grid),
+              width: 4,
               components: [
                 <IBlockComponent>{
                   ...getBaseComponent(ComponentType.Block),
@@ -199,6 +211,7 @@ export const siteTest: ISite = {
           gridItems: [
             {
               ...getBaseComponent(ComponentType.Grid),
+              width: 4,
               components: [
                 <IBlockComponent>{
                   ...getBaseComponent(ComponentType.Block),
@@ -214,6 +227,7 @@ export const siteTest: ISite = {
             },
             {
               ...getBaseComponent(ComponentType.Grid),
+              width: 4,
               components: [
                 <IBlockComponent>{
                   ...getBaseComponent(ComponentType.Block),
@@ -229,6 +243,7 @@ export const siteTest: ISite = {
             },
             {
               ...getBaseComponent(ComponentType.Grid),
+              width: 4,
               components: [
                 <IBlockComponent>{
                   ...getBaseComponent(ComponentType.Block),

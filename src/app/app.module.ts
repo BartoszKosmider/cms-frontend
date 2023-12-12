@@ -32,6 +32,7 @@ import { SharedDirectivesModule } from './shared/directives/shared-directives.mo
 import { MaterialModule } from './shared/modules/material.module';
 import { BaseEditorComponent } from './site/administrator-panel/editors/base-editor/base-editor.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ImageEditorComponent } from './site/administrator-panel/editors/image-editor/image-editor.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     RowEditorComponent,
     GridEditorComponent,
     BaseEditorComponent,
+    ImageEditorComponent,
   ],
   imports: [
     BrowserModule,

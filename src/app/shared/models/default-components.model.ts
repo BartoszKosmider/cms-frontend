@@ -30,6 +30,7 @@ export const getBaseComponent = (type: ComponentType): IBaseComponent => <IBaseC
 export const getGrid = (): IGrid => <IGrid>{
   ...getBaseComponent(ComponentType.Grid),
   components: [],
+  width: 12,
 };
 
 export const getRow = (): IRow => <IRow>{

@@ -6,6 +6,7 @@ import { distinctUntilChanged, filter } from 'rxjs';
 import { IRow } from 'src/app/shared/models/site.model';
 import { UpdateRowColumns } from 'src/app/site-template/store/site.actions';
 import { BaseEditor } from '../base-editor';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-row-editor',
@@ -26,6 +27,7 @@ export class RowEditorComponent extends BaseEditor<IRow> implements OnInit {
     this.numberOfColumns.setValue(this.value.gridItems.length);
 
     this.numberOfColumns.valueChanges.pipe(
+      debounceTime(500),
       distinctUntilChanged(),
       filter(x => !_.isNil(x) && x > 0 && x < 13),
     ).subscribe(numberOfColumns => {
@@ -35,4 +37,7 @@ export class RowEditorComponent extends BaseEditor<IRow> implements OnInit {
     });
   }
 
+  public getRange(): number[] {
+    return _.range(<number>this.value.gridItems.length);
+  }
 }

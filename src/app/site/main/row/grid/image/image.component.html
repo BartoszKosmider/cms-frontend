@@ -16,16 +16,14 @@
   [style.padding-left]="component.paddingLeft + 'px'"
 
   [style.background-color]="component.backgroundColor"
-
-
   >
-  <div *ngIf="component.imgPath; else placeholder">
-    <img [src]="component.imgPath"/>
+  <div>
+    <figure>
+      <img
+        class="figure-img img-fluid rounded"
+        [src]="component.imgPath"
+        style="width: 100%; height: auto;"/>
+      <figcaption class="figure-caption">{{ component.description }}</figcaption>
+    </figure>
   </div>
 </div>
-
-
-
-<ng-template #placeholder>
-  <img src="https://png.pngtree.com/png-vector/20210604/ourmid/pngtree-gray-network-placeholder-png-image_3416659.jpg"/>
-</ng-template>

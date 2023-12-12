@@ -16,7 +16,7 @@
   [style.padding-left]="row.paddingLeft + 'px'"
 
   [style.background-color]="row.backgroundColor">
-  <div [class]="'col'" *ngFor="let grid of row.gridItems; trackBy: trackByIndex">
+  <div [class]="'col-' + grid.width" *ngFor="let grid of row.gridItems; trackBy: trackByIndex">
     <app-grid
       (click)="selectedGrid = grid.id"
       [grid]="grid">

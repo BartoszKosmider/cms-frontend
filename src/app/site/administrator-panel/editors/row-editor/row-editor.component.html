@@ -19,6 +19,26 @@
                 [min]="1"
                 [max]="12">
           </div>
+
+          <div>
+            @for (item of getRange(); track $index) {
+                <label for="columnRange">Column Width {{ item + 1 }}</label>
+                <div class="input-group mb-3">
+                  <input type="range"
+                    class="form-control form-control-sm form-range"
+                    [min]="1"
+                    [max]="12"
+                    id="columnRange"
+                    [(ngModel)]="value.gridItems[item].width"
+                    aria-describedby="basic-addon2">
+
+                  <div class="input-group-append column-width-container"
+                    id="basic-addon2"
+                    >{{value.gridItems[item].width}}
+                  </div>
+                </div>
+            }
+          </div>
         </div>
       </div>
     </div>

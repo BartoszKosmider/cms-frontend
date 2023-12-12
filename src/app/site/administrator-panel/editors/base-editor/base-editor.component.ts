@@ -11,6 +11,8 @@ import { BLACK_COLOR, BorderStyle, WHITE_COLOR } from 'src/app/shared/models/app
 })
 export class BaseEditorComponent implements OnInit {
   public borderStyles = BorderStyle;
+  public minPx = 0;
+  public maxPx = 1000;
   private _value!: IBaseComponent;
 
   @Input()
@@ -37,6 +39,8 @@ export class BaseEditorComponent implements OnInit {
     borderStyle: new FormControl('solid'),
     borderColor: new FormControl(BLACK_COLOR),
     borderRadius: new FormControl(0),
+    widthPx: new FormControl(0),
+    heightPx: new FormControl(0),
   });
 
   public ngOnInit(): void {
@@ -56,7 +60,9 @@ export class BaseEditorComponent implements OnInit {
       this.value.borderStyle = form.borderStyle ?? 'solid';
       this.value.borderColor = form.borderColor ?? BLACK_COLOR;
       this.value.borderRadius = form.borderRadius ?? 0;
-    })
+      this.value.widthPx = form.widthPx ?? 0;
+      this.value.heightPx = form.heightPx ?? 0;
+    });
   }
 
   private refreshForm(value: IBaseComponent) {
@@ -74,6 +80,8 @@ export class BaseEditorComponent implements OnInit {
       borderStyle: value.borderStyle ?? 'solid',
       borderColor: value.borderColor ?? BLACK_COLOR,
       borderRadius: value.borderRadius ?? 0,
+      widthPx: value.widthPx ?? 0,
+      heightPx: value.heightPx ?? 0,
     });
   }
 }
