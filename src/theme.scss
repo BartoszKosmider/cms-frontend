@@ -1,0 +1,64 @@
+@use '@angular/material' as mat;
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+$accent-palette: (
+  50: #dffafa,
+  100: #aef1f2,
+  200: #74e8ec,
+  300: #14dee6,
+  400: #00d6e1,
+  500: #00cede,
+  600: #00bdcb,
+  700: #00a7b0,
+  800: #009398,
+  900: #006e6b,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$primary-palette: (
+  50: #eee6fd,
+  100: #d3c3f9,
+  200: #b59af5,
+  300: #966ff3,
+  400: #7a4ef0,
+  500: #5c29ec,
+  600: #4e25e6,
+  700: #381cdd,
+  800: #1615d7,
+  900: #0000d0,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+$my-primary: mat.define-palette($primary-palette, 500);
+$my-accent: mat.define-palette($accent-palette, 500);
+$my-theme: mat.define-light-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+@include mat.all-component-themes($my-theme);

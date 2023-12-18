@@ -1,3 +1,4 @@
+import { Subject } from "rxjs";
 import { BLACK_COLOR, getNewGuid } from "./app.model";
 import { getBaseComponent, getImageComponent } from './default-components.model';
 
@@ -51,6 +52,12 @@ export interface IImageComponent extends IBaseComponent, IBaseGridComponent {
   height?: number;
 }
 
+export interface IMicroArticleComponent extends IBaseComponent, IBaseGridComponent {
+  articleId?: number;
+  articleTitle?: string;
+  articleChanged$?: Subject<number>;
+}
+
 export interface IBaseGridComponent {
 }
 
@@ -81,6 +88,7 @@ export enum ComponentType {
   Grid = 'Grid',
   Block = 'Block',
   Image = 'Image',
+  MicroArticle = 'MicroArticle',
 }
 
 export const siteTest: ISite = {
@@ -132,6 +140,10 @@ export const siteTest: ISite = {
                   fontColor: BLACK_COLOR,
                   textAlign: 'center',
                   verticalAlign: 'middle',
+                },
+                <IMicroArticleComponent>{
+                  ...getBaseComponent(ComponentType.MicroArticle),
+                  articleId: 1,
                 },
               ],
             },

@@ -1,0 +1,18 @@
+<div>
+  @if (data && data.question) {
+    <h1 mat-dialog-title>{{data.question}}</h1>
+  }
+
+  <div mat-dialog-actions>
+    <button mat-button
+      (click)="close()"
+      >No
+    </button>
+    <button mat-raised-button
+      [color]="'warn'"
+      [mat-dialog-close]="true"
+      cdkFocusInitial
+      >Yes
+    </button>
+  </div>
+</div>

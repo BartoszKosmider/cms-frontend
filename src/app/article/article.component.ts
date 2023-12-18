@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { Select, Store } from '@ngxs/store';
 import * as _ from 'lodash';
 import { Editor, Toolbar, Validators as EditorValidators } from 'ngx-editor';
 import { toHTML } from 'ngx-editor';
+import { GetArticle, SaveArticle } from './store/article.action';
+import { ArticleState } from './store/article.state';
+import { Observable, Subject, filter, takeUntil } from 'rxjs';
+import { IArticle, ISaveArticle } from '../shared/models/article.model';
 
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss'],
 })
-export class ArticleComponent {
+export class ArticleComponent implements OnDestroy {
+  public articleId?: number;
   public editor = new Editor();
   public toolbar: Toolbar = [
     ['bold', 'italic'],
@@ -23,17 +30,57 @@ export class ArticleComponent {
   ];
 
   public form = new FormGroup({
+    title: new FormControl('', [Validators.required]),
+    category: new FormControl('', [Validators.required]),
     editorContent: new FormControl<Record<string, any>>(
       { value: null, disabled: false },
       EditorValidators.required()
     ),
-    title: new FormControl('', [Validators.required]),
-    category: new FormControl('', [Validators.required]),
+    description: new FormControl('', [Validators.required]),
   });
 
+  @Select(ArticleState.article)
+  public article$?: Observable<IArticle>;
+
+  private destroy$ = new Subject<void>();
+
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store,
+  ) {
+    this.route.params.subscribe(params => {
+      this.articleId = +params['articleId'];
+      this.store.dispatch(new GetArticle(this.articleId));
+    });
+
+    this.article$?.pipe(
+      takeUntil(this.destroy$),
+      filter(a => !_.isNil(a)),
+    ).subscribe(article => {
+      this.form.patchValue({
+        title: article.title,
+        category: article.category,
+        editorContent: article.definition,
+        description: article.description,
+      });
+      this.form.updateValueAndValidity();
+    });
+  }
+
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
   public saveArticle(): void {
-    console.log('todo', this.form.getRawValue(), this.form.valid);
+    // todo validation
+    const formValues = this.form.getRawValue();
+    this.store.dispatch(new SaveArticle(<ISaveArticle>{
+      title: formValues.title,
+      category: formValues.category,
+      description: formValues.description,
+      definition: formValues.editorContent,
+    }));
   }
 
   public get editorXml(): string {

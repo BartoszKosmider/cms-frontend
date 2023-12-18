@@ -21,11 +21,6 @@ export const FontFamily = [
   'emoji',
   'math',
   'fangsong',
-  'inherit',
-  'initial',
-  'revert',
-  'revert-layer',
-  'unset',
 ];
 
 export const BorderStyle = [

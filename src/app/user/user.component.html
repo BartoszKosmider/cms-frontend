@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-4">
+    <ul class="list-group">
+      @for (tab of tabs; track $index) {
+        <li class="list-group-item"
+          (click)="selectedTab = tab"
+        >{{ tab }}
+        </li>
+      }
+    </ul>
+  </div>
+  <div class="col-8">
+    @switch (selectedTab) {
+      @case ('Articles') {
+        <app-article-list></app-article-list>
+      }
+      @case ('Categories') {
+        <app-category-list></app-category-list>
+      }
+      @case ('Settings') {
+        <app-settings></app-settings>
+      }
+    }
+  </div>
+</div>
+

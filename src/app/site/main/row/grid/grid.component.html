@@ -35,11 +35,19 @@
       </span>
     </div>
 
-    <div [ngSwitch]="component.type"
-      class="component"
+    <div class="component"
       (click)="selectedComponent = component.id">
-      <app-block *ngSwitchCase="baseComponentType.Block" [component]="component"></app-block>
-      <app-image *ngSwitchCase="baseComponentType.Image" [component]="component"></app-image>
+      @switch (component.type) {
+        @case (baseComponentType.Block) {
+          <app-block [component]="component"></app-block>
+        }
+        @case (baseComponentType.Image) {
+          <app-image [component]="component"></app-image>
+        }
+        @case (baseComponentType.MicroArticle) {
+          <app-micro-article [component]="component"></app-micro-article>
+        }
+      }
     </div>
   </div>
 </div>

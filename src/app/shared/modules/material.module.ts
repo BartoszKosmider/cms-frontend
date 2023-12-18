@@ -5,6 +5,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatListModule } from '@angular/material/list';
+import { MatDialogModule} from '@angular/material/dialog';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -14,6 +20,12 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     DragDropModule,
     CommonModule,
+    MatProgressSpinnerModule,
+    MatAutocompleteModule,
+    MatListModule,
+    MatDialogModule,
+    MatTableModule,
+    MatCheckboxModule,
   ],
   exports: [
     DragDropModule,
@@ -21,6 +33,12 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatSelectModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
+    MatAutocompleteModule,
+    MatListModule,
+    MatDialogModule,
+    MatTableModule,
+    MatCheckboxModule,
   ]
 })
 export class MaterialModule { }

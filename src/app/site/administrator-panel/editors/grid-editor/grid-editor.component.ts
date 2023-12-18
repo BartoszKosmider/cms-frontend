@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { getBlockComponent, getImageComponent } from 'src/app/shared/models/default-components.model';
+import { getBlockComponent, getImageComponent, getMicroArticleComponent } from 'src/app/shared/models/default-components.model';
 import { IGrid } from 'src/app/shared/models/site.model';
 import { BaseEditor } from '../base-editor';
 import { Dictionary } from 'lodash';
@@ -12,11 +12,12 @@ import { Dictionary } from 'lodash';
   inputs: BaseEditor.genericInputs,
 })
 export class GridEditorComponent extends BaseEditor<IGrid> {
-  public availableComponents = [getBlockComponent(), getImageComponent()];
+  public availableComponents = [getBlockComponent(), getImageComponent(), getMicroArticleComponent()];
 
   public iconsDictionary: Dictionary<string> = {
     'Block': 'bi bi-fonts',
     'Image': 'bi bi-image-fill',
+    'MicroArticle': 'bi bi-receipt'
   };
 
   constructor(

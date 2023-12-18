@@ -33,6 +33,16 @@ import { MaterialModule } from './shared/modules/material.module';
 import { BaseEditorComponent } from './site/administrator-panel/editors/base-editor/base-editor.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageEditorComponent } from './site/administrator-panel/editors/image-editor/image-editor.component';
+import { MicroArticleComponent } from './site/main/row/grid/micro-article/micro-article.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MicroArticleEditorComponent } from './site/administrator-panel/editors/micro-article-editor/micro-article-editor.component';
+import { ArticleState } from './article/store/article.state';
+import { UserComponent } from './user/user.component';
+import { UserState } from './user/store/user.state';
+import { SettingsComponent } from './user/settings/settings.component';
+import { ArticleListComponent } from './user/article-list/article-list.component';
+import { CategoryListComponent } from './user/category-list/category-list.component';
+import { NewCategoryDialogComponent } from './user/category-list/new-category-dialog/new-category-dialog.component';
 
 @NgModule({
   declarations: [
@@ -58,12 +68,21 @@ import { ImageEditorComponent } from './site/administrator-panel/editors/image-e
     GridEditorComponent,
     BaseEditorComponent,
     ImageEditorComponent,
+    MicroArticleComponent,
+    MicroArticleEditorComponent,
+    UserComponent,
+    ArticleListComponent,
+    CategoryListComponent,
+    SettingsComponent,
+    NewCategoryDialogComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgxsModule.forRoot([
       SiteState,
+      ArticleState,
+      UserState,
     ]),
     NgxsRouterPluginModule.forRoot(),
     // NgxsStoragePluginModule.forRoot({
@@ -77,6 +96,7 @@ import { ImageEditorComponent } from './site/administrator-panel/editors/image-e
     SharedDirectivesModule,
     MaterialModule,
     BrowserAnimationsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

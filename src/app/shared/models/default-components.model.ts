@@ -1,5 +1,6 @@
+import { Subject } from 'rxjs';
 import { BLACK_COLOR, WHITE_COLOR, getNewGuid } from './app.model';
-import { ComponentType, IGrid, IMenuItem, IRow, IBlockComponent, IBaseComponent, IImageComponent } from './site.model';
+import { ComponentType, IGrid, IMenuItem, IRow, IBlockComponent, IBaseComponent, IImageComponent, IMicroArticleComponent } from './site.model';
 
 export const getMenuItem = (): IMenuItem => <IMenuItem>{
   id: getNewGuid(),
@@ -54,3 +55,10 @@ export const getImageComponent = (): IImageComponent => <IImageComponent>{
   imgPath: 'https://png.pngtree.com/png-vector/20210604/ourmid/pngtree-gray-network-placeholder-png-image_3416659.jpg',
   backgroundColor: '#ffffff',
 };
+
+export const getMicroArticleComponent = (): IMicroArticleComponent => <IMicroArticleComponent>{
+  ...getBaseComponent(ComponentType.MicroArticle),
+  articleId: undefined,
+  articleChanged$: new Subject<number>(),
+};
+

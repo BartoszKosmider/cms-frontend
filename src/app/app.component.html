@@ -5,6 +5,7 @@
     </mat-drawer>
     <mat-drawer-content>
       <button mat-raised-button
+        [color]="'primary'"
         (click)="drawer.toggle()"
         *ngIf="isLogged"
         >Toggle drawer

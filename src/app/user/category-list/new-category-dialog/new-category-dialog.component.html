@@ -1,0 +1,20 @@
+<div>
+  <h1 mat-dialog-title>Add new category</h1>
+  <div mat-dialog-content>
+    <input
+      [formControl]="categoryControl">
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button
+      (click)="close()"
+      >Cancel
+    </button>
+    <button mat-raised-button
+      [color]="'primary'"
+      (click)="save()"
+      cdkFocusInitial
+      >Save
+    </button>
+  </div>
+</div>

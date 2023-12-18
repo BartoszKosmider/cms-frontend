@@ -24,6 +24,9 @@
       @case (componentType.Image) {
         <app-image-editor [value]="componentToEdit"></app-image-editor>
       }
+      @case (componentType.MicroArticle) {
+        <app-micro-article-editor [value]="componentToEdit"></app-micro-article-editor>
+      }
 
       @default {
         Not defined yet!!!

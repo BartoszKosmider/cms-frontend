@@ -1,0 +1,31 @@
+<div>
+  @if (categories$ | async; as categories) {
+    <button
+      mat-raised-button
+      [color]="'primary'"
+      (click)="categoriesList.deselectAll(); addNewCategory(categories);"
+      >Add new category
+    </button>
+
+    @if (categoriesList.selectedOptions.selected.length > 0) {
+      <button
+        mat-raised-button
+        [color]="'warn'"
+        (click)="deleteSelected(categoriesList.selectedOptions.selected)"
+        >Delete selected
+      </button>
+    }
+
+    <mat-selection-list #categoriesList>
+      @for (category of categories; track category) {
+        <mat-list-option>{{category}}</mat-list-option>
+      }
+    </mat-selection-list>
+
+    <p>
+      Categories selected: {{categoriesList.selectedOptions.selected.length}}
+    </p>
+  } @else {
+    <mat-spinner></mat-spinner>
+  }
+</div>
