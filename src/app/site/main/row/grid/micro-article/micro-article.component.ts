@@ -17,13 +17,15 @@ export class MicroArticleComponent implements OnInit {
   public component!: IMicroArticleComponent;
 
 
-  constructor(private articleService: ArticleService) {
-  }
+  constructor(
+    private articleService: ArticleService,
+  ) { }
 
   public ngOnInit(): void {
     this.component.articleChanged$ = new Subject<number>();
-    this.component.articleChanged$.subscribe(value => {
-      this.getMicroArticle(value);
+    this.component.articleChanged$.subscribe(articleId => {
+      this.component.articleId = articleId;
+      this.getMicroArticle(articleId);
     });
 
     if (_.isNil(this.component.articleId)) {

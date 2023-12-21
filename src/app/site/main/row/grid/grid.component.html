@@ -14,11 +14,11 @@
   [style.padding-bottom]="grid.paddingBottom + 'px'"
   [style.padding-left]="grid.paddingLeft + 'px'"
 
-  [style.background-color]="grid.backgroundColor"
+  [style.background-color]="grid.enableBackgroundColor ? grid.backgroundColor : null"
+  [ngClass]="grid.enableBackgroundPattern ? grid.backgroundPattern : null"
 
   cdkDropList
   [cdkDropListData]="grid.components"
-  cdkDropListConnectedTo="addComponentsList"
   (cdkDropListDropped)="drop($event)"
   >
   <div cdkDrag *ngFor="let component of grid.components; trackBy: trackByIndex">

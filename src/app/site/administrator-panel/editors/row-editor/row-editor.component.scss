@@ -2,3 +2,13 @@
   width: 40px;
   text-align: center;
 }
+
+.row-alignment {
+  display: flex;
+  align-items: center;
+
+  button {
+    display: flex;
+    align-items: center;
+  }
+}

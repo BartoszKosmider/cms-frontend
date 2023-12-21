@@ -1,0 +1,18 @@
+@if (selectedPageId) {
+  <div>
+    <form [formGroup]="pageForm">
+      <div class="mb-3">
+        <label for="pageName">Page name</label>
+          <input class="form-control form-control-sm"
+            id="pageName"
+            formControlName="pageName"
+            type="text">
+      </div>
+    </form>
+  </div>
+
+  <app-delete-button
+    [clickAction]="deletePage">
+  </app-delete-button>
+}
+

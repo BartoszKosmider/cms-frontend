@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs';
-import { BLACK_COLOR, WHITE_COLOR, getNewGuid } from './app.model';
+import { BLACK_COLOR, RowVerticalAlignment, WHITE_COLOR, getNewGuid, RowHorizontalAlignment } from './app.model';
 import { ComponentType, IGrid, IMenuItem, IRow, IBlockComponent, IBaseComponent, IImageComponent, IMicroArticleComponent } from './site.model';
 
 export const getMenuItem = (): IMenuItem => <IMenuItem>{
@@ -21,11 +21,14 @@ export const getBaseComponent = (type: ComponentType): IBaseComponent => <IBaseC
   paddingRight: 0,
   paddingBottom: 0,
   paddingLeft: 0,
+  enableBackgroundColor: false,
   backgroundColor: WHITE_COLOR,
   borderWidth: 0,
   borderStyle: 'hidden',
   borderColor: BLACK_COLOR,
   borderRadius: 0,
+  width: 100,
+  height: 100,
 };
 
 export const getGrid = (): IGrid => <IGrid>{
@@ -37,6 +40,8 @@ export const getGrid = (): IGrid => <IGrid>{
 export const getRow = (): IRow => <IRow>{
   ...getBaseComponent(ComponentType.Row),
   gridItems: [getGrid()],
+  verticalAlignment: RowVerticalAlignment.Top,
+  horizontalAlignment: RowHorizontalAlignment.Start,
 };
 
 export const getBlockComponent = (): IBlockComponent => <IBlockComponent>{

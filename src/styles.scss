@@ -1,1 +1,13 @@
-/* You can add global styles to this file, and also import other style files */
+.cms-background-pattern-1 {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 20px,
+    black 20px,
+    black 40px
+  );
+}
+
+.cms-background-pattern-2 {
+  background: repeating-linear-gradient(90deg in oklab, blue, red 100px);
+}

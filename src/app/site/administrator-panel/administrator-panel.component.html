@@ -36,25 +36,32 @@
 </div>
 
 <ng-template #administratorPanel>
-  <span *ngIf="isEditMode$ | async">
-    <button class="btn btn-primary"
-      (click)="addNewPage()">
-      <i class="bi bi-file-text"></i> Add page
-    </button>
-    <button class="btn btn-primary"
-      (click)="addNewRow()">
-      <i class="bi bi-list"></i> Add row
-    </button>
+  @if (isEditMode$ | async) {
+    <span>
+      <button mat-raised-button
+        [color]="'primary'"
+        (click)="addNewPage()">
+        <i class="bi bi-file-text"></i> Add page
+      </button>
+      <button mat-raised-button
+      [color]="'primary'"
+        (click)="addNewRow()">
+        <i class="bi bi-list"></i> Add row
+      </button>
 
-    <button class="btn btn-primary"
+      <button mat-raised-button
+      [color]="'primary'"
+        (click)="toggleEditMode()">
+        <i class="bi bi-save"></i> Save
+      </button>
+    </span>
+
+    <app-page-editor></app-page-editor>
+  } @else {
+    <button mat-raised-button
+      [color]="'primary'"
       (click)="toggleEditMode()">
-      <i class="bi bi-save"></i> Save
+      <i class="bi bi-unlock-fill"></i> Edit
     </button>
-  </span>
-
-  <button class="btn btn-primary"
-    *ngIf="!(isEditMode$ | async)"
-    (click)="toggleEditMode()">
-    <i class="bi bi-unlock-fill"></i> Edit
-  </button>
+  }
 </ng-template>

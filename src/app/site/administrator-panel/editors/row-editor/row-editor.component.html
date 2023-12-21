@@ -10,6 +10,30 @@
       </h2>
       <div id="rowEditor-collapseOne" class="accordion-collapse collapse">
         <div class="accordion-body">
+          <div class="mb-3 row-alignment">
+            Horizontal alignment
+
+            @for (horizontalAlignmentButton of horizontalAlignmentButtons; track $index) {
+              <button
+                (click)="setHorizontalAlignment(horizontalAlignmentButton.className)"
+                mat-icon-button>
+                <i [class]="horizontalAlignmentButton.icon"></i>
+              </button>
+            }
+          </div>
+
+          <div class="mb-3 row-alignment">
+            Vertical alignment
+
+            @for (verticalAlignmentButton of verticalAlignmentButtons; track $index) {
+              <button
+                (click)="setVerticalAlignment(verticalAlignmentButton.className)"
+                mat-icon-button>
+                <i [class]="verticalAlignmentButton.icon"></i>
+              </button>
+            }
+          </div>
+
           <div class="mb-3">
             <label for="numberOfColumns">Number of columns</label>
               <input class="form-control form-control-sm"
@@ -30,10 +54,10 @@
                     [max]="12"
                     id="columnRange"
                     [(ngModel)]="value.gridItems[item].width"
-                    aria-describedby="basic-addon2">
+                    aria-describedby="columnRange-described">
 
                   <div class="input-group-append column-width-container"
-                    id="basic-addon2"
+                    id="columnRange-described"
                     >{{value.gridItems[item].width}}
                   </div>
                 </div>

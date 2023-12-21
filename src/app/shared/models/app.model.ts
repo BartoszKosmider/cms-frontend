@@ -51,3 +51,20 @@ export const VerticalAlign = [
   'sub',
   'text-top'
 ];
+
+export enum RowVerticalAlignment {
+  Top = 'align-self-start',
+  Middle = 'align-self-center',
+  Bottom = 'align-self-end',
+}
+
+export enum RowHorizontalAlignment {
+  Start = 'justify-content-start',
+  Center = 'justify-content-center',
+  End = 'justify-content-end',
+}
+
+export enum BackgroundPattern {
+  ZebraStripes = 'cms-background-pattern-1',
+  DoubleHorizontalColour = 'cms-background-pattern-2',
+};

@@ -2,7 +2,7 @@ import { Component, Input, ElementRef, HostListener } from '@angular/core';
 import { trackByIndex } from 'src/app/shared/models/app.model';
 import { IGrid, IRow } from 'src/app/shared/models/site.model';
 import { Store } from '@ngxs/store';
-import { SetComponentToEdit } from 'src/app/site-template/store/site.actions';
+import { DeleteRow, SetComponentToEdit } from 'src/app/site-template/store/site.actions';
 
 @Component({
   selector: 'app-row',
@@ -33,6 +33,10 @@ export class RowComponent {
 
   public setRowToEdit(): () => void {
     return () => this.store.dispatch(new SetComponentToEdit(this.row));
+  }
+
+  public deleteRow(rowId: string): () => void {
+    return () => this.store.dispatch(new DeleteRow(rowId));
   }
 
   public setGridToEdit(grid: IGrid): () => void {

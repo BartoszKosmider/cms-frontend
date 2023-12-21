@@ -1,30 +1,34 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext, createSelector } from "@ngxs/store";
-import { ISite, siteTest, IMenuItem, IBaseComponent, IHeader, IFooter, IRow } from '../../shared/models/site.model';
-import { AddNewPage, AddNewRow, GetSite, SetComponentToEdit, SetPageId, ToggleEditMode, UpdateRowColumns } from './site.actions';
-import { append, insertItem, patch, updateItem } from "@ngxs/store/operators";
-import { getGrid, getRow, getBaseComponent, getMenuItem } from '../../shared/models/default-components.model';
+import { ISite, IMenuItem, IBaseComponent, IHeader, IFooter, IRow } from '../../shared/models/site.model';
+import { AddNewPage, AddNewRow, DeletePage, DeleteRow, GetSite, PatchPage, SetComponentToEdit, SetPageId, ToggleEditMode, UpdateRowColumns } from './site.actions';
+import { append, patch, removeItem, updateItem } from "@ngxs/store/operators";
+import { getGrid, getRow, getMenuItem } from '../../shared/models/default-components.model';
 import * as _ from "lodash";
+import { SiteService } from '../../shared/services/site.service';
+import { exhaustMap } from "rxjs/operators";
+import { of } from "rxjs";
 
 export interface ISiteState {
   site: ISite;
   pageId: string;
   componentToEdit?: IBaseComponent;
   isEditMode: boolean;
-  clickedComponent?: IBaseComponent;
 }
 
 @State<ISiteState>({
   name: 'SiteState',
   defaults: {
-    site: siteTest,
+    site: <ISite>{},
     pageId: '',
     isEditMode: false,
   },
 })
 @Injectable()
 export class SiteState {
-  public constructor() { }
+  public constructor(
+    private siteService: SiteService,
+  ) { }
 
   @Selector()
   public static site(state: ISiteState): ISite {
@@ -44,11 +48,6 @@ export class SiteState {
   @Selector()
   public static pageId(state: ISiteState): string {
     return state.pageId;
-  }
-
-  @Selector()
-  public static clickedComponent(state: ISiteState): IBaseComponent | undefined {
-    return state.clickedComponent;
   }
 
   public static mainPage(pageId: string): (state: ISiteState) => IMenuItem | undefined {
@@ -74,10 +73,11 @@ export class SiteState {
 
   @Action(GetSite)
   public getSite(ctx: StateContext<ISiteState>, action: GetSite): void {
-    // todo
-    // ctx.patchState({
-    //   site: {},
-    // });
+    this.siteService.getSite().subscribe(val => {
+      ctx.patchState({
+        site: val
+      });
+    })
   }
 
   @Action(SetPageId)
@@ -100,6 +100,18 @@ export class SiteState {
       site: patch({
         menuItems: updateItem<IMenuItem>(mi => mi.id === pageId, patch({
           rowItems: append<IRow>([getRow()]),
+        })),
+      }),
+    }));
+  }
+
+  @Action(DeleteRow)
+  public deleteRow(ctx: StateContext<ISiteState>, {rowId}: DeleteRow): void {
+    const pageId = ctx.getState().pageId;
+    ctx.setState(patch<ISiteState>({
+      site: patch({
+        menuItems: updateItem<IMenuItem>(mi => mi.id === pageId, patch({
+          rowItems: removeItem<IRow>(row => row.id === rowId),
         })),
       }),
     }));
@@ -155,5 +167,29 @@ export class SiteState {
         }),
       }),
     );
+  }
+
+  @Action(PatchPage)
+  public patchPage(ctx: StateContext<ISiteState>, action: PatchPage): void {
+    if (_.isNil(action.pageId) || action.pageId.trim() === '') {
+      return;
+    }
+
+    ctx.setState(patch<ISiteState>({
+      site: patch({
+        menuItems: updateItem<IMenuItem>(mi => mi.id === action.pageId, patch({
+          title: action.title,
+        })),
+      }),
+    }));
+  }
+
+  @Action(DeletePage)
+  public deletePage(ctx: StateContext<ISiteState>, action: DeletePage): void {
+    ctx.setState(patch<ISiteState>({
+      site: patch({
+        menuItems: removeItem<IMenuItem>(mi => mi.id === action.pageId),
+      }),
+    }));
   }
 }

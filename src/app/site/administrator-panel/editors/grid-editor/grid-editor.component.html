@@ -13,10 +13,10 @@
           <h6>Drag & drop components to grid</h6>
 
           <ul class="list-group"
-            id="addComponentsList"
+            id="grid-editor-container"
             cdkDropList
             [cdkDropListData]="availableComponents"
-            [cdkDropListConnectedTo]="'componentsList' + value.id"
+            [cdkDropListEnterPredicate]="canDrop"
             >
             <li class="list-group-item"
               *ngFor="let availableComponent of availableComponents"

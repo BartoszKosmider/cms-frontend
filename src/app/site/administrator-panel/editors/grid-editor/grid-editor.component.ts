@@ -4,6 +4,7 @@ import { getBlockComponent, getImageComponent, getMicroArticleComponent } from '
 import { IGrid } from 'src/app/shared/models/site.model';
 import { BaseEditor } from '../base-editor';
 import { Dictionary } from 'lodash';
+import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-grid-editor',
@@ -26,7 +27,7 @@ export class GridEditorComponent extends BaseEditor<IGrid> {
     super();
   }
 
-  public addBlockComponent(): void {
-    this.value.components.push(getBlockComponent());
+  public canDrop(drag: CdkDrag<any>, drop: CdkDropList<any>): boolean {
+    return false;
   }
 }

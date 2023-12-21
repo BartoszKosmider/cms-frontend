@@ -4,7 +4,7 @@ import { ComponentType } from '../../../../shared/models/site.model';
 import { Store } from '@ngxs/store';
 import { getNewGuid, trackByIndex } from 'src/app/shared/models/app.model';
 import { SetComponentToEdit } from 'src/app/site-template/store/site.actions';
-import { CdkDragDrop, copyArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import * as _ from 'lodash';
 
 @Component({
@@ -48,12 +48,21 @@ export class GridComponent {
     } else {
       const item = event.previousContainer.data[event.previousIndex];
       item.id = getNewGuid();
-      copyArrayItem(
-        _.cloneDeep(event.previousContainer.data),
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
+      if (event.previousContainer.id === 'grid-editor-container') {
+        copyArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+      } else {
+        transferArrayItem(
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex,
+        );
+      }
     }
   }
 }

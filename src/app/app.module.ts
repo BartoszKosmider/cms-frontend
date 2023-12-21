@@ -43,6 +43,7 @@ import { SettingsComponent } from './user/settings/settings.component';
 import { ArticleListComponent } from './user/article-list/article-list.component';
 import { CategoryListComponent } from './user/category-list/category-list.component';
 import { NewCategoryDialogComponent } from './user/category-list/new-category-dialog/new-category-dialog.component';
+import { PageEditorComponent } from './site/administrator-panel/editors/page-editor/page-editor.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { NewCategoryDialogComponent } from './user/category-list/new-category-di
     CategoryListComponent,
     SettingsComponent,
     NewCategoryDialogComponent,
+    PageEditorComponent,
   ],
   imports: [
     BrowserModule,

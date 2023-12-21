@@ -1,4 +1,5 @@
-<div class="row row-container"
+<div
+  [class]="'row row-container ' + row.horizontalAlignment"
   (click)="selectedRow = row.id"
 
   [style.border-border-width]="row.borderWidth + 'px'"
@@ -15,8 +16,15 @@
   [style.padding-bottom]="row.paddingBottom + 'px'"
   [style.padding-left]="row.paddingLeft + 'px'"
 
-  [style.background-color]="row.backgroundColor">
-  <div [class]="'col-' + grid.width" *ngFor="let grid of row.gridItems; trackBy: trackByIndex">
+  [style.background-color]="row.enableBackgroundColor ? row.backgroundColor : null"
+  [ngClass]="row.enableBackgroundPattern ? row.backgroundPattern : null"
+
+  [style.width]="row.width + '%'"
+  [style.height]="row.height + '%'">
+  <div
+    [class]="'col-' + grid.width + ' ' + row.verticalAlignment"
+    *ngFor="let grid of row.gridItems; trackBy: trackByIndex">
+
     <app-grid
       (click)="selectedGrid = grid.id"
       [grid]="grid">
@@ -39,5 +47,8 @@
       [text]="'Row'"
       [clickAction]="setRowToEdit()">
     </app-edit-button>
+    <app-delete-button
+      [clickAction]="deleteRow(row.id)">
+    </app-delete-button>
   </div>
 </div>
