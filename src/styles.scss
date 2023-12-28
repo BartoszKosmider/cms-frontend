@@ -11,3 +11,7 @@
 .cms-background-pattern-2 {
   background: repeating-linear-gradient(90deg in oklab, blue, red 100px);
 }
+
+html, body {
+  height:100%;
+}
