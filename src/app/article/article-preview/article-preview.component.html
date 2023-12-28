@@ -1,0 +1,17 @@
+@if (article$ | async; as article) {
+  <div class="row">
+    <div class="col">
+      title: {{article.title}}
+      category: {{article.category}}
+      description: {{article.description}}
+
+      <div [innerHTML]="editorXml(article.definition) | sanitizeHtml"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <app-article-comments></app-article-comments>
+    </div>
+  </div>
+}

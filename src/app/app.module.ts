@@ -5,7 +5,7 @@ import { NgxsModule } from '@ngxs/store';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ArticleComponent } from './article/article.component';
+import { ArticleComponent } from './article/article/article.component';
 import { LoginComponent } from './login/login.component';
 import { FooterComponent } from './site-template/footer/footer.component';
 import { HeaderComponent } from './site-template/header/header.component';
@@ -49,6 +49,8 @@ import { ErrorDialogComponent } from './shared/error/error-dialog/error-dialog.c
 import { LoadingBarComponent } from './loading-bar/loading-bar.component';
 import { FormControlValidationComponent } from './shared/validation/form-control-validation/form-control-validation.component';
 import { AdminListComponent } from './user/admin-list/admin-list.component';
+import { ArticlePreviewComponent } from './article/article-preview/article-preview.component';
+import { ArticleCommentsComponent } from './article/article-preview/article-comments/article-comments.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { AdminListComponent } from './user/admin-list/admin-list.component';
     BlockComponent,
     ImageComponent,
     ArticleComponent,
+    ArticleCommentsComponent,
+    ArticlePreviewComponent,
     SiteTemplateComponent,
     SiteComponent,
     SanitizeHtmlPipe,

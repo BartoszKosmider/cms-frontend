@@ -52,6 +52,23 @@ export class ArticleService {
                         "text": "xdxdxddx"
                     }
                 ]
+            },
+            {
+                "type": "paragraph",
+                "attrs": {
+                    "align": "right"
+                },
+                "content": [
+                    {
+                        "type": "image",
+                        "attrs": {
+                            "src": "https://sklepmocwslabosci.pl/userdata/public/gfx/470/Jezus-Milosierny.-Obraz-A4-z-zawieszka.jpg",
+                            "alt": "",
+                            "title": "",
+                            "width": "460px"
+                        }
+                    }
+                ]
             }
         ]
     },

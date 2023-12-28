@@ -4,11 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import * as _ from 'lodash';
 import { Editor, Toolbar, Validators as EditorValidators } from 'ngx-editor';
-import { toHTML } from 'ngx-editor';
-import { GetArticle, SaveArticle } from './store/article.action';
-import { ArticleState } from './store/article.state';
+import { GetArticle, SaveArticle } from '../store/article.action';
+import { ArticleState } from '../store/article.state';
 import { Observable, Subject, filter, takeUntil } from 'rxjs';
-import { IArticle, ISaveArticle } from '../shared/models/article.model';
+import { IArticle, ISaveArticle } from '../../shared/models/article.model';
 
 @Component({
   selector: 'app-article',
@@ -81,11 +80,5 @@ export class ArticleComponent implements OnDestroy {
       description: formValues.description,
       definition: formValues.editorContent,
     }));
-  }
-
-  public get editorXml(): string {
-    const editorContentValue = this.form.get('editorContent')?.value;
-
-    return !_.isNil(editorContentValue) ? toHTML(editorContentValue) : '';
   }
 }
