@@ -1,0 +1,46 @@
+<div>
+  @if(admins$ | async; as admins) {
+    <button
+      mat-raised-button
+      [color]="'primary'"
+      (click)="registerAdmin()"
+      >Add new admin
+    </button>
+
+    @if(selection.hasValue()) {
+      <button
+        mat-raised-button
+        [color]="'warn'"
+        (click)="deleteSelected()"
+        >Delete selected
+      </button>
+    }
+
+    <mat-table [dataSource]="admins">
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef> username </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? toggleAllRows(admins) : null"
+                        [checked]="selection.hasValue() && isAllSelected(admins.length)"
+                        [indeterminate]="selection.hasValue() && !isAllSelected(admins.length)">
+          </mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)">
+          </mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  } @else {
+    <mat-spinner></mat-spinner>
+  }
+</div>

@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ILoginDto, IRegisterUserDto } from '../models/user.model';
+import { Observable, of } from 'rxjs';
+import { IAdminAccount, ILoginDto, IRegisterUserDto } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +26,19 @@ export class UserService {
     return this.http.post(this.basePath + 'authentication/login', dto, {
       responseType: 'text'
     });
+  }
+
+  public getAdmins(): Observable<IAdminAccount[]> {
+    return of([
+      { username: 'dupa1' },
+      { username: 'dupa2' },
+      { username: 'dupa3' },
+    ])
+    // return this.http.get<IAdminAccount[]>(this.basePath);
+  }
+
+  public deleteAdmins(adminsToDelete: string[]): Observable<any> {
+    return of();
+    // return this.http.get<IAdminAccount[]>(this.basePath);
   }
 }

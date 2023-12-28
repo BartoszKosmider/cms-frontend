@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-4">
+  <div class="col-12 col-lg-4">
     <ul class="list-group">
       @for (tab of tabs; track $index) {
         <li class="list-group-item"
@@ -9,7 +9,7 @@
       }
     </ul>
   </div>
-  <div class="col-8">
+  <div class="col-12 col-lg-8">
     @switch (selectedTab) {
       @case ('Articles') {
         <app-article-list></app-article-list>
@@ -19,6 +19,9 @@
       }
       @case ('Settings') {
         <app-settings></app-settings>
+      }
+      @case ('Admin accounts') {
+        <app-admin-list></app-admin-list>
       }
     }
   </div>

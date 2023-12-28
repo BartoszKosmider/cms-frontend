@@ -49,3 +49,14 @@ export class Logout {
   public static readonly type = '[User] Logout';
   constructor() { }
 }
+
+export class GetAdmins {
+  public static readonly type = '[User] Get admins';
+  constructor() { }
+}
+
+export class DeleteAdmins {
+  public static readonly type = '[User] Delete admins';
+  constructor(public adminsToDelete: string[]) { }
+}
+

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import * as _ from "lodash";
-import { AddNewCategory, DeleteArticles, DeleteCategories, GetArticles, GetCategories, GetUser, LoginUser, Logout, RegisterAdmin, RegisterUser } from "./user.action";
+import { AddNewCategory, DeleteAdmins, DeleteArticles, DeleteCategories, GetAdmins, GetArticles, GetCategories, GetUser, LoginUser, Logout, RegisterAdmin, RegisterUser } from "./user.action";
 import { UserService } from "src/app/shared/services/user.service";
 import { CategoryService } from "src/app/shared/services/category.service";
 import { IMicroArticle } from "src/app/shared/models/article.model";
@@ -10,10 +10,12 @@ import { exhaustMap } from 'rxjs/operators';
 import { Navigate } from "@ngxs/router-plugin";
 import { of } from "rxjs";
 import { UserInteractionsService } from "src/app/shared/user-interactions/user-interactions.service";
+import { IAdminAccount } from "src/app/shared/models/user.model";
 
 export interface IUserState {
   categories?: string[];
   articles?: IMicroArticle[];
+  admins?: IAdminAccount[]
   token?: string;
 }
 
@@ -22,6 +24,7 @@ export interface IUserState {
   defaults: {
     categories: undefined,
     articles: undefined,
+    admins: undefined,
     token: undefined,
   },
 })
@@ -47,6 +50,11 @@ export class UserState {
   @Selector()
   public static articles(state: IUserState): IMicroArticle[] | undefined {
     return state.articles;
+  }
+
+  @Selector()
+  public static admins(state: IUserState): IAdminAccount[] | undefined {
+    return state.admins;
   }
 
   @Action(GetUser)
@@ -149,7 +157,44 @@ export class UserState {
   @Action(RegisterAdmin)
   public registerAdmin(ctx: StateContext<IUserState>, action: RegisterAdmin) {
     return this.userService.registerAdmin(action.dto).pipe(
-      exhaustMap(() => of()),
+      exhaustMap(() => {
+        this.userInteractionsService.openDialog({
+          title: 'Admin created successfully!',
+        });
+
+        return ctx.dispatch([new Navigate(['/user'])]);
+      }),
+    );
+  }
+
+  @Action(GetAdmins)
+  public getAdmins(ctx: StateContext<IUserState>, action: GetAdmins) {
+    return this.userService.getAdmins().pipe(
+      exhaustMap(admins => {
+        ctx.patchState({
+          admins: admins,
+        });
+
+        return of();
+      }),
+    );
+  }
+
+  @Action(DeleteAdmins)
+  public deleteAdmins(ctx: StateContext<IUserState>, action: DeleteAdmins) {
+    return this.userService.getAdmins().pipe(
+      exhaustMap(() => {
+        let admins = ctx.getState().admins;
+        action.adminsToDelete.forEach(username => {
+          admins = admins?.filter(a => a.username !== username);
+        });
+
+        ctx.patchState({
+          admins: admins,
+        });
+
+        return of();
+      }),
     );
   }
 }

@@ -48,6 +48,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ErrorDialogComponent } from './shared/error/error-dialog/error-dialog.component';
 import { LoadingBarComponent } from './loading-bar/loading-bar.component';
 import { FormControlValidationComponent } from './shared/validation/form-control-validation/form-control-validation.component';
+import { AdminListComponent } from './user/admin-list/admin-list.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { FormControlValidationComponent } from './shared/validation/form-control
     ErrorDialogComponent,
     LoadingBarComponent,
     FormControlValidationComponent,
+    AdminListComponent,
   ],
   imports: [
     AppRoutingModule,

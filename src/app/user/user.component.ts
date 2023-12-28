@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../shared/auth/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -6,8 +7,15 @@ import { Component } from '@angular/core';
   styleUrl: './user.component.scss',
 })
 export class UserComponent {
-  public tabs = ['Articles', 'Categories', 'Settings'];
+  public tabs = ['Settings'];
+  public adminTabs = ['Articles', 'Categories', 'Admin accounts'];
   public selectedTab?: string;
 
-
+  constructor(
+    private authService: AuthService,
+  ) {
+    if (this.authService.isAdmin()) {
+      this.tabs.push(...this.adminTabs);
+    }
+  }
 }

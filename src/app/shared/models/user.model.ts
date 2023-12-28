@@ -9,3 +9,16 @@ export interface ILoginDto {
   username: string;
   password: string;
 }
+
+export interface IJwtToken {
+  role: string;
+}
+
+export enum UserRole {
+  Admin = 'Admin',
+  User = 'User',
+}
+
+export interface IAdminAccount {
+  username: string;
+}
