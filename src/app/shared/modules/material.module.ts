@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialogModule} from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatDialogModule,
     MatTableModule,
     MatCheckboxModule,
+    MatProgressBarModule,
   ],
   exports: [
     DragDropModule,
@@ -39,6 +41,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatDialogModule,
     MatTableModule,
     MatCheckboxModule,
+    MatProgressBarModule,
   ]
 })
 export class MaterialModule { }

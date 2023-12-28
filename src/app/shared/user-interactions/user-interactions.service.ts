@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { DialogComponent } from '../components/dialog/dialog.component';
-import { DialogQuestionComponent } from '../components/dialog-question/dialog-question.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
+import { DialogQuestionComponent } from './dialog-question/dialog-question.component';
 import { ComponentType } from '@angular/cdk/overlay';
-
-export interface IBaseDialogData {
-  title: string;
-}
-
-export interface IBaseQuestionDialogData {
-  question: string;
-}
+import { IBaseDialogData, IBaseQuestionDialogData } from '../models/app.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserInteractionsService {
+  public isLoading = new BehaviorSubject<boolean>(false);
 
   constructor(
     private dialog: MatDialog,
@@ -33,7 +28,7 @@ export class UserInteractionsService {
     });
   }
 
-  public openCustomPopup<C, T, R>(component: ComponentType<C>, data: T) {
+  public openCustomPopup<C, T, R=void>(component: ComponentType<C>, data: T) {
     return this.dialog.open<C, T, R>(component, {
       data: data,
     });

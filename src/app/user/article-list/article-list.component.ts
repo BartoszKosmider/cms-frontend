@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { UserInteractionsService } from 'src/app/shared/services/user-interactions.service';
+import { UserInteractionsService } from 'src/app/shared/user-interactions/user-interactions.service';
 import { UserState } from '../store/user.state';
 import { Observable } from 'rxjs';
 import { IMicroArticle } from 'src/app/shared/models/article.model';

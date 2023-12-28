@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import * as uuid from 'uuid';
 
 export const trackByIndex = (index: number, item: any) => index;
@@ -68,3 +69,15 @@ export enum BackgroundPattern {
   ZebraStripes = 'cms-background-pattern-1',
   DoubleHorizontalColour = 'cms-background-pattern-2',
 };
+
+export interface IBaseDialogData {
+  title: string;
+}
+
+export interface IBaseQuestionDialogData {
+  question: string;
+}
+
+export interface IErrorDialogData {
+  error: HttpErrorResponse,
+}

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
-import { GetSite } from '../site-template/store/site.actions';
 import { SiteState } from '../site-template/store/site.state';
 
 @Component({
@@ -12,7 +11,6 @@ export class SiteComponent {
   constructor(
     private store: Store,
   ) {
-    this.store.dispatch(new GetSite());
   }
 
   public getsite(): any {

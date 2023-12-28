@@ -1,0 +1,71 @@
+<div class="row justify-content-center">
+  <div class="col-lg-6 col-12">
+    <form [formGroup]="registerForm">
+      <div class="mb-3">
+        <label for="username">Username</label>
+        <input class="form-control form-control-sm"
+          #username
+          id="username"
+          type="text"
+          formControlName="username">
+
+        <app-form-control-validation
+          [form]="registerForm"
+          [controlName]="'username'"
+          [controlRef]="username">
+        </app-form-control-validation>
+      </div>
+
+      <div class="mb-3">
+        <label for="password">Password</label>
+        <input class="form-control form-control-sm"
+          #password
+          id="password"
+          type="password"
+          formControlName="password">
+
+        <app-form-control-validation
+          [form]="registerForm"
+          [controlName]="'password'"
+          [controlRef]="password">
+        </app-form-control-validation>
+      </div>
+
+      <div class="mb-3">
+        <label for="name">Name</label>
+        <input class="form-control form-control-sm"
+          #name
+          id="name"
+          type="text"
+          formControlName="name">
+
+        <app-form-control-validation
+          [form]="registerForm"
+          [controlName]="'name'"
+          [controlRef]="name">
+        </app-form-control-validation>
+      </div>
+
+      <div class="mb-3">
+        <label for="email">E-mail</label>
+        <input class="form-control form-control-sm"
+          #email
+          id="email"
+          type="email"
+          formControlName="email">
+
+        <app-form-control-validation
+          [form]="registerForm"
+          [controlName]="'email'"
+          [controlRef]="email">
+        </app-form-control-validation>
+      </div>
+    </form>
+    <button mat-raised-button
+      (click)="register()"
+      [color]="'primary'"
+      [disabled]="registerForm.invalid">
+      Register
+    </button>
+  </div>
+</div>

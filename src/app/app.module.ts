@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgxsModule } from '@ngxs/store';
@@ -31,10 +30,8 @@ import { SharedComponentsModule } from './shared/components/shared-components.mo
 import { SharedDirectivesModule } from './shared/directives/shared-directives.module';
 import { MaterialModule } from './shared/modules/material.module';
 import { BaseEditorComponent } from './site/administrator-panel/editors/base-editor/base-editor.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ImageEditorComponent } from './site/administrator-panel/editors/image-editor/image-editor.component';
 import { MicroArticleComponent } from './site/main/row/grid/micro-article/micro-article.component';
-import { HttpClientModule } from '@angular/common/http';
 import { MicroArticleEditorComponent } from './site/administrator-panel/editors/micro-article-editor/micro-article-editor.component';
 import { ArticleState } from './article/store/article.state';
 import { UserComponent } from './user/user.component';
@@ -44,6 +41,13 @@ import { ArticleListComponent } from './user/article-list/article-list.component
 import { CategoryListComponent } from './user/category-list/category-list.component';
 import { NewCategoryDialogComponent } from './user/category-list/new-category-dialog/new-category-dialog.component';
 import { PageEditorComponent } from './site/administrator-panel/editors/page-editor/page-editor.component';
+import { CoreModule } from './shared/modules/core.module';
+import { RegisterComponent } from './register/register.component';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
+import { JwtModule } from '@auth0/angular-jwt';
+import { ErrorDialogComponent } from './shared/error/error-dialog/error-dialog.component';
+import { LoadingBarComponent } from './loading-bar/loading-bar.component';
+import { FormControlValidationComponent } from './shared/validation/form-control-validation/form-control-validation.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,7 @@ import { PageEditorComponent } from './site/administrator-panel/editors/page-edi
     FooterComponent,
     MainComponent,
     LoginComponent,
+    RegisterComponent,
     AdministratorPanelComponent,
     RowComponent,
     GridComponent,
@@ -77,9 +82,11 @@ import { PageEditorComponent } from './site/administrator-panel/editors/page-edi
     SettingsComponent,
     NewCategoryDialogComponent,
     PageEditorComponent,
+    ErrorDialogComponent,
+    LoadingBarComponent,
+    FormControlValidationComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     NgxsModule.forRoot([
       SiteState,
@@ -87,9 +94,9 @@ import { PageEditorComponent } from './site/administrator-panel/editors/page-edi
       UserState,
     ]),
     NgxsRouterPluginModule.forRoot(),
-    // NgxsStoragePluginModule.forRoot({
-    //   key: ['LoginUserState.token', LoginState],
-    // }),
+    NgxsStoragePluginModule.forRoot({
+      key: 'UserState.token'
+    }),
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
@@ -97,10 +104,13 @@ import { PageEditorComponent } from './site/administrator-panel/editors/page-edi
     SharedComponentsModule,
     SharedDirectivesModule,
     MaterialModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
+    CoreModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: () => localStorage.getItem('UserState.token'),
+      },
+    }),
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
