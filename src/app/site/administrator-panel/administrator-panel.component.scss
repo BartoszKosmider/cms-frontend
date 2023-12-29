@@ -2,3 +2,13 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+
+  button {
+    margin: 5px
+  }
+}

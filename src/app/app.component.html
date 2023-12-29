@@ -4,13 +4,17 @@
       <app-administrator-panel></app-administrator-panel>
     </mat-drawer>
     <mat-drawer-content>
-      <button mat-raised-button
-        [color]="'primary'"
-        (click)="drawer.toggle()"
-        *ngIf="isLogged"
-        >Toggle drawer
-      </button>
       <app-site-template></app-site-template>
     </mat-drawer-content>
   </mat-drawer-container>
+  @if (isLogged) {
+    <div class="cms-mat-fab-button"
+      matTooltip="Toggle administrator panel">
+    <button mat-fab
+      [color]="'primary'"
+      (click)="drawer.toggle()"
+      ><i class="bi bi-pencil-square"></i>
+    </button>
+  </div>
+  }
 </div>

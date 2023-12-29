@@ -8,7 +8,7 @@ import { IAdminAccount, ILoginDto, IRegisterUserDto } from '../models/user.model
 })
 export class UserService {
 
-  private basePath = 'http://localhost:5012/api/'
+  private basePath = 'http://localhost:5000/api/'
 
   constructor(
     private http: HttpClient,

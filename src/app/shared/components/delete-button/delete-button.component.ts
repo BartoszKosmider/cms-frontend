@@ -8,4 +8,7 @@ import { Component, Input } from '@angular/core';
 export class DeleteButtonComponent {
   @Input()
   public clickAction!: () => void;
+
+  @Input()
+  public tooltip?: string;
 }

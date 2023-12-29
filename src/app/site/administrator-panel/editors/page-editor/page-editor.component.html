@@ -1,18 +1,23 @@
 @if (selectedPageId) {
   <div>
-    <form [formGroup]="pageForm">
-      <div class="mb-3">
-        <label for="pageName">Page name</label>
-          <input class="form-control form-control-sm"
-            id="pageName"
-            formControlName="pageName"
-            type="text">
-      </div>
-    </form>
-  </div>
+    <div>
+      <form [formGroup]="pageForm">
+        <div class="mb-3">
+          <label for="pageName">Page name</label>
+            <input class="form-control form-control-sm"
+              id="pageName"
+              formControlName="pageName"
+              type="text">
+        </div>
+      </form>
+    </div>
 
-  <app-delete-button
-    [clickAction]="deletePage">
-  </app-delete-button>
+    <div style="text-align: right;">
+      <app-delete-button
+        [tooltip]="'Remove page'"
+        [clickAction]="deletePage">
+      </app-delete-button>
+    </div>
+  </div>
 }
 

@@ -81,3 +81,7 @@ export interface IBaseQuestionDialogData {
 export interface IErrorDialogData {
   error: HttpErrorResponse,
 }
+
+export interface IImageDialogData {
+  image: string;
+}

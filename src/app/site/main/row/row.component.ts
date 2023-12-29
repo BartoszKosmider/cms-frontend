@@ -1,8 +1,10 @@
 import { Component, Input, ElementRef, HostListener } from '@angular/core';
 import { trackByIndex } from 'src/app/shared/models/app.model';
 import { IGrid, IRow } from 'src/app/shared/models/site.model';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { DeleteRow, SetComponentToEdit } from 'src/app/site-template/store/site.actions';
+import { SiteState } from 'src/app/site-template/store/site.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-row',
@@ -13,6 +15,9 @@ export class RowComponent {
   public trackByIndex = trackByIndex;
   public selectedGrid?: string;
   public selectedRow?: string;
+
+  @Select(SiteState.isEditMode)
+  public isEditMode$?: Observable<boolean>;
 
   @HostListener('document:mousedown', ['$event'])
   public onGlobalClick(event: { target: any; }): void {

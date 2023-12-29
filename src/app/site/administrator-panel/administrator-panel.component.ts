@@ -5,7 +5,7 @@ import { ComponentType, IBaseComponent } from 'src/app/shared/models/site.model'
 import * as _ from 'lodash';
 import { trackByIndex } from 'src/app/shared/models/app.model';
 import { SiteState } from 'src/app/site-template/store/site.state';
-import { AddNewPage, AddNewRow, SetComponentToEdit, ToggleEditMode } from '../../site-template/store/site.actions';
+import { AddNewPage, AddNewRow, DiscardSiteChanges, SetComponentToEdit, ToggleEditMode } from '../../site-template/store/site.actions';
 
 @Component({
   selector: 'app-administrator-panel',
@@ -42,5 +42,9 @@ export class AdministratorPanelComponent {
 
   public return(): void {
     this.store.dispatch(new SetComponentToEdit());
+  }
+
+  public cancelEdit(): void {
+    this.store.dispatch([new ToggleEditMode(), new DiscardSiteChanges()]);
   }
 }

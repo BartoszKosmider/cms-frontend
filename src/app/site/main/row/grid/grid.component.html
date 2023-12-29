@@ -1,5 +1,6 @@
 <div [id]="'componentsList' + grid.id"
   class="grid-container"
+  [class.grid-hover]="isEditMode$ | async"
   [style.border-border-width]="grid.borderWidth + 'px'"
   [style.border-style]="grid.borderStyle"
   [style.border-color]="grid.borderColor"
@@ -26,16 +27,19 @@
       style="display: flex; justify-content: center;" >
       <span class="component-buttons">
         <app-edit-button
-          [text]="'Component'"
+          [tooltip]="'Edit component'"
           [clickAction]="setComponentToEdit(component)">
         </app-edit-button>
         <app-delete-button
+          [tooltip]="'Remove component'"
           [clickAction]="deleteComponent(component)">
         </app-delete-button>
       </span>
     </div>
 
-    <div class="component"
+    <div
+      class="component"
+      [class.component-hover]="isEditMode$ | async"
       (click)="selectedComponent = component.id">
       @switch (component.type) {
         @case (baseComponentType.Block) {

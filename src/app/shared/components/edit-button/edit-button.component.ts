@@ -11,4 +11,7 @@ export class EditButtonComponent {
 
   @Input()
   public text!: string;
+
+  @Input()
+  public tooltip?: string;
 }

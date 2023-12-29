@@ -34,6 +34,10 @@ export class ToggleEditMode {
   public static readonly type = '[Site] Toggle edit mode';
 }
 
+export class DiscardSiteChanges {
+  public static readonly type = '[Site] Discard site changes';
+}
+
 export class AddNewPage {
   public static readonly type = '[Site] Add new page';
   // public constructor(public pageId: string) { }

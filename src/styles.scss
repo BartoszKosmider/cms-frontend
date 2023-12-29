@@ -15,3 +15,10 @@
 html, body {
   height:100%;
 }
+
+.cms-mat-fab-button {
+  position: absolute;
+  bottom: 2rem;
+  right: 3rem;
+  z-index: 1000;
+}

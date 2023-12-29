@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext, createSelector } from "@ngxs/store";
 import { ISite, IMenuItem, IBaseComponent, IHeader, IFooter, IRow } from '../../shared/models/site.model';
-import { AddNewPage, AddNewRow, DeletePage, DeleteRow, GetSite, PatchPage, SetComponentToEdit, SetPageId, ToggleEditMode, UpdateRowColumns } from './site.actions';
+import { AddNewPage, AddNewRow, DeletePage, DeleteRow, DiscardSiteChanges, GetSite, PatchPage, SetComponentToEdit, SetPageId, ToggleEditMode, UpdateRowColumns } from './site.actions';
 import { append, patch, removeItem, updateItem } from "@ngxs/store/operators";
 import { getGrid, getRow, getMenuItem } from '../../shared/models/default-components.model';
 import * as _ from "lodash";
@@ -11,6 +11,7 @@ import { of } from "rxjs";
 
 export interface ISiteState {
   site: ISite;
+  sitePreviousVersion?: ISite;
   pageId: string;
   componentToEdit?: IBaseComponent;
   isEditMode: boolean;
@@ -20,6 +21,7 @@ export interface ISiteState {
   name: 'SiteState',
   defaults: {
     site: <ISite>{},
+    sitePreviousVersion: undefined,
     pageId: '',
     isEditMode: false,
   },
@@ -153,8 +155,21 @@ export class SiteState {
   @Action(ToggleEditMode)
   public toggleEditMode(ctx: StateContext<ISiteState>): void {
     const isEditMode = ctx.getState().isEditMode;
+    if (!isEditMode) {
+      ctx.patchState({
+        sitePreviousVersion: _.cloneDeep(ctx.getState().site),
+      });
+    }
     ctx.patchState({
       isEditMode: !isEditMode,
+    });
+  }
+
+  @Action(DiscardSiteChanges)
+  public discardSiteChanges(ctx: StateContext<ISiteState>): void {
+    const state = ctx.getState();
+    ctx.patchState({
+      site: state.sitePreviousVersion,
     });
   }
 

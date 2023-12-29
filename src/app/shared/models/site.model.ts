@@ -36,7 +36,7 @@ export interface IGrid extends IBaseComponent {
   width: number;
 }
 
-export type GridComponentType = IBlockComponent | IImageComponent;
+export type GridComponentType = IBlockComponent | IImageComponent | IMicroArticleComponent;
 
 export interface IBlockComponent extends IBaseComponent, IBaseGridComponent {
   text?: string;

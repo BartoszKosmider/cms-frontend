@@ -1,5 +1,6 @@
 <div
   [class]="'row row-container ' + row.horizontalAlignment"
+  [class.row-hover]="isEditMode$ | async"
   (click)="selectedRow = row.id"
 
   [style.border-border-width]="row.borderWidth + 'px'"
@@ -33,10 +34,11 @@
       class="grid-buttons"
       *ngIf="selectedGrid === grid.id">
       <app-edit-button
-        [text]="'Grid'"
+        [tooltip]="'Edit grid'"
         [clickAction]="setGridToEdit(grid)">
       </app-edit-button>
       <app-delete-button
+        [tooltip]="'Remove grid'"
         [clickAction]="deleteGrid(grid)">
       </app-delete-button>
     </div>
@@ -44,10 +46,11 @@
   <div class="row-buttons"
     *ngIf="selectedRow === row.id">
     <app-edit-button
-      [text]="'Row'"
+      [tooltip]="'Edit row'"
       [clickAction]="setRowToEdit()">
     </app-edit-button>
     <app-delete-button
+      [tooltip]="'Remove row'"
       [clickAction]="deleteRow(row.id)">
     </app-delete-button>
   </div>

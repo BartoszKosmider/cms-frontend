@@ -4,7 +4,7 @@
       <i class="bi bi-arrow-return-left"></i>
     </button>
   </div>
-  <div [ngSwitch]="componentToEdit.type">
+  <div style="padding: 10px 5px;">
     @switch (componentToEdit.type) {
       <!-- site definition -->
       @case (componentType.Header) {
@@ -37,31 +37,39 @@
 
 <ng-template #administratorPanel>
   @if (isEditMode$ | async) {
-    <span>
+    <div class="button-container">
       <button mat-raised-button
         [color]="'primary'"
         (click)="addNewPage()">
         <i class="bi bi-file-text"></i> Add page
       </button>
       <button mat-raised-button
-      [color]="'primary'"
+        [color]="'primary'"
         (click)="addNewRow()">
         <i class="bi bi-list"></i> Add row
       </button>
 
       <button mat-raised-button
-      [color]="'primary'"
+        [color]="'primary'"
         (click)="toggleEditMode()">
         <i class="bi bi-save"></i> Save
       </button>
-    </span>
 
-    <app-page-editor></app-page-editor>
+      <button mat-raised-button
+        [color]="'warn'"
+        (click)="cancelEdit()">
+        <i class="bi bi-x-circle-fill"></i> Cancel
+      </button>
+
+      <app-page-editor></app-page-editor>
+    </div>
   } @else {
-    <button mat-raised-button
-      [color]="'primary'"
-      (click)="toggleEditMode()">
-      <i class="bi bi-unlock-fill"></i> Edit
-    </button>
+    <div class="button-container">
+      <button mat-raised-button
+        [color]="'primary'"
+        (click)="toggleEditMode()">
+        <i class="bi bi-unlock-fill"></i> Edit
+      </button>
+    </div>
   }
 </ng-template>

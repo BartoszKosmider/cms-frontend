@@ -6,12 +6,14 @@ import { SharedDirectivesModule } from '../directives/shared-directives.module';
 import { MaterialModule } from '../modules/material.module';
 import { DialogComponent } from '../user-interactions/dialog/dialog.component';
 import { DialogQuestionComponent } from '../user-interactions/dialog-question/dialog-question.component';
+import { DialogImageComponent } from '../user-interactions/dialog-image/dialog-image.component';
 
 const sharedComponenets = [
   EditButtonComponent,
   DeleteButtonComponent,
   DialogComponent,
   DialogQuestionComponent,
+  DialogImageComponent,
 ];
 
 @NgModule({

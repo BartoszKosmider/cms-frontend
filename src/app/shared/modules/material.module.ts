@@ -12,6 +12,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatTableModule,
     MatCheckboxModule,
     MatProgressBarModule,
+    MatTooltipModule,
   ],
   exports: [
     DragDropModule,
@@ -42,6 +44,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatTableModule,
     MatCheckboxModule,
     MatProgressBarModule,
+    MatTooltipModule,
   ]
 })
 export class MaterialModule { }

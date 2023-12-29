@@ -1,11 +1,13 @@
 import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { GridComponentType, IBaseComponent, IGrid } from 'src/app/shared/models/site.model';
 import { ComponentType } from '../../../../shared/models/site.model';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { getNewGuid, trackByIndex } from 'src/app/shared/models/app.model';
 import { SetComponentToEdit } from 'src/app/site-template/store/site.actions';
 import { CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import * as _ from 'lodash';
+import { SiteState } from 'src/app/site-template/store/site.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-grid',
@@ -16,6 +18,9 @@ export class GridComponent {
   public baseComponentType = ComponentType;
   public trackByIndex = trackByIndex;
   public selectedComponent?: string;
+
+  @Select(SiteState.isEditMode)
+  public isEditMode$?: Observable<boolean>;
 
   @HostListener('document:mousedown', ['$event'])
   public onGlobalClick(event: { target: any; }): void {

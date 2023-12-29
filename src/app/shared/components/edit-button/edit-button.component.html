@@ -2,6 +2,7 @@
   mat-raised-button
   [color]="'primary'"
   appShowInEditMode
+  [matTooltip]="tooltip ?? ''"
   (click)="clickAction()">
   <i class="bi bi-pen"></i>
   {{ text }}
