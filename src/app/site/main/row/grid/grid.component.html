@@ -22,36 +22,39 @@
   [cdkDropListData]="grid.components"
   (cdkDropListDropped)="drop($event)"
   >
-  <div cdkDrag *ngFor="let component of grid.components; trackBy: trackByIndex">
-    <div *ngIf="selectedComponent === component.id"
-      style="display: flex; justify-content: center;" >
-      <span class="component-buttons">
-        <app-edit-button
-          [tooltip]="'Edit component'"
-          [clickAction]="setComponentToEdit(component)">
-        </app-edit-button>
-        <app-delete-button
-          [tooltip]="'Remove component'"
-          [clickAction]="deleteComponent(component)">
-        </app-delete-button>
-      </span>
-    </div>
 
-    <div
-      class="component"
-      [class.component-hover]="isEditMode$ | async"
-      (click)="selectedComponent = component.id">
-      @switch (component.type) {
-        @case (baseComponentType.Block) {
-          <app-block [component]="component"></app-block>
-        }
-        @case (baseComponentType.Image) {
-          <app-image [component]="component"></app-image>
-        }
-        @case (baseComponentType.MicroArticle) {
-          <app-micro-article [component]="component"></app-micro-article>
-        }
+  @for (component of grid.components; track $index) {
+    <div cdkDrag [cdkDragDisabled]="!(isEditMode$ | async)">
+      @if (selectedComponent === component.id) {
+        <div style="display: flex; justify-content: center;" >
+          <span class="component-buttons">
+            <app-edit-button
+              [tooltip]="'Edit component'"
+              [clickAction]="setComponentToEdit(component)">
+            </app-edit-button>
+            <app-delete-button
+              [tooltip]="'Remove component'"
+              [clickAction]="deleteComponent(component)">
+            </app-delete-button>
+          </span>
+        </div>
       }
+      <div
+        class="component"
+        [class.component-hover]="isEditMode$ | async"
+        (click)="selectedComponent = component.id">
+        @switch (component.type) {
+          @case (baseComponentType.Block) {
+            <app-block [component]="component"></app-block>
+          }
+          @case (baseComponentType.Image) {
+            <app-image [component]="component"></app-image>
+          }
+          @case (baseComponentType.MicroArticle) {
+            <app-micro-article [component]="component"></app-micro-article>
+          }
+        }
+      </div>
     </div>
-  </div>
+  }
 </div>
