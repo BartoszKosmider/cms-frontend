@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import * as _ from 'lodash';
 import { Editor, Toolbar, Validators as EditorValidators } from 'ngx-editor';
-import { GetArticle, SaveArticle, UpdateArticle } from '../store/article.action';
+import { ClearArticle, GetArticle, SaveArticle, UpdateArticle } from '../store/article.action';
 import { ArticleState } from '../store/article.state';
 import { Observable, Subject, filter, takeUntil } from 'rxjs';
 import { IArticle, ISaveArticle } from '../../shared/models/article.model';
@@ -56,7 +56,7 @@ export class ArticleComponent implements OnDestroy {
     this.route.params.subscribe(params => {
       const articleId = params['articleId']
       if (_.isNil(articleId) || articleId === 'new') {
-        this.store.dispatch(new GetCategories());
+        this.store.dispatch([new GetCategories(), new ClearArticle()]);
 
         return;
       }

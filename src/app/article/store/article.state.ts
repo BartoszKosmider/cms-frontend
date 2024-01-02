@@ -1,13 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import * as _ from "lodash";
-import { GetArticle, GetArticleComments, SaveArticle, SaveArticleComment, UpdateArticle } from "./article.action";
+import { ClearArticle, GetArticle, GetArticleComments, SaveArticle, SaveArticleComment, UpdateArticle } from "./article.action";
 import { IArticle, IComment } from "src/app/shared/models/article.model";
 import { ArticleService } from '../../shared/services/article.service';
 import { Observable, exhaustMap, of } from "rxjs";
 import { ArticleMapperService } from "src/app/shared/services/article-mapper.service";
 import { UserInteractionsService } from "src/app/shared/user-interactions/user-interactions.service";
 import { insertItem, patch, updateItem } from "@ngxs/store/operators";
+import { Navigate } from "@ngxs/router-plugin";
 
 export interface IArticleState {
   article?: IArticle,
@@ -60,7 +61,7 @@ export class ArticleState {
           title: 'Successfully saved article!',
         });
 
-        return of();
+        return ctx.dispatch(new Navigate(['user']));
       }),
     );
   }
@@ -102,5 +103,12 @@ export class ArticleState {
         return of();
       }),
     );
+  }
+
+  @Action(ClearArticle)
+  public clearArticle(ctx: StateContext<IArticleState>): void{
+    ctx.patchState({
+      article: undefined,
+    })
   }
 }

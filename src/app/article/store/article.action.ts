@@ -29,3 +29,7 @@ export class SaveArticleComment {
   public static readonly type = '[Article] Save article comment';
   constructor(public articleId: number, public dto: ISaveArticleComment) { }
 }
+
+export class ClearArticle {
+  public static readonly type = '[Article] Clear article';
+}
