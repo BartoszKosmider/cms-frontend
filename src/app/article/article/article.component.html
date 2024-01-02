@@ -1,18 +1,69 @@
 <div>
   <form [formGroup]="form">
-    title:
-    <input formControlName="title">
-    cateogry:
-    <input formControlName="category">
-    description:
-    <input formControlName="description">
+    <div class="mb-3">
+      <label for="username">Title</label>
+      <input class="form-control form-control-sm"
+        #title
+        id="title"
+        type="text"
+        formControlName="title">
+
+      <app-form-control-validation
+        [form]="form"
+        [controlName]="'title'"
+        [controlRef]="title">
+      </app-form-control-validation>
+    </div>
+
+    @if(categories$ | async; as categories) {
+      <div class="mb-3">
+        <label for="category">Category</label>
+        <select class="form-select form-select-sm"
+          #category
+          id="category"
+          formControlName="category">
+
+          @for (category of categories; track category) {
+            <option [value]="category.id">{{category.name}}</option>
+          }
+
+          <app-form-control-validation
+            [form]="form"
+            [controlName]="'category'"
+            [controlRef]="category">
+          </app-form-control-validation>
+        </select>
+      </div>
+    }
+
+    <div class="mb-3">
+      <label for="description">Description</label>
+      <input class="form-control form-control-sm"
+        #description
+        id="description"
+        type="text"
+        formControlName="description">
+
+      <app-form-control-validation
+        [form]="form"
+        [controlName]="'description'"
+        [controlRef]="description">
+      </app-form-control-validation>
+    </div>
+
     <div class="editor">
       <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
       </ngx-editor-menu>
       <ngx-editor [editor]="editor" formControlName="editorContent">
       </ngx-editor>
     </div>
-  </form>
 
-  <button (click)="saveArticle()">Zapis</button>
+    <button
+      mat-raised-button
+      [color]="'primary'"
+      (click)="saveArticle()"
+      [disabled]="form.invalid"
+      >Zapis
+    </button>
+  </form>
 </div>

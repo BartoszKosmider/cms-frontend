@@ -23,6 +23,24 @@ export interface IGetArticleTitlesDto {
 export interface ISaveArticle {
   title: string;
   description: string;
-  definition: any;
+  contents: string;
   category: string;
+}
+
+export interface IGetArticle {
+  id: number;
+  title: string;
+  description: string;
+  contents: string;
+}
+
+export interface IComment {
+  id: number;
+  content: string;
+  authorId: string;
+  authorName: string;
+}
+
+export interface ISaveArticleComment {
+  content: string;
 }

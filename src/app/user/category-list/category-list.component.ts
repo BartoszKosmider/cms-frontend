@@ -3,9 +3,10 @@ import { MatListOption } from '@angular/material/list';
 import { UserInteractionsService } from 'src/app/shared/user-interactions/user-interactions.service';
 import { NewCategoryDialogComponent } from './new-category-dialog/new-category-dialog.component';
 import { Select, Store } from '@ngxs/store';
-import { UserState } from '../store/user.state';
 import { Observable } from 'rxjs';
-import { AddNewCategory, DeleteCategories, GetCategories } from '../store/user.action';
+import { CategoryState } from './store/category.state';
+import { AddNewCategory, DeleteCategories, GetCategories } from './store/category.action';
+import { ICategory } from 'src/app/shared/models/category.model';
 
 @Component({
   selector: 'app-category-list',
@@ -14,8 +15,8 @@ import { AddNewCategory, DeleteCategories, GetCategories } from '../store/user.a
 })
 export class CategoryListComponent {
 
-  @Select(UserState.categories)
-  public categories$?: Observable<string[]>;
+  @Select(CategoryState.categories)
+  public categories$?: Observable<ICategory[]>;
 
   constructor(
     private userInteractionsService: UserInteractionsService,
@@ -31,15 +32,15 @@ export class CategoryListComponent {
 
     popupRef.afterClosed().subscribe(result => {
       if (result) {
-        const categoriesToDelete = categories.map(c => c.getLabel());
+        const categoriesToDelete = categories.map(c => (<ICategory>c.value).name);
         this.store.dispatch(new DeleteCategories(categoriesToDelete));
       }
     });
   }
 
-  public addNewCategory(categories: string[]): void {
+  public addNewCategory(categories: ICategory[]): void {
     const popupRef = this.userInteractionsService.openCustomPopup
-      <NewCategoryDialogComponent,string[],string>(NewCategoryDialogComponent, categories);
+      <NewCategoryDialogComponent,ICategory[],string>(NewCategoryDialogComponent, categories);
 
     popupRef.afterClosed().subscribe(category => {
       if (category) {

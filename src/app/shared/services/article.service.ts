@@ -1,78 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IArticle, IGetArticleTitlesDto, IMicroArticle, ISaveArticle } from '../models/article.model';
+import { IArticle, IComment, IGetArticle, IGetArticleTitlesDto, IMicroArticle, ISaveArticle, ISaveArticleComment } from '../models/article.model';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
-  private basePath = 'todo';
+  private basePath = 'http://localhost:5000/api/article'
 
   constructor(
     private http: HttpClient,
   ) { }
 
-  public getArticle(articleId: number): Observable<IArticle> {
-    // return this.http.get<IArticle>(this.basePath + articleId);
-
-    return of(<IArticle>{
-      id: 1,
-      title: 'tytuł',
-      category: 'todo',
-      description: 'lorem dlsakfklsa lkska lkfsdk ksdak flaksdkl fsdak',
-      definition: {
-        "type": "doc",
-        "content": [
-            {
-                "type": "paragraph",
-                "attrs": {
-                    "align": null
-                },
-                "content": [
-                    {
-                        "type": "text",
-                        "marks": [
-                            {
-                                "type": "strong"
-                            }
-                        ],
-                        "text": "nowy artykuł"
-                    }
-                ]
-            },
-            {
-                "type": "paragraph",
-                "attrs": {
-                    "align": "center"
-                },
-                "content": [
-                    {
-                        "type": "text",
-                        "text": "xdxdxddx"
-                    }
-                ]
-            },
-            {
-                "type": "paragraph",
-                "attrs": {
-                    "align": "right"
-                },
-                "content": [
-                    {
-                        "type": "image",
-                        "attrs": {
-                            "src": "https://sklepmocwslabosci.pl/userdata/public/gfx/470/Jezus-Milosierny.-Obraz-A4-z-zawieszka.jpg",
-                            "alt": "",
-                            "title": "",
-                            "width": "460px"
-                        }
-                    }
-                ]
-            }
-        ]
-    },
-    });
+  public getArticle(articleId: number): Observable<IGetArticle> {
+    return this.http.get<IGetArticle>(this.basePath + '/' + articleId);
   }
 
   public getMicroArticle(articleId: number): Observable<IMicroArticle> {
@@ -138,14 +80,40 @@ export class ArticleService {
   }
 
   public saveArticle(article: ISaveArticle): Observable<any> {
-    // return this.http.post<any>(this.basePath, article);
-
-    return of('dupa2');
+    return this.http.post<any>(this.basePath, article);
   }
 
   public updateArticle(article: ISaveArticle, articleId: number): Observable<any> {
-    // return this.http.put<any>(this.basePath + articleId, article);
+    return this.http.put<any>(this.basePath + '/' + articleId, article);
+  }
 
-    return of('dupa3');
+  public getArticleComments(articleId: number, timestamp: string, limit: number, offset: number): Observable<IComment[]> {
+    return of([
+      {
+        id: 1,
+        content: 'chujowe',
+        authorId: 'guid1',
+        authorName: 'jebacz',
+      },
+      {
+        id: 1,
+        content: 'zajebiste',
+        authorId: 'guid2',
+        authorName: 'spocony_fanatyk2011pl',
+      },
+    ]);
+  }
+
+  public saveArticleComment(articleId: number, dto: ISaveArticleComment): Observable<IComment> {
+    // return this.http.post<any>(this.basePath + '/' + articleId + '/comment', <ISaveArticleComment>{
+    //   content: content,
+    // });
+
+    return of({
+      id: 2137,
+      content: dto.content,
+      authorId: '<guid>',
+      authorName: '<authorName>',
+    },);
   }
 }

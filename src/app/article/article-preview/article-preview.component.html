@@ -1,9 +1,21 @@
 @if (article$ | async; as article) {
   <div class="row">
     <div class="col">
-      title: {{article.title}}
-      category: {{article.category}}
-      description: {{article.description}}
+      <div>
+        <h3>Title: {{article.title}}</h3>
+      </div>
+      <div>
+        Category: {{article.category}}
+      </div>
+      <div>
+        Description: {{article.description}}
+      </div>
+      <div>
+        Created: todo
+      </div>
+      <div>
+        Author: todo
+      </div>
 
       <div [innerHTML]="editorXml(article.definition) | sanitizeHtml"></div>
     </div>
@@ -11,7 +23,9 @@
 
   <div class="row">
     <div class="col">
-      <app-article-comments></app-article-comments>
+      <app-article-comments
+        [articleId]="article.id"
+      ></app-article-comments>
     </div>
   </div>
 }

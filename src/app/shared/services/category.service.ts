@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { ICategory } from '../models/category.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,14 @@ export class CategoryService {
     private http: HttpClient,
   ) { }
 
-  public getCategories(): Observable<string[]> {
-    // return this.http.get<string[]>(this.basePath);
+  public getCategories(): Observable<ICategory[]> {
+    // return this.http.get<ICategory[]>(this.basePath);
 
     return of([
-      'kategoria 1',
-      'kategoria 2',
-      'kategoria 3',
-      'kategoria 4',
-      'kategoria 5',
+      { id: 1, name: 'kategoria 1'},
+      { id: 2, name: 'kategoria 2'},
+      { id: 3, name: 'kategoria 3'},
+      { id: 4, name: 'kategoria 4'},
     ]);
   }
 

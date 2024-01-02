@@ -51,6 +51,7 @@ import { FormControlValidationComponent } from './shared/validation/form-control
 import { AdminListComponent } from './user/admin-list/admin-list.component';
 import { ArticlePreviewComponent } from './article/article-preview/article-preview.component';
 import { ArticleCommentsComponent } from './article/article-preview/article-comments/article-comments.component';
+import { CategoryState } from './user/category-list/store/category.state';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { ArticleCommentsComponent } from './article/article-preview/article-comm
       SiteState,
       ArticleState,
       UserState,
+      CategoryState,
     ]),
     NgxsRouterPluginModule.forRoot(),
     NgxsStoragePluginModule.forRoot({

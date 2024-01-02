@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import * as _ from "lodash";
-import { AddNewCategory, DeleteAdmins, DeleteArticles, DeleteCategories, GetAdmins, GetArticles, GetCategories, GetUser, LoginUser, Logout, RegisterAdmin, RegisterUser } from "./user.action";
+import { DeleteAdmins, DeleteArticles, GetAdmins, GetArticles, GetUser, LoginUser, Logout, RegisterAdmin, RegisterUser } from "./user.action";
 import { UserService } from "src/app/shared/services/user.service";
 import { CategoryService } from "src/app/shared/services/category.service";
 import { IMicroArticle } from "src/app/shared/models/article.model";
@@ -11,9 +11,10 @@ import { Navigate } from "@ngxs/router-plugin";
 import { of } from "rxjs";
 import { UserInteractionsService } from "src/app/shared/user-interactions/user-interactions.service";
 import { IAdminAccount } from "src/app/shared/models/user.model";
+import { ICategory } from "src/app/shared/models/category.model";
 
 export interface IUserState {
-  categories?: string[];
+  categories?: ICategory[];
   articles?: IMicroArticle[];
   admins?: IAdminAccount[]
   token?: string;
@@ -43,11 +44,6 @@ export class UserState {
   }
 
   @Selector()
-  public static categories(state: IUserState): string[] | undefined {
-    return state.categories;
-  }
-
-  @Selector()
   public static articles(state: IUserState): IMicroArticle[] | undefined {
     return state.articles;
   }
@@ -60,41 +56,6 @@ export class UserState {
   @Action(GetUser)
   public getArticle(ctx: StateContext<IUserState>, action: GetUser): void {
 
-  }
-
-  @Action(GetCategories)
-  public getCategories(ctx: StateContext<IUserState>): void {
-    this.categoryService.getCategories().subscribe(categories => {
-      ctx.patchState({
-        categories: categories,
-      });
-    });
-  }
-
-  @Action(DeleteCategories)
-  public deleteCategories(ctx: StateContext<IUserState>, action: DeleteCategories): void {
-    this.categoryService.deleteCategories(action.categoriesToDelete).subscribe(() => {
-      const categories = ctx.getState().categories;
-      if (_.isNil(categories)) {
-        return;
-      }
-
-      ctx.patchState({
-        categories: _.pull(categories, ...action.categoriesToDelete),
-      })
-    });
-  }
-
-  @Action(AddNewCategory)
-  public addNewCategory(ctx: StateContext<IUserState>, action: AddNewCategory): void {
-    this.categoryService.saveCategory(action.category).subscribe(() => {
-      const categories = ctx.getState().categories;
-      categories?.push(action.category);
-
-      ctx.patchState({
-        categories: categories,
-      });
-    });
   }
 
   @Action(GetArticles)

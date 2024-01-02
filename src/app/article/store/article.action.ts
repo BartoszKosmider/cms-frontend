@@ -1,4 +1,4 @@
-import { ISaveArticle } from "src/app/shared/models/article.model";
+import { ISaveArticle, ISaveArticleComment } from "src/app/shared/models/article.model";
 
 export class GetArticle {
   public static readonly type = '[Article] Get article';
@@ -10,3 +10,22 @@ export class SaveArticle {
   constructor(public article: ISaveArticle) { }
 }
 
+export class UpdateArticle {
+  public static readonly type = '[Article] Update article';
+  constructor(public article: ISaveArticle, public articleId: number) { }
+}
+
+export class GetArticleComments {
+  public static readonly type = '[Article] Get article comments';
+  constructor(
+    public articleId: number,
+    public timestamp: string,
+    public limit: number,
+    public offset: number,
+  ) { }
+}
+
+export class SaveArticleComment {
+  public static readonly type = '[Article] Save article comment';
+  constructor(public articleId: number, public dto: ISaveArticleComment) { }
+}

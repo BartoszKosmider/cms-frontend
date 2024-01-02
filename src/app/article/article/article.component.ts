@@ -4,10 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Select, Store } from '@ngxs/store';
 import * as _ from 'lodash';
 import { Editor, Toolbar, Validators as EditorValidators } from 'ngx-editor';
-import { GetArticle, SaveArticle } from '../store/article.action';
+import { GetArticle, SaveArticle, UpdateArticle } from '../store/article.action';
 import { ArticleState } from '../store/article.state';
 import { Observable, Subject, filter, takeUntil } from 'rxjs';
 import { IArticle, ISaveArticle } from '../../shared/models/article.model';
+import { CategoryState } from 'src/app/user/category-list/store/category.state';
+import { ICategory } from 'src/app/shared/models/category.model';
+import { GetCategories } from 'src/app/user/category-list/store/category.action';
 
 @Component({
   selector: 'app-article',
@@ -41,6 +44,9 @@ export class ArticleComponent implements OnDestroy {
   @Select(ArticleState.article)
   public article$?: Observable<IArticle>;
 
+  @Select(CategoryState.categories)
+  public categories$?: Observable<ICategory[]>;
+
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -48,7 +54,14 @@ export class ArticleComponent implements OnDestroy {
     private store: Store,
   ) {
     this.route.params.subscribe(params => {
-      this.articleId = +params['articleId'];
+      const articleId = params['articleId']
+      if (_.isNil(articleId) || articleId === 'new') {
+        this.store.dispatch(new GetCategories());
+
+        return;
+      }
+
+      this.articleId = +articleId;
       this.store.dispatch(new GetArticle(this.articleId));
     });
 
@@ -72,13 +85,25 @@ export class ArticleComponent implements OnDestroy {
   }
 
   public saveArticle(): void {
-    // todo validation
+    if (this.form.invalid) {
+      return;
+    }
+
     const formValues = this.form.getRawValue();
-    this.store.dispatch(new SaveArticle(<ISaveArticle>{
-      title: formValues.title,
-      category: formValues.category,
-      description: formValues.description,
-      definition: formValues.editorContent,
-    }));
+    if (_.isNil(this.articleId)) {
+      this.store.dispatch(new SaveArticle(<ISaveArticle>{
+        title: formValues.title,
+        category: formValues.category,
+        description: formValues.description,
+        contents: JSON.stringify(formValues.editorContent),
+      }));
+    } else {
+      this.store.dispatch(new UpdateArticle(<ISaveArticle>{
+        title: formValues.title,
+        category: formValues.category,
+        description: formValues.description,
+        contents: JSON.stringify(formValues.editorContent),
+      }, this.articleId));
+    }
   }
 }
