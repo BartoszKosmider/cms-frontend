@@ -36,7 +36,7 @@ export interface IGrid extends IBaseComponent {
   width: number;
 }
 
-export type GridComponentType = IBlockComponent | IImageComponent | IMicroArticleComponent;
+export type GridComponentType = IBlockComponent | IImageComponent | IMicroArticleComponent | ITwitterComponent;
 
 export interface IBlockComponent extends IBaseComponent, IBaseGridComponent {
   text?: string;
@@ -56,6 +56,10 @@ export interface IMicroArticleComponent extends IBaseComponent, IBaseGridCompone
   articleId?: number;
   articleTitle?: string;
   articleChanged$?: Subject<number>;
+}
+
+export interface ITwitterComponent extends IBaseComponent, IBaseGridComponent {
+  twitterPostHtml?: string;
 }
 
 export interface IBaseGridComponent {
@@ -80,8 +84,8 @@ export interface IBaseComponent {
   borderStyle: string;
   borderColor: string;
   borderRadius: number;
-  width: number;
-  height: number;
+  // width: number;
+  // height: number;
 }
 
 export enum ComponentType {
@@ -92,5 +96,6 @@ export enum ComponentType {
   Block = 'Block',
   Image = 'Image',
   MicroArticle = 'MicroArticle',
+  Twitter = 'Twitter',
 }
 

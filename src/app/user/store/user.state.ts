@@ -8,10 +8,11 @@ import { IMicroArticle } from "src/app/shared/models/article.model";
 import { ArticleService } from "src/app/shared/services/article.service";
 import { exhaustMap } from 'rxjs/operators';
 import { Navigate } from "@ngxs/router-plugin";
-import { of } from "rxjs";
+import { Observable, of } from "rxjs";
 import { UserInteractionsService } from "src/app/shared/user-interactions/user-interactions.service";
 import { IAdminAccount } from "src/app/shared/models/user.model";
 import { ICategory } from "src/app/shared/models/category.model";
+import { patch, removeItem } from "@ngxs/store/operators";
 
 export interface IUserState {
   categories?: ICategory[];
@@ -68,17 +69,18 @@ export class UserState {
   }
 
   @Action(DeleteArticles)
-  public deleteArticles(ctx: StateContext<IUserState>, action: DeleteArticles): void {
-    this.articleService.deleteArticles(action.articleIds).subscribe(() => {
-      let articles = ctx.getState().articles;
-      action.articleIds.forEach(articleId => {
-        articles = articles?.filter(a => a.id !== articleId);
-      });
+  public deleteArticles(ctx: StateContext<IUserState>, action: DeleteArticles): Observable<any> {
+    return this.articleService.deleteArticles(action.articleIds).pipe(
+      exhaustMap(res => {
+        action.articleIds.forEach(articleId => {
+          ctx.setState(patch<IUserState>({
+            articles: removeItem(a => a.id === articleId),
+          }));
+        })
 
-      ctx.patchState({
-        articles: articles,
-      });
-    });
+        return of();
+      })
+    );
   }
 
   @Action(LoginUser)

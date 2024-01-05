@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
 import { BLACK_COLOR, RowVerticalAlignment, WHITE_COLOR, getNewGuid, RowHorizontalAlignment } from './app.model';
-import { ComponentType, IGrid, IMenuItem, IRow, IBlockComponent, IBaseComponent, IImageComponent, IMicroArticleComponent } from './site.model';
+import { ComponentType, IGrid, IMenuItem, IRow, IBlockComponent, IBaseComponent, IImageComponent, IMicroArticleComponent, ITwitterComponent } from './site.model';
 
 export const getMenuItem = (): IMenuItem => <IMenuItem>{
   id: getNewGuid(),
@@ -27,8 +27,8 @@ export const getBaseComponent = (type: ComponentType): IBaseComponent => <IBaseC
   borderStyle: 'hidden',
   borderColor: BLACK_COLOR,
   borderRadius: 0,
-  width: 100,
-  height: 100,
+  // width: 100,
+  // height: 100,
 };
 
 export const getGrid = (): IGrid => <IGrid>{
@@ -67,3 +67,7 @@ export const getMicroArticleComponent = (): IMicroArticleComponent => <IMicroArt
   articleChanged$: new Subject<number>(),
 };
 
+export const getTwitterComponent = (): ITwitterComponent => <ITwitterComponent>{
+  ...getBaseComponent(ComponentType.Twitter),
+  twitterPostHtml: 'dupa',
+};

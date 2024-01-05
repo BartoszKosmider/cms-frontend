@@ -19,9 +19,7 @@
 
   [style.background-color]="row.enableBackgroundColor ? row.backgroundColor : null"
   [ngClass]="row.enableBackgroundPattern ? row.backgroundPattern : null"
-
-  [style.width]="row.width + '%'"
-  [style.height]="row.height + '%'">
+  >
   <div
     [class]="'col-' + grid.width + ' ' + row.verticalAlignment"
     *ngFor="let grid of row.gridItems; trackBy: trackByIndex">

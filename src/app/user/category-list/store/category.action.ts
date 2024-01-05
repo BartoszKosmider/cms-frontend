@@ -5,7 +5,7 @@ export class GetCategories {
 
 export class DeleteCategories {
   public static readonly type = '[User] Delete categories';
-  constructor(public categoriesToDelete: string[]) { }
+  constructor(public categoryIds: number[]) { }
 }
 
 export class AddNewCategory {

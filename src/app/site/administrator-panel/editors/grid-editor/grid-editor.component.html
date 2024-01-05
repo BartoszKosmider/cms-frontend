@@ -18,12 +18,22 @@
             [cdkDropListData]="availableComponents"
             [cdkDropListEnterPredicate]="canDrop"
             >
-            <li class="list-group-item"
-              *ngFor="let availableComponent of availableComponents"
-              cdkDrag>
-              <i [class]="iconsDictionary[availableComponent.type]"></i>
-              {{availableComponent.type}}
-            </li>
+
+            @for (availableComponent of availableComponents; track $index) {
+              <li class="list-group-item" cdkDrag>
+                <div class="cms-example-custom-placeholder"
+                  *cdkDragPlaceholder>
+                </div>
+                <img
+                  *cdkDragPreview
+                  [src]="imagePathDictionary[availableComponent.type]"
+                  [alt]="availableComponent.type"
+                  class="cms-component-preview">
+                <i [class]="iconsDictionary[availableComponent.type]"></i>
+                {{availableComponent.type}}
+              </li>
+            }
+
           </ul>
         </div>
       </div>

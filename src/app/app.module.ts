@@ -52,6 +52,8 @@ import { AdminListComponent } from './user/admin-list/admin-list.component';
 import { ArticlePreviewComponent } from './article/article-preview/article-preview.component';
 import { ArticleCommentsComponent } from './article/article-preview/article-comments/article-comments.component';
 import { CategoryState } from './user/category-list/store/category.state';
+import { TwitterComponent } from './site/main/row/grid/twitter/twitter.component';
+import { TwitterEditorComponent } from './site/administrator-panel/editors/twitter-editor/twitter-editor.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +94,8 @@ import { CategoryState } from './user/category-list/store/category.state';
     LoadingBarComponent,
     FormControlValidationComponent,
     AdminListComponent,
+    TwitterComponent,
+    TwitterEditorComponent,
   ],
   imports: [
     AppRoutingModule,

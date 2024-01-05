@@ -1,0 +1,36 @@
+<div>
+  <app-base-editor [value]="value"></app-base-editor>
+
+  <div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#blockEditor-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+          Twitter
+        </button>
+      </h2>
+      <div id="blockEditor-collapseOne" class="accordion-collapse collapse">
+        <div class="accordion-body">
+          <label for="postUrl">URL</label>
+          <div class="input-group mb-3">
+            <input
+              [formControl]="postUrl"
+              class="form-control form-control-sm"
+              id="postUrl"
+              type="text"
+              aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button
+                (click)="load()"
+                class="input-group-text"
+                id="basic-addon2"
+                >Load
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

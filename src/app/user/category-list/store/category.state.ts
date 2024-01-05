@@ -2,11 +2,10 @@ import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import * as _ from "lodash";
 import { AddNewCategory, DeleteCategories, GetCategories } from "./category.action";
-import { UserService } from "src/app/shared/services/user.service";
 import { CategoryService } from "src/app/shared/services/category.service";
-import { ArticleService } from "src/app/shared/services/article.service";
-import { UserInteractionsService } from "src/app/shared/user-interactions/user-interactions.service";
 import { ICategory } from "src/app/shared/models/category.model";
+import { Observable, exhaustMap, of } from "rxjs";
+import { append, patch, removeItem } from "@ngxs/store/operators";
 
 export interface ICategorytate {
   categories?: ICategory[];
@@ -21,10 +20,7 @@ export interface ICategorytate {
 @Injectable()
 export class CategoryState {
   public constructor(
-    private userService: UserService,
     private categoryService: CategoryService,
-    private articleService: ArticleService,
-    private userInteractionsService: UserInteractionsService,
   ) { }
 
   @Selector()
@@ -33,37 +29,43 @@ export class CategoryState {
   }
 
   @Action(GetCategories)
-  public getCategories(ctx: StateContext<ICategorytate>): void {
-    this.categoryService.getCategories().subscribe(categories => {
+  public getCategories(ctx: StateContext<ICategorytate>): Observable<any> {
+    return this.categoryService.getCategories().pipe(exhaustMap(({categories}) => {
       ctx.patchState({
         categories: categories,
       });
-    });
+
+      return of();
+    }));
   }
 
   @Action(DeleteCategories)
-  public deleteCategories(ctx: StateContext<ICategorytate>, action: DeleteCategories): void {
-    this.categoryService.deleteCategories(action.categoriesToDelete).subscribe(() => {
-      const categories = ctx.getState().categories;
-      if (_.isNil(categories)) {
-        return;
-      }
+  public deleteCategories(ctx: StateContext<ICategorytate>, action: DeleteCategories): Observable<any> {
+    return this.categoryService.deleteCategories(action.categoryIds).pipe(
+      exhaustMap(() => {
+        action.categoryIds.forEach(categoryId => {
+          ctx.setState(patch({
+            categories: removeItem(c => c.id === categoryId),
+          }));
+        })
 
-      // ctx.patchState({
-      //   categories: _.pull(categories, ...action.categoriesToDelete),
-      // })
-    });
+        return of();
+      })
+    );
   }
 
   @Action(AddNewCategory)
-  public addNewCategory(ctx: StateContext<ICategorytate>, action: AddNewCategory): void {
-    this.categoryService.saveCategory(action.category).subscribe(() => {
-      const categories = ctx.getState().categories;
-      // categories?.push(action.category);
+  public addNewCategory(ctx: StateContext<ICategorytate>, action: AddNewCategory): Observable<any> {
+    return this.categoryService.saveCategory({
+      category: action.category,
+    }).pipe(
+      exhaustMap(res => {
+        ctx.setState(patch({
+          categories: append([{id: res.id, category: action.category}]),
+        }));
 
-      // ctx.patchState({
-      //   categories: categories,
-      // });
-    });
+        return of();
+      })
+    );
   }
 }

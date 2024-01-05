@@ -27,13 +27,13 @@ export class CategoryListComponent {
 
   public deleteSelected(categories: MatListOption[]): void {
     const popupRef = this.userInteractionsService.openQuestionDialog({
-      question: 'u sure?',
+      question: 'Are you sure?',
     });
 
     popupRef.afterClosed().subscribe(result => {
       if (result) {
-        const categoriesToDelete = categories.map(c => (<ICategory>c.value).name);
-        this.store.dispatch(new DeleteCategories(categoriesToDelete));
+        const categoryIds = categories.map(c => (<ICategory>c.value).id);
+        this.store.dispatch(new DeleteCategories(categoryIds));
       }
     });
   }

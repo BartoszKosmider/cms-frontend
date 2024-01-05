@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 
 import { ComponentType, IBlockComponent, IMicroArticleComponent, ISite } from '../models/site.model';
 import { getNewGuid, BLACK_COLOR } from '../models/app.model';
-import { getBaseComponent, getImageComponent } from '../models/default-components.model';
+import { getBaseComponent, getImageComponent, getTwitterComponent } from '../models/default-components.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +47,7 @@ export class SiteService {
                 ...getBaseComponent(ComponentType.Grid),
                 width: 6,
                 components: [
+                  getTwitterComponent(),
                   getImageComponent(),
                   <IBlockComponent>{
                     ...getBaseComponent(ComponentType.Block),

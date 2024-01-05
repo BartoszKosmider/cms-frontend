@@ -18,7 +18,7 @@
 
     <mat-selection-list #categoriesList>
       @for (category of categories; track category) {
-        <mat-list-option [value]="category">{{category.name}}</mat-list-option>
+        <mat-list-option [value]="category">{{category.category}}</mat-list-option>
       }
     </mat-selection-list>
 

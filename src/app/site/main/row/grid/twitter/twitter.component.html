@@ -1,0 +1,5 @@
+<div
+  [innerHTML]="this.component.twitterPostHtml"
+  [style.pointer-events]="(isEditMode$ | async) ? 'none' : null"
+  >
+</div>

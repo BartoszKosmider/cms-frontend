@@ -25,6 +25,14 @@
 
   @for (component of grid.components; track $index) {
     <div cdkDrag [cdkDragDisabled]="!(isEditMode$ | async)">
+      <div class="cms-example-custom-placeholder"
+        *cdkDragPlaceholder>
+      </div>
+      <img
+        *cdkDragPreview
+        [src]="imagePathDictionary[component.type]"
+        [alt]="component.type"
+        class="cms-component-preview">
       @if (selectedComponent === component.id) {
         <div style="display: flex; justify-content: center;" >
           <span class="component-buttons">
@@ -52,6 +60,9 @@
           }
           @case (baseComponentType.MicroArticle) {
             <app-micro-article [component]="component"></app-micro-article>
+          }
+          @case (baseComponentType.Twitter) {
+            <app-twitter [component]="component"></app-twitter>
           }
         }
       </div>

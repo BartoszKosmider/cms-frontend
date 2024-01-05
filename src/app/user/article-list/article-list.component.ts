@@ -28,7 +28,7 @@ export class ArticleListComponent {
 
   public deleteSelected(): void {
     const popupRef = this.userInteractionsService.openQuestionDialog({
-      question: 'u sure?',
+      question: 'Are you sure?',
     });
 
     popupRef.afterClosed().subscribe(result => {

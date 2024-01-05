@@ -2,7 +2,7 @@ import { Component, ElementRef, HostListener, Input } from '@angular/core';
 import { GridComponentType, IBaseComponent, IGrid } from 'src/app/shared/models/site.model';
 import { ComponentType } from '../../../../shared/models/site.model';
 import { Select, Store } from '@ngxs/store';
-import { getNewGuid, trackByIndex } from 'src/app/shared/models/app.model';
+import { ImagePathDictionary, getNewGuid, trackByIndex } from 'src/app/shared/models/app.model';
 import { SetComponentToEdit } from 'src/app/site-template/store/site.actions';
 import { CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import * as _ from 'lodash';
@@ -18,6 +18,7 @@ export class GridComponent {
   public baseComponentType = ComponentType;
   public trackByIndex = trackByIndex;
   public selectedComponent?: string;
+  public imagePathDictionary = ImagePathDictionary;
 
   @Select(SiteState.isEditMode)
   public isEditMode$?: Observable<boolean>;

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IArticle, IComment, IGetArticle, IGetArticleTitlesDto, IMicroArticle, ISaveArticle, ISaveArticleComment } from '../models/article.model';
 import { Observable, of } from 'rxjs';
@@ -74,9 +74,11 @@ export class ArticleService {
   }
 
   public deleteArticles(articleIds: number[]): Observable<any> {
-    // return this.http.delete<any>(this.basePath + JSON.stringify(articleIds));
+    const params = {
+      articleIds: articleIds,
+    }
 
-    return of('dupa');
+    return this.http.delete<any>(this.basePath, {params: params});
   }
 
   public saveArticle(article: ISaveArticle): Observable<any> {

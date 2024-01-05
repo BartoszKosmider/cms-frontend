@@ -46,8 +46,8 @@ export class BaseEditorComponent implements OnInit, OnDestroy {
     borderStyle: new FormControl('solid'),
     borderColor: new FormControl(BLACK_COLOR),
     borderRadius: new FormControl(0),
-    width: new FormControl(0),
-    height: new FormControl(0),
+    // width: new FormControl(0),
+    // height: new FormControl(0),
   });
 
   public ngOnInit(): void {
@@ -71,8 +71,8 @@ export class BaseEditorComponent implements OnInit, OnDestroy {
       this.value.borderStyle = form.borderStyle ?? 'solid';
       this.value.borderColor = form.borderColor ?? BLACK_COLOR;
       this.value.borderRadius = form.borderRadius ?? 0;
-      this.value.width = form.width ?? 0;
-      this.value.height = form.height ?? 0;
+      // this.value.width = form.width ?? 0;
+      // this.value.height = form.height ?? 0;
     });
   }
 
@@ -99,8 +99,8 @@ export class BaseEditorComponent implements OnInit, OnDestroy {
       borderStyle: value.borderStyle ?? 'solid',
       borderColor: value.borderColor ?? BLACK_COLOR,
       borderRadius: value.borderRadius ?? 0,
-      width: value.width ?? 0,
-      height: value.height ?? 0,
+      // width: value.width ?? 0,
+      // height: value.height ?? 0,
     });
   }
 }

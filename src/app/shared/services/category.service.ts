@@ -1,38 +1,32 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ICategory } from '../models/category.model';
+import { ICategory, IGetCategories, ISaveCategory } from '../models/category.model';
+import { IIdResponse } from '../models/app.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  private basePath = 'todo';
+  private basePath = 'http://localhost:5000/api/categories'
 
   constructor(
     private http: HttpClient,
   ) { }
 
-  public getCategories(): Observable<ICategory[]> {
-    // return this.http.get<ICategory[]>(this.basePath);
-
-    return of([
-      { id: 1, name: 'kategoria 1'},
-      { id: 2, name: 'kategoria 2'},
-      { id: 3, name: 'kategoria 3'},
-      { id: 4, name: 'kategoria 4'},
-    ]);
+  public getCategories(): Observable<IGetCategories> {
+    return this.http.get<IGetCategories>(this.basePath);
   }
 
-  public deleteCategories(categories: string[]): Observable<string> {
-    // return this.http.post<void>(this.basePath, categories);
+  public deleteCategories(categoryIds: number[]): Observable<string> {
+    const params = {
+      categoryIds: categoryIds,
+    };
 
-    return of('test');
+    return this.http.delete<any>(this.basePath, {params: params});
   }
 
-  public saveCategory(category: string): Observable<any> {
-    // return this.http.post<void>(this.basePath, categories);
-
-    return of('test');
+  public saveCategory(category: ISaveCategory): Observable<IIdResponse> {
+    return this.http.post<IIdResponse>(this.basePath, category);
   }
 }

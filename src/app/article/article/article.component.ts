@@ -62,7 +62,7 @@ export class ArticleComponent implements OnDestroy {
       }
 
       this.articleId = +articleId;
-      this.store.dispatch(new GetArticle(this.articleId));
+      this.store.dispatch([new GetArticle(this.articleId), new GetCategories()]);
     });
 
     this.article$?.pipe(

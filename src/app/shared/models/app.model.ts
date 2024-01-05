@@ -1,4 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { Dictionary } from 'lodash';
 import * as uuid from 'uuid';
 
 export const trackByIndex = (index: number, item: any) => index;
@@ -84,4 +85,14 @@ export interface IErrorDialogData {
 
 export interface IImageDialogData {
   image: string;
+}
+
+export interface IIdResponse {
+  id: number;
+}
+export const ImagePathDictionary: Dictionary<string> = {
+  'Block': 'assets/component-images/Block.png',
+  'Image': 'assets/component-images/Image.png',
+  'MicroArticle': 'assets/component-images/MicroArticle.png',
+  'Twitter': 'assets/component-images/Twitter.png',
 }

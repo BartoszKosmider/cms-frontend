@@ -1,4 +1,12 @@
 export interface ICategory {
   id: number;
-  name: string;
+  category: string;
+}
+
+export interface IGetCategories {
+  categories: ICategory[];
+}
+
+export interface ISaveCategory {
+  category: string;
 }
