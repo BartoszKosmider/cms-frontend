@@ -19,6 +19,9 @@ export class RowComponent {
   @Select(SiteState.isEditMode)
   public isEditMode$?: Observable<boolean>;
 
+  @Input()
+  public disableDelete?: boolean;
+
   @HostListener('document:mousedown', ['$event'])
   public onGlobalClick(event: { target: any; }): void {
      if (!this.elementRef.nativeElement.contains(event.target)) {

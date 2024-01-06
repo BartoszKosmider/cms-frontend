@@ -47,9 +47,11 @@
       [tooltip]="'Edit row'"
       [clickAction]="setRowToEdit()">
     </app-edit-button>
-    <app-delete-button
-      [tooltip]="'Remove row'"
-      [clickAction]="deleteRow(row.id)">
-    </app-delete-button>
+    @if (!disableDelete) {
+      <app-delete-button
+        [tooltip]="'Remove row'"
+        [clickAction]="deleteRow(row.id)">
+      </app-delete-button>
+    }
   </div>
 </div>

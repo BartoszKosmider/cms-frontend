@@ -22,11 +22,6 @@ export class MicroArticleComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    this.component.articleChanged$ = new Subject<number>();
-    this.component.articleChanged$.subscribe(articleId => {
-      this.component.articleId = articleId;
-      this.getMicroArticle(articleId);
-    });
 
     if (_.isNil(this.component.articleId)) {
       return;

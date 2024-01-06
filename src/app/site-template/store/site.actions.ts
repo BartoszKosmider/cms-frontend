@@ -1,8 +1,13 @@
-import { IBaseComponent, IMenuItem } from "src/app/shared/models/site.model";
+import { IBaseComponent, ISaveSite } from "src/app/shared/models/site.model";
 
 export class GetSite {
   public static readonly type = '[Site] Get site';
   public constructor() { }
+}
+
+export class SaveSite {
+  public static readonly type = '[Site] Save site';
+  public constructor(public dto: ISaveSite) { }
 }
 
 export class SetPageId {

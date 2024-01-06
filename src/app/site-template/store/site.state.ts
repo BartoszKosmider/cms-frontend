@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext, createSelector } from "@ngxs/store";
 import { ISite, IMenuItem, IBaseComponent, IHeader, IFooter, IRow } from '../../shared/models/site.model';
-import { AddNewPage, AddNewRow, DeletePage, DeleteRow, DiscardSiteChanges, GetSite, PatchPage, SetComponentToEdit, SetPageId, ToggleEditMode, UpdateRowColumns } from './site.actions';
+import { AddNewPage, AddNewRow, DeletePage, DeleteRow, DiscardSiteChanges, GetSite, PatchPage, SaveSite, SetComponentToEdit, SetPageId, ToggleEditMode, UpdateRowColumns } from './site.actions';
 import { append, patch, removeItem, updateItem } from "@ngxs/store/operators";
 import { getGrid, getRow, getMenuItem } from '../../shared/models/default-components.model';
 import * as _ from "lodash";
 import { SiteService } from '../../shared/services/site.service';
 import { exhaustMap } from "rxjs/operators";
-import { of } from "rxjs";
+import { Observable, of } from "rxjs";
 
 export interface ISiteState {
   site: ISite;
@@ -74,12 +74,25 @@ export class SiteState {
   }
 
   @Action(GetSite)
-  public getSite(ctx: StateContext<ISiteState>, action: GetSite): void {
-    this.siteService.getSite().subscribe(val => {
-      ctx.patchState({
-        site: val
-      });
-    })
+  public getSite(ctx: StateContext<ISiteState>): Observable<any> {
+    return this.siteService.getSite().pipe(
+      exhaustMap(site => {
+        ctx.patchState({
+          site: site
+        });
+
+        return of();
+      }),
+    );
+  }
+
+  @Action(SaveSite)
+  public saveSite(ctx: StateContext<ISiteState>, action: SaveSite): Observable<any> {
+    return this.siteService.saveSite(action.dto).pipe(
+      exhaustMap(() => {
+        return ctx.dispatch(new ToggleEditMode());
+      }),
+    );
   }
 
   @Action(SetPageId)

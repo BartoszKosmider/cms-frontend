@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { IFooter } from 'src/app/shared/models/site.model';
 import { Observable } from 'rxjs';
@@ -17,16 +17,25 @@ export class FooterComponent {
   @Select(SiteState.isEditMode)
   public isEditMode$?: Observable<boolean>;
 
+  @HostListener('document:mousedown', ['$event'])
+  public onGlobalClick(event: { target: any; }): void {
+     if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.selectedFooter = false;
+     }
+  }
+
+  public selectedFooter = false;
 
   constructor(
     private store: Store,
+    private elementRef: ElementRef,
   ) { }
 
-  public setComponentToEdit(component: IFooter) {
-    if (!this.store.selectSnapshot(SiteState.isEditMode)) {
-      return;
+  public setComponentToEdit(component: IFooter): () => void {
+    return () => {
+      if (this.store.selectSnapshot(SiteState.isEditMode)) {
+        this.store.dispatch(new SetComponentToEdit(component));
+      }
     }
-
-    this.store.dispatch(new SetComponentToEdit(component));
   }
 }

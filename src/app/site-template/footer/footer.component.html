@@ -1,11 +1,26 @@
-<footer
-  *ngIf="footer$ | async as footer"
-  (click)="setComponentToEdit(footer)"
-  class="py-5 text-center"
-  [class.footer-hover]="isEditMode$ | async"
-  [style.background-color]="footer.enableBackgroundColor ? footer.backgroundColor : null"
-  >
-  <p class="mb-0">
-    <a href="#">Back to top</a>
-  </p>
-</footer>
+@if (footer$ | async; as footer) {
+  @if (selectedFooter) {
+    <div class="footer-buttons">
+      <app-edit-button
+        [tooltip]="'Edit footer'"
+        [clickAction]="setComponentToEdit(footer)">
+      </app-edit-button>
+    </div>
+  }
+
+  <footer
+    class="py-5 text-center"
+    (click)="selectedFooter = true"
+    [class.footer-hover]="isEditMode$ | async"
+    [style.background-color]="footer.enableBackgroundColor ? footer.backgroundColor : null"
+    >
+
+    @for (rowItem of footer.rowItems; track $index) {
+      <app-row
+        [row]="rowItem"
+        [disableDelete]="true"
+      ></app-row>
+    }
+  </footer>
+}
+

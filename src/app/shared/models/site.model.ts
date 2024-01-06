@@ -17,6 +17,7 @@ export interface IHeader extends IBaseComponent {
 }
 
 export interface IFooter extends IBaseComponent {
+  rowItems: IRow[];
 }
 
 export interface IRow extends IBaseComponent {
@@ -40,6 +41,7 @@ export interface IBlockComponent extends IBaseComponent, IBaseGridComponent {
   fontColor?: string;
   textAlign?: string;
   verticalAlign?: string;
+  link?: string;
 }
 
 export interface IImageComponent extends IBaseComponent, IBaseGridComponent {
@@ -50,7 +52,6 @@ export interface IImageComponent extends IBaseComponent, IBaseGridComponent {
 export interface IMicroArticleComponent extends IBaseComponent, IBaseGridComponent {
   articleId?: number;
   articleTitle?: string;
-  articleChanged$?: Subject<number>;
 }
 
 export interface ITwitterComponent extends IBaseComponent, IBaseGridComponent {
@@ -92,5 +93,9 @@ export enum ComponentType {
   Image = 'Image',
   MicroArticle = 'MicroArticle',
   Twitter = 'Twitter',
+}
+
+export interface ISaveSite {
+  site: ISite;
 }
 

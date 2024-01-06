@@ -58,6 +58,15 @@
               <option *ngFor="let verticalAlign of verticalAligns" [value]="verticalAlign">{{ verticalAlign }}</option>
             </select>
           </div>
+
+          <div class="mb-3">
+            <label for="link">Link</label>
+            <input
+              class="form-control form-control-sm"
+              id="link"
+              type="text"
+              [(ngModel)]="value.link">
+          </div>
         </div>
       </div>
     </div>

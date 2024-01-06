@@ -23,4 +23,14 @@
   [style.color]="component.fontColor"
   [style.text-align]="component.textAlign"
   [style.vertical-align]="component.verticalAlign"
-  >{{ component.text }}</div>
+  >
+
+  @if (!(isEditMode | async) && component.link) {
+    <a [href]="component.link">
+      {{ component.text }}
+    </a>
+  } @else {
+    {{ component.text }}
+  }
+
+</div>

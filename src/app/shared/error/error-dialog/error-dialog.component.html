@@ -5,7 +5,7 @@
 
   <div mat-dialog-content>
     Message:<br/>
-    {{data.error.error}}
+    {{data.error.error?? data.error.message}}
   </div>
 
   <div mat-dialog-actions>

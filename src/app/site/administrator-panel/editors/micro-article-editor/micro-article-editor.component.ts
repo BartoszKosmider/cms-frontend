@@ -52,7 +52,7 @@ export class MicroArticleEditorComponent extends BaseEditor<IMicroArticleCompone
   }
 
   public onSelect($event: MatAutocompleteSelectedEvent): void {
-    this.value.articleChanged$?.next($event.option.value.key);
+
   }
 
   public showTitle(value: any): string {

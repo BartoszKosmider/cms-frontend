@@ -2,25 +2,28 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable, of } from 'rxjs';
 
-import { ComponentType, IBlockComponent, IMicroArticleComponent, ISite } from '../models/site.model';
+import { ComponentType, IBlockComponent, IMicroArticleComponent, ISaveSite, ISite } from '../models/site.model';
 import { getNewGuid, BLACK_COLOR } from '../models/app.model';
 import { getBaseComponent, getImageComponent, getTwitterComponent } from '../models/default-components.model';
+import { fromJSON, stringify } from 'flatted';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SiteService {
-  // todo dodanie jakiegos pliku yaml albo konfiguracje proxy dodać
-  private basePath = 'api/site';
+  private basePath = 'api/site/dupa';
 
   public constructor(private http: HttpClient) { }
 
   public getSite(): Observable<ISite> {
-    // return this.http.get<ISite>(this.basePath + 'todo');
+    // return this.http.get<ISite>(this.basePath);
 
     return of(this.SITE_MOCK);
   }
 
+  public saveSite(dto: ISaveSite): Observable<any> {
+    return this.http.post<any>(this.basePath, dto);
+  }
 
   private SITE_MOCK: ISite = {
     header: {
@@ -31,6 +34,43 @@ export class SiteService {
     footer: {
       ...getBaseComponent(ComponentType.Footer),
       backgroundColor: '#101010',
+      rowItems: [
+        {
+          ...getBaseComponent(ComponentType.Row),
+          horizontalAlignment: 'justify-content-center',
+          verticalAlignment: 'align-self-center',
+          gridItems: [
+            {
+              ...getBaseComponent(ComponentType.Grid),
+              width: 6,
+              components: [
+                <IBlockComponent>{
+                  ...getBaseComponent(ComponentType.Block),
+                  backgroundColor: '#FF0000',
+                  text: 'twitter',
+                  fontSize: 12,
+                  fontFamily: 'sans-serif',
+                  fontColor: BLACK_COLOR,
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
+                  link: 'https://twitter.com/JKowalski_posel',
+                },
+                <IBlockComponent>{
+                  ...getBaseComponent(ComponentType.Block),
+                  backgroundColor: '#FF0000',
+                  text: 'facebook',
+                  fontSize: 12,
+                  fontFamily: 'sans-serif',
+                  fontColor: BLACK_COLOR,
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
+                  link: 'https://www.facebook.com/JanuszKowalski.official/?locale=pl_PL',
+                },
+              ],
+            },
+          ],
+        },
+      ],
     },
     menuItems: [
       {
