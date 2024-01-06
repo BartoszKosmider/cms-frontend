@@ -16,6 +16,9 @@
       @case (componentType.Grid) {
         <app-grid-editor [value]="componentToEdit"></app-grid-editor>
       }
+      @case (componentType.Footer) {
+        <app-footer-editor [value]="componentToEdit"></app-footer-editor>
+      }
 
       <!-- components -->
       @case (componentType.Block) {

@@ -14,11 +14,19 @@ export class FooterComponent {
   @Select(SiteState.footer)
   public footer$!: Observable<IFooter>;
 
+  @Select(SiteState.isEditMode)
+  public isEditMode$?: Observable<boolean>;
+
+
   constructor(
     private store: Store,
   ) { }
 
   public setComponentToEdit(component: IFooter) {
+    if (!this.store.selectSnapshot(SiteState.isEditMode)) {
+      return;
+    }
+
     this.store.dispatch(new SetComponentToEdit(component));
   }
 }

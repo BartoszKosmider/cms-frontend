@@ -6,7 +6,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class TwitterService {
-  private basePath = 'https://publish.twitter.com/oembed'
+  private basePath = 'api/twitter'
 
   constructor(
     private httpClient: HttpClient,

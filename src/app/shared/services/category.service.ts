@@ -1,14 +1,14 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { ICategory, IGetCategories, ISaveCategory } from '../models/category.model';
+import { Observable } from 'rxjs';
+import { IGetCategories, ISaveCategory } from '../models/category.model';
 import { IIdResponse } from '../models/app.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  private basePath = 'http://localhost:5000/api/categories'
+  private basePath = 'api/categories'
 
   constructor(
     private http: HttpClient,

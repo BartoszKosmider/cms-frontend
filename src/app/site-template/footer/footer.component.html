@@ -1,8 +1,10 @@
-<footer *ngIf="footer$ | async as footer"
+<footer
+  *ngIf="footer$ | async as footer"
   (click)="setComponentToEdit(footer)"
   class="py-5 text-center"
-  [style.background-color]="footer.backgroundColor">
-  <div>{{ footer.text }}</div>
+  [class.footer-hover]="isEditMode$ | async"
+  [style.background-color]="footer.enableBackgroundColor ? footer.backgroundColor : null"
+  >
   <p class="mb-0">
     <a href="#">Back to top</a>
   </p>

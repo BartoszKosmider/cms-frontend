@@ -1,10 +1,22 @@
 <div>
-  <div>
-    Kolor tła
-    <input type="color" [(ngModel)]="value.backgroundColor">
+  <div class="mb-3">
+    <label for="backgroundColor">Background color</label>
+    <input type="checkbox"
+      class="form-check-input"
+      style="margin-left: 10px;"
+      [(ngModel)]="value.enableBackgroundColor">
+    <input class="form-control form-control-sm"
+      id="backgroundColor"
+      type="color"
+      [(ngModel)]="value.backgroundColor">
   </div>
-  <div>
-    Tytuł strony
-    <input type="text" [(ngModel)]="value.text">
+
+  <div class="mb-3">
+    <label for="title">Title</label>
+    <input class="form-control form-control-sm"
+      id="title"
+      type="text"
+      spellcheck="false"
+      [(ngModel)]="value.title">
   </div>
 </div>

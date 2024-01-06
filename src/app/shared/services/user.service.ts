@@ -8,22 +8,22 @@ import { IAdminAccount, ILoginDto, IRegisterUserDto } from '../models/user.model
 })
 export class UserService {
 
-  private basePath = 'http://localhost:5000/api/'
+  private basePath = 'api/authentication'
 
   constructor(
     private http: HttpClient,
   ) { }
 
   public registerUser(dto: IRegisterUserDto): Observable<IRegisterUserDto> {
-    return this.http.post<IRegisterUserDto>(this.basePath + 'authentication/registration', dto);
+    return this.http.post<IRegisterUserDto>(this.basePath + '/registration', dto);
   }
 
   public registerAdmin(dto: IRegisterUserDto): Observable<IRegisterUserDto> {
-    return this.http.post<IRegisterUserDto>(this.basePath + 'authentication/registration/admin', dto);
+    return this.http.post<IRegisterUserDto>(this.basePath + '/registration/admin', dto);
   }
 
   public login(dto: ILoginDto): Observable<any> {
-    return this.http.post(this.basePath + 'authentication/login', dto, {
+    return this.http.post(this.basePath + '/login', dto, {
       responseType: 'text'
     });
   }

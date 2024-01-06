@@ -1,6 +1,4 @@
 import { Subject } from "rxjs";
-import { BLACK_COLOR, getNewGuid } from "./app.model";
-import { getBaseComponent, getImageComponent } from './default-components.model';
 
 export interface ISite {
   menuItems: IMenuItem[];
@@ -15,13 +13,10 @@ export interface IMenuItem {
 }
 
 export interface IHeader extends IBaseComponent {
-  text: string;
-  backgroundColor: string;
+  title: string;
 }
 
 export interface IFooter extends IBaseComponent {
-  text: string;
-  backgroundColor: string;
 }
 
 export interface IRow extends IBaseComponent {

@@ -16,6 +16,9 @@ export class HeaderComponent {
   @Select(SiteState.header)
   public header$!: Observable<IHeader>;
 
+  @Select(SiteState.isEditMode)
+  public isEditMode$!: Observable<boolean>;
+
   constructor(
     private store: Store,
     public authService: AuthService,
@@ -23,6 +26,10 @@ export class HeaderComponent {
   }
 
   public setComponentToEdit(component: IBaseComponent) {
+    if (!this.store.selectSnapshot(SiteState.isEditMode)) {
+      return;
+    }
+
     this.store.dispatch(new SetComponentToEdit(component));
   }
 

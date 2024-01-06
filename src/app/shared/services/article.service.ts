@@ -1,13 +1,13 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IArticle, IComment, IGetArticle, IGetArticleTitlesDto, IMicroArticle, ISaveArticle, ISaveArticleComment } from '../models/article.model';
+import { IComment, IGetArticle, IGetArticleTitlesDto, IMicroArticle, ISaveArticle, ISaveArticleComment } from '../models/article.model';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
-  private basePath = 'http://localhost:5000/api/article'
+  private basePath = 'api/article'
 
   constructor(
     private http: HttpClient,

@@ -11,7 +11,7 @@ import { getBaseComponent, getImageComponent, getTwitterComponent } from '../mod
 })
 export class SiteService {
   // todo dodanie jakiegos pliku yaml albo konfiguracje proxy dodać
-  private basePath = 'http://localhost:3000/';
+  private basePath = 'api/site';
 
   public constructor(private http: HttpClient) { }
 
@@ -25,12 +25,11 @@ export class SiteService {
   private SITE_MOCK: ISite = {
     header: {
       ...getBaseComponent(ComponentType.Header),
-      text: 'cms projekt header',
+      title: 'cms projekt header',
       backgroundColor: '#123123',
     },
     footer: {
       ...getBaseComponent(ComponentType.Footer),
-      text: 'cms projekt footer',
       backgroundColor: '#101010',
     },
     menuItems: [
