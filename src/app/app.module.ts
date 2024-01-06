@@ -119,7 +119,14 @@ import { TwitterEditorComponent } from './site/administrator-panel/editors/twitt
     CoreModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => localStorage.getItem('UserState.token'),
+        tokenGetter: () => {
+          let token = localStorage.getItem('UserState.token');
+          if (token) {
+            token = token.slice(1, -1);
+          }
+
+          return token;
+        },
       },
     }),
   ],

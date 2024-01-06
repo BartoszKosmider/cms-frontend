@@ -17,7 +17,7 @@ export class HttpLoadingInterceptor implements HttpInterceptor {
     const token = localStorage.getItem('UserState.token');
     if (!_.isNil(token) && token.trim() !== '') {
       request = request.clone({
-        setHeaders: { Authorization: `Bearer ${token.slice(1, -1)}` }
+        setHeaders: { Authorization: `Bearer ${token}` }
       });
     }
 
