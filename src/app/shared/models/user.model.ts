@@ -12,13 +12,10 @@ export interface ILoginDto {
 
 export interface IJwtToken {
   role: string;
+  name: string;
 }
 
 export enum UserRole {
   Admin = 'Admin',
   User = 'User',
-}
-
-export interface IAdminAccount {
-  username: string;
 }

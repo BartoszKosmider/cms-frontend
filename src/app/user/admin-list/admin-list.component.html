@@ -18,16 +18,16 @@
 
     <mat-table [dataSource]="admins">
       <ng-container matColumnDef="username">
-        <mat-header-cell *matHeaderCellDef> username </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="select">
         <mat-header-cell *matHeaderCellDef>
-          <mat-checkbox (change)="$event ? toggleAllRows(admins) : null"
+          <!-- <mat-checkbox (change)="$event ? toggleAllRows(admins) : null"
                         [checked]="selection.hasValue() && isAllSelected(admins.length)"
                         [indeterminate]="selection.hasValue() && !isAllSelected(admins.length)">
-          </mat-checkbox>
+          </mat-checkbox> -->
         </mat-header-cell>
         <mat-cell *matCellDef="let row">
           <mat-checkbox (click)="$event.stopPropagation()"

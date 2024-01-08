@@ -47,4 +47,16 @@ export class AuthService {
 
     return decode?.role === UserRole.User;
   }
+
+  public getUserName(): string | undefined {
+    const isValid = this.isAuthenticated();
+    if (!isValid) {
+      return undefined;
+    }
+
+    const token = this.store.selectSnapshot(UserState.token);
+    const decode = this.jwtHelperService.decodeToken<IJwtToken>(<string>token);
+
+    return decode?.name;
+  }
 }

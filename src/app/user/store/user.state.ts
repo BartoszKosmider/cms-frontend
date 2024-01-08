@@ -1,23 +1,24 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import * as _ from "lodash";
-import { DeleteAdmins, DeleteArticles, GetAdmins, GetArticles, GetUser, LoginUser, Logout, RegisterAdmin, RegisterUser } from "./user.action";
+import { DeleteAdmins, DeleteArticles, DeleteCurrentUser, GetAdmins, GetArticles, GetUser, LoginUser, Logout, RegisterAdmin, RegisterUser } from './user.action';
 import { UserService } from "src/app/shared/services/user.service";
-import { CategoryService } from "src/app/shared/services/category.service";
 import { IMicroArticle } from "src/app/shared/models/article.model";
 import { ArticleService } from "src/app/shared/services/article.service";
 import { exhaustMap } from 'rxjs/operators';
 import { Navigate } from "@ngxs/router-plugin";
 import { Observable, of } from "rxjs";
 import { UserInteractionsService } from "src/app/shared/user-interactions/user-interactions.service";
-import { IAdminAccount } from "src/app/shared/models/user.model";
 import { ICategory } from "src/app/shared/models/category.model";
 import { patch, removeItem } from "@ngxs/store/operators";
+import { AccountService } from "src/app/shared/services/account.service";
+import { UserRole } from "src/app/shared/models/user.model";
+import { AuthService } from "src/app/shared/auth/auth.service";
 
 export interface IUserState {
   categories?: ICategory[];
   articles?: IMicroArticle[];
-  admins?: IAdminAccount[]
+  admins?: string[]
   token?: string;
 }
 
@@ -34,9 +35,10 @@ export interface IUserState {
 export class UserState {
   public constructor(
     private userService: UserService,
-    private categoryService: CategoryService,
+    private accountService: AccountService,
     private articleService: ArticleService,
     private userInteractionsService: UserInteractionsService,
+    private authService: AuthService,
   ) { }
 
   @Selector()
@@ -50,7 +52,7 @@ export class UserState {
   }
 
   @Selector()
-  public static admins(state: IUserState): IAdminAccount[] | undefined {
+  public static admins(state: IUserState): string[] | undefined {
     return state.admins;
   }
 
@@ -131,9 +133,11 @@ export class UserState {
   }
 
   @Action(GetAdmins)
-  public getAdmins(ctx: StateContext<IUserState>, action: GetAdmins) {
-    return this.userService.getAdmins().pipe(
+  public getAdmins(ctx: StateContext<IUserState>) {
+    return this.accountService.getUsers(UserRole.Admin).pipe(
       exhaustMap(admins => {
+        const userName = this.authService.getUserName();
+        admins = admins.filter(a => a !== userName);
         ctx.patchState({
           admins: admins,
         });
@@ -145,11 +149,11 @@ export class UserState {
 
   @Action(DeleteAdmins)
   public deleteAdmins(ctx: StateContext<IUserState>, action: DeleteAdmins) {
-    return this.userService.getAdmins().pipe(
+    return this.accountService.deleteUsers(action.usersToDelete).pipe(
       exhaustMap(() => {
         let admins = ctx.getState().admins;
-        action.adminsToDelete.forEach(username => {
-          admins = admins?.filter(a => a.username !== username);
+        action.usersToDelete.forEach(username => {
+          admins = admins?.filter(a => a !== username);
         });
 
         ctx.patchState({
@@ -157,6 +161,18 @@ export class UserState {
         });
 
         return of();
+      }),
+    );
+  }
+
+  @Action(DeleteCurrentUser)
+  public deleteCurrentUser(ctx: StateContext<IUserState>) {
+    return this.accountService.deleteCurrentUser().pipe(
+      exhaustMap(() => {
+        return ctx.dispatch([
+          new Logout(),
+          new Navigate(['/login']),
+        ]);
       }),
     );
   }

@@ -42,6 +42,10 @@ export class GetAdmins {
 
 export class DeleteAdmins {
   public static readonly type = '[User] Delete admins';
-  constructor(public adminsToDelete: string[]) { }
+  constructor(public usersToDelete: string[]) { }
+}
+
+export class DeleteCurrentUser {
+  public static readonly type = '[User] Delete current user';
 }
 
