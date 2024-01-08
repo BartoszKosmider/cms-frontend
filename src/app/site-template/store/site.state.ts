@@ -78,7 +78,7 @@ export class SiteState {
     return this.siteService.getSite().pipe(
       exhaustMap(site => {
         ctx.patchState({
-          site: site
+          site: site.site,
         });
 
         return of();

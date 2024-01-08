@@ -96,3 +96,6 @@ export const ImagePathDictionary: Dictionary<string> = {
   'MicroArticle': 'assets/component-images/MicroArticle.png',
   'Twitter': 'assets/component-images/Twitter.png',
 }
+
+export const DATETIME_FORMAT = 'DD-MM-YYYY HH:mm:ss';
+export const DATE_FORMAT = 'DD-MM-YYYY';

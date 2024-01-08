@@ -33,7 +33,7 @@ export class ArticleComponent implements OnDestroy {
 
   public form = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    category: new FormControl('', [Validators.required]),
+    categoryId: new FormControl<number | undefined>(undefined, [Validators.required]),
     editorContent: new FormControl<Record<string, any>>(
       { value: null, disabled: false },
       EditorValidators.required()
@@ -71,7 +71,7 @@ export class ArticleComponent implements OnDestroy {
     ).subscribe(article => {
       this.form.patchValue({
         title: article.title,
-        category: article.category,
+        categoryId: article.categoryId,
         editorContent: article.definition,
         description: article.description,
       });
@@ -93,14 +93,14 @@ export class ArticleComponent implements OnDestroy {
     if (_.isNil(this.articleId)) {
       this.store.dispatch(new SaveArticle(<ISaveArticle>{
         title: formValues.title,
-        category: formValues.category,
+        categoryId: <number>formValues.categoryId,
         description: formValues.description,
         contents: JSON.stringify(formValues.editorContent),
       }));
     } else {
       this.store.dispatch(new UpdateArticle(<ISaveArticle>{
         title: formValues.title,
-        category: formValues.category,
+        categoryId: <number>formValues.categoryId,
         description: formValues.description,
         contents: JSON.stringify(formValues.editorContent),
       }, this.articleId));

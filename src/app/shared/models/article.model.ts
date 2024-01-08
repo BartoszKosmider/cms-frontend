@@ -5,7 +5,7 @@ export interface IArticle {
   title: string;
   description: string;
   definition: any;
-  category: string;
+  categoryId: number;
 }
 
 export interface IMicroArticle {
@@ -13,7 +13,8 @@ export interface IMicroArticle {
   title: string;
   description: string;
   category: string;
-  date: string;
+  createdAt: string;
+  authorId: string;
 }
 
 export interface IGetArticleTitlesDto {
@@ -24,7 +25,7 @@ export interface ISaveArticle {
   title: string;
   description: string;
   contents: string;
-  category: string;
+  categoryId: number;
 }
 
 export interface IGetArticle {

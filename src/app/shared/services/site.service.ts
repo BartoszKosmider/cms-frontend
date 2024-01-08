@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { ComponentType, IBlockComponent, IMicroArticleComponent, ISaveSite, ISite } from '../models/site.model';
+import { ComponentType, IBlockComponent, IGetSite, IMicroArticleComponent, ISaveSite, ISite } from '../models/site.model';
 import { getNewGuid, BLACK_COLOR } from '../models/app.model';
 import { getBaseComponent, getImageComponent, getTwitterComponent } from '../models/default-components.model';
-import { fromJSON, stringify } from 'flatted';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +14,8 @@ export class SiteService {
 
   public constructor(private http: HttpClient) { }
 
-  public getSite(): Observable<ISite> {
-    // return this.http.get<ISite>(this.basePath);
-
-    return of(this.SITE_MOCK);
+  public getSite(): Observable<IGetSite> {
+    return this.http.get<IGetSite>(this.basePath);
   }
 
   public saveSite(dto: ISaveSite): Observable<any> {

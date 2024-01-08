@@ -18,14 +18,7 @@ export class ArticleService {
   }
 
   public getMicroArticle(articleId: number): Observable<IMicroArticle> {
-    // return this.http.get<IMicroArticle>(this.basePath + articleId);
-
-    return of(<IMicroArticle>{
-      id: 1,
-      title: 'tytuł',
-      description: 'lorem dlsakfklsa lkska lkfsdk ksdak flaksdkl fsdak',
-      category: 'kategoria',
-    });
+    return this.http.get<IMicroArticle>(this.basePath + '/' + articleId + '/short');
   }
 
   public getArticlesByTitle(title: string): Observable<IGetArticleTitlesDto> {
@@ -50,7 +43,7 @@ export class ArticleService {
         title: 'tytuł1',
         description: 'lorem dlsakfklsa lkska lkfsdk ksdak flaksdkl fsdak',
         category: 'kategoria1',
-        date: '2022-12-31 13:13'
+        createdAt: '2022-12-31 13:13'
       },
       {
         id: 2,

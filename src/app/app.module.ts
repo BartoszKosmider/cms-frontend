@@ -54,6 +54,7 @@ import { ArticleCommentsComponent } from './article/article-preview/article-comm
 import { CategoryState } from './user/category-list/store/category.state';
 import { TwitterComponent } from './site/main/row/grid/twitter/twitter.component';
 import { TwitterEditorComponent } from './site/administrator-panel/editors/twitter-editor/twitter-editor.component';
+import { FormatDatePipe } from './shared/pipes/format-date.pipe';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { TwitterEditorComponent } from './site/administrator-panel/editors/twitt
     SiteTemplateComponent,
     SiteComponent,
     SanitizeHtmlPipe,
+    FormatDatePipe,
     HeaderEditorComponent,
     BlockEditorComponent,
     FooterEditorComponent,

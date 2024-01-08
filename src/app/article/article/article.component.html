@@ -21,7 +21,7 @@
         <select class="form-select form-select-sm"
           #category
           id="category"
-          formControlName="category">
+          formControlName="categoryId">
 
           @for (category of categories; track category) {
             <option [value]="category.id">{{category.category}}</option>

@@ -1,5 +1,3 @@
-import { Subject } from "rxjs";
-
 export interface ISite {
   menuItems: IMenuItem[];
   header: IHeader;
@@ -96,6 +94,10 @@ export enum ComponentType {
 }
 
 export interface ISaveSite {
+  site: ISite;
+}
+
+export interface IGetSite {
   site: ISite;
 }
 

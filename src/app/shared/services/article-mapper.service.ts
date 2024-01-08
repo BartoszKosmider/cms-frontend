@@ -11,7 +11,7 @@ export class ArticleMapperService {
       title: dto.title,
       description: dto.description,
       definition: JSON.parse(dto.contents),
-      category: 'dupa',
+      categoryId: 1,
     };
   }
 }
