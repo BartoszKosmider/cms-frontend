@@ -6,7 +6,7 @@ import { ArticleState } from '../store/article.state';
 import * as _ from 'lodash';
 import { toHTML } from 'ngx-editor';
 import { ActivatedRoute } from '@angular/router';
-import { GetArticle } from '../store/article.action';
+import { DisLikeArticle, GetArticle, LikeArticle } from '../store/article.action';
 
 @Component({
   selector: 'app-article-preview',
@@ -31,5 +31,13 @@ export class ArticlePreviewComponent {
 
   public editorXml(definition: any): string {
     return !_.isNil(definition) ? toHTML(definition) : '';
+  }
+
+  public like(): void {
+    this.store.dispatch(new LikeArticle(<number>this.articleId));
+  }
+
+  public dislike(): void {
+    this.store.dispatch(new DisLikeArticle(<number>this.articleId));
   }
 }

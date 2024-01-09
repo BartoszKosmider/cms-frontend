@@ -16,7 +16,25 @@
       <div>
         Author: todo
       </div>
+      <div>
+        Likes: todo
+        <div appShowIfUserLogged>
+          @if (article.isLiked) {
+            <button mat-button
+              (click)="dislike()"
+              matTooltip="Dislike article">
+              <i class="bi bi-hand-thumbs-up-fill"></i>
+            </button>
+          } @else {
+            <button mat-button
+              (click)="like()"
+              matTooltip="Like article">
+              <i class="bi bi-hand-thumbs-up"></i>
+            </button>
+          }
+        </div>
 
+      </div>
       <div [innerHTML]="editorXml(article.definition) | sanitizeHtml"></div>
     </div>
   </div>

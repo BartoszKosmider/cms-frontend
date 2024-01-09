@@ -1,24 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IComment, IGetArticle, IGetArticleTitlesDto, IMicroArticle, ISaveArticle, ISaveArticleComment } from '../models/article.model';
+import { IComment, IGetArticle, IGetArticleTitlesDto, IGetMicroArticlesList, IMicroArticle, ISaveArticle, ISaveArticleComment, SortingType } from '../models/article.model';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
-  private basePath = 'api/article'
+  private baseArticlePath = 'api/article'
+  private baseArticleLikePath = 'api/likes'
 
   constructor(
     private http: HttpClient,
   ) { }
 
   public getArticle(articleId: number): Observable<IGetArticle> {
-    return this.http.get<IGetArticle>(this.basePath + '/' + articleId);
+    return this.http.get<IGetArticle>(this.baseArticlePath + '/' + articleId);
   }
 
   public getMicroArticle(articleId: number): Observable<IMicroArticle> {
-    return this.http.get<IMicroArticle>(this.basePath + '/' + articleId + '/short');
+    return this.http.get<IMicroArticle>(this.baseArticlePath + '/' + articleId + '/short');
   }
 
   public getArticlesByTitle(title: string): Observable<IGetArticleTitlesDto> {
@@ -34,36 +35,12 @@ export class ArticleService {
     });
   }
 
-  public getMicroArticles(): Observable<IMicroArticle[]> {
-    // return this.http.get<IMicroArticle>(this.basePath + articleId);
+  public getMicroArticles(sortingType: SortingType, numberOfElements = 20): Observable<IGetMicroArticlesList> {
+    const params = {
+      order: sortingType,
+    }
 
-    return of(<IMicroArticle[]>[
-      {
-        id: 1,
-        title: 'tytuł1',
-        description: 'lorem dlsakfklsa lkska lkfsdk ksdak flaksdkl fsdak',
-        category: 'kategoria1',
-        createdAt: '2022-12-31 13:13'
-      },
-      {
-        id: 2,
-        title: 'tytuł2',
-        description: 'lorem dlsakfklsa lkska lkfsdk ksdak flaksdkl fsdak',
-        category: '2022-12-31 13:13',
-      },
-      {
-        id: 3,
-        title: 'tytuł3',
-        description: 'lorem dlsakfklsa lkska lkfsdk ksdak flaksdkl fsdak',
-        category: 'kategoria3',
-      },
-      {
-        id: 4,
-        title: 'tytuł5',
-        description: 'lorem dlsakfklsa lkska lkfsdk ksdak flaksdkl fsdak',
-        category: 'kategoria4',
-      },
-    ]);
+    return this.http.get<IGetMicroArticlesList>(this.baseArticlePath + '/list/' + numberOfElements, {params: params});
   }
 
   public deleteArticles(articleIds: number[]): Observable<any> {
@@ -71,15 +48,15 @@ export class ArticleService {
       articleIds: articleIds,
     }
 
-    return this.http.delete<any>(this.basePath, {params: params});
+    return this.http.delete<any>(this.baseArticlePath, {params: params});
   }
 
   public saveArticle(article: ISaveArticle): Observable<any> {
-    return this.http.post<any>(this.basePath, article);
+    return this.http.post<any>(this.baseArticlePath, article);
   }
 
   public updateArticle(article: ISaveArticle, articleId: number): Observable<any> {
-    return this.http.put<any>(this.basePath + '/' + articleId, article);
+    return this.http.put<any>(this.baseArticlePath + '/' + articleId, article);
   }
 
   public getArticleComments(articleId: number, timestamp: string, limit: number, offset: number): Observable<IComment[]> {
@@ -110,5 +87,21 @@ export class ArticleService {
       authorId: '<guid>',
       authorName: '<authorName>',
     },);
+  }
+
+  public likeArticle(articleId: number): Observable<any> {
+    const params = {
+      articleId: articleId,
+    }
+
+    return this.http.post(this.baseArticleLikePath, {}, { params: params});
+  }
+
+  public dislikeArticle(articleId: number): Observable<any> {
+    const params = {
+      articleId: articleId,
+    }
+
+    return this.http.delete(this.baseArticleLikePath, { params: params});
   }
 }

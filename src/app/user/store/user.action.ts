@@ -1,13 +1,9 @@
+import { SortingType } from "src/app/shared/models/article.model";
 import { ILoginDto, IRegisterUserDto } from "src/app/shared/models/user.model";
-
-export class GetUser {
-  public static readonly type = '[User] Get user';
-  constructor() { }
-}
 
 export class GetArticles {
   public static readonly type = '[User] Get articles';
-  constructor() { }
+  constructor(public sortingType: SortingType) { }
 }
 
 export class DeleteArticles {

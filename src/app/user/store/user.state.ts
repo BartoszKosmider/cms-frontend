@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import * as _ from "lodash";
-import { DeleteAdmins, DeleteArticles, DeleteCurrentUser, GetAdmins, GetArticles, GetUser, LoginUser, Logout, RegisterAdmin, RegisterUser } from './user.action';
+import { DeleteAdmins, DeleteArticles, DeleteCurrentUser, GetAdmins, GetArticles, LoginUser, Logout, RegisterAdmin, RegisterUser } from './user.action';
 import { UserService } from "src/app/shared/services/user.service";
 import { IMicroArticle } from "src/app/shared/models/article.model";
 import { ArticleService } from "src/app/shared/services/article.service";
@@ -56,18 +56,17 @@ export class UserState {
     return state.admins;
   }
 
-  @Action(GetUser)
-  public getArticle(ctx: StateContext<IUserState>, action: GetUser): void {
-
-  }
-
   @Action(GetArticles)
-  public getArticles(ctx: StateContext<IUserState>, action: GetArticles): void {
-    this.articleService.getMicroArticles().subscribe(articles => {
-      ctx.patchState({
-        articles: articles,
-      });
-    });
+  public getArticles(ctx: StateContext<IUserState>, action: GetArticles): Observable<any> {
+    return this.articleService.getMicroArticles(action.sortingType).pipe(
+      exhaustMap(({articles}) => {
+        ctx.patchState({
+          articles: articles,
+        });
+
+        return of();
+      }),
+    );
   }
 
   @Action(DeleteArticles)

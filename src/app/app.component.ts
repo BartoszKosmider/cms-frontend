@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngxs/store';
 import { GetSite } from './site-template/store/site.actions';
 import { AuthService } from './shared/auth/auth.service';
+import { GetCategories } from './user/category-list/store/category.action';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,6 @@ export class AppComponent {
     private store: Store,
     private authService: AuthService,
   ) {
-    this.store.dispatch(new GetSite());
+    this.store.dispatch([new GetCategories(), new GetSite()]);
   }
 }

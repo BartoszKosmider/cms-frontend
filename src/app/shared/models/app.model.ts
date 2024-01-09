@@ -99,3 +99,8 @@ export const ImagePathDictionary: Dictionary<string> = {
 
 export const DATETIME_FORMAT = 'DD-MM-YYYY HH:mm:ss';
 export const DATE_FORMAT = 'DD-MM-YYYY';
+
+export enum OrderBy {
+  ASC = 'Ascending',
+  DESC = 'Descending',
+}

@@ -1,5 +1,5 @@
 <div>
-  @if(articles$ | async; as articles) {
+  @if((categories$ | async) && (articles$ | async); as articles) {
     <button
       mat-raised-button
       [color]="'primary'"
@@ -16,6 +16,42 @@
       </button>
     }
 
+    <div>
+      <form [formGroup]="filterForm">
+        <div class="mb-3">
+          <label for="filterOption">Filter by</label>
+          <select
+            class="form-select form-select-sm"
+            id="filterOption"
+            formControlName="option">
+            @for (filterOption of filterOptions; track $index) {
+              <option [value]="filterOption">{{ filterOption }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="orderBy">Order by</label>
+          <select
+            class="form-select form-select-sm"
+            id="orderBy"
+            formControlName="orderBy">
+            @for (orderByOption of orderByOptions; track $index) {
+              <option [value]="orderByOption">{{ orderByOption }}</option>
+            }
+          </select>
+        </div>
+
+        <button
+          mat-raised-button
+          [color]="'primary'"
+          (click)="refreshArticles()"
+          type="submit"
+          >Refresh
+        </button>
+      </form>
+    </div>
+
     <mat-table [dataSource]="articles">
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
@@ -29,12 +65,12 @@
 
       <ng-container matColumnDef="category">
         <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{element.categoryId | appCategoryTranslation}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="date">
-        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.date}} </mat-cell>
+      <ng-container matColumnDef="createdAt">
+        <mat-header-cell *matHeaderCellDef> Created at </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.createdAt | appFormatDate}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="edit">
@@ -66,6 +102,13 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
+    <!-- <mat-paginator
+      [length]="articles.length"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      aria-label="Select page"
+      (page)="pageChanged($event)">
+    </mat-paginator> -->
   } @else {
     <mat-spinner></mat-spinner>
   }

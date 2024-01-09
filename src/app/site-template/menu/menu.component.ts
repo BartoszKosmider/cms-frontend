@@ -22,6 +22,6 @@ export class MenuComponent {
   ) { }
 
   public setPageId(pageId: string | undefined): void {
-    this.store.dispatch(new SetPageId(pageId))
+    this.store.dispatch(new SetPageId(pageId));
   }
 }

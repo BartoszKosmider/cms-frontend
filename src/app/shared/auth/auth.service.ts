@@ -59,4 +59,8 @@ export class AuthService {
 
     return decode?.name;
   }
+
+  public isTokenValid(token: string): boolean {
+    return !!token && !this.jwtHelperService.isTokenExpired(token);
+  }
 }

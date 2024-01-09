@@ -6,13 +6,14 @@ export interface IArticle {
   description: string;
   definition: any;
   categoryId: number;
+  isLiked: boolean;
 }
 
 export interface IMicroArticle {
   id: number;
   title: string;
   description: string;
-  category: string;
+  categoryId: number;
   createdAt: string;
   authorId: string;
 }
@@ -33,6 +34,8 @@ export interface IGetArticle {
   title: string;
   description: string;
   contents: string;
+  categoryId: number;
+  isLiked: boolean;
 }
 
 export interface IComment {
@@ -44,4 +47,23 @@ export interface IComment {
 
 export interface ISaveArticleComment {
   content: string;
+}
+
+export interface IGetMicroArticlesList {
+  articles: IMicroArticle[];
+}
+
+export enum SortingType {
+  NameDescending = 'NDesc',
+  NameAscending = 'NAsc',
+  TimeDescending = 'NTDesc',
+  TimeAscending = 'TAsc',
+  LikeDescending = 'LDesc',
+  LikeAscending = 'LAsc',
+}
+
+export enum ArticleFilterOption {
+  Like = 'Like',
+  Name = 'Name',
+  Time = 'Time',
 }

@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import * as _ from "lodash";
-import { ClearArticle, GetArticle, GetArticleComments, SaveArticle, SaveArticleComment, UpdateArticle } from "./article.action";
+import { ClearArticle, DisLikeArticle, GetArticle, GetArticleComments, LikeArticle, SaveArticle, SaveArticleComment, UpdateArticle } from "./article.action";
 import { IArticle, IComment } from "src/app/shared/models/article.model";
 import { ArticleService } from '../../shared/services/article.service';
 import { Observable, exhaustMap, of } from "rxjs";
@@ -110,5 +110,38 @@ export class ArticleState {
     ctx.patchState({
       article: undefined,
     })
+  }
+
+  @Action(LikeArticle)
+  public likeArticle(ctx: StateContext<IArticleState>, action: LikeArticle): Observable<any> {
+    return this.articleService.likeArticle(action.articleId).pipe(
+      exhaustMap(() => {
+        const article = ctx.getState().article;
+        ctx.patchState({
+          article: <IArticle>{
+            ...article,
+            isLiked: true,
+          }
+        })
+        return of();
+      }),
+    );
+  }
+
+  @Action(DisLikeArticle)
+  public disLikeArticle(ctx: StateContext<IArticleState>, action: DisLikeArticle): Observable<any> {
+    return this.articleService.dislikeArticle(action.articleId).pipe(
+      exhaustMap(() => {
+        const article = ctx.getState().article;
+        ctx.patchState({
+          article: <IArticle>{
+            ...article,
+            isLiked: false,
+          }
+        });
+
+        return of();
+      }),
+    );
   }
 }

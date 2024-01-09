@@ -55,6 +55,7 @@ import { CategoryState } from './user/category-list/store/category.state';
 import { TwitterComponent } from './site/main/row/grid/twitter/twitter.component';
 import { TwitterEditorComponent } from './site/administrator-panel/editors/twitter-editor/twitter-editor.component';
 import { FormatDatePipe } from './shared/pipes/format-date.pipe';
+import { CategoryTranslationPipe } from './shared/pipes/category-translation.pipe';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { FormatDatePipe } from './shared/pipes/format-date.pipe';
     SiteTemplateComponent,
     SiteComponent,
     SanitizeHtmlPipe,
+    CategoryTranslationPipe,
     FormatDatePipe,
     HeaderEditorComponent,
     BlockEditorComponent,

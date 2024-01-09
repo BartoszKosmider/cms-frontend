@@ -81,7 +81,7 @@ export class SiteState {
           site: site.site,
         });
 
-        return of();
+        return ctx.dispatch(new SetPageId(site.site.menuItems[0]?.id));
       }),
     );
   }

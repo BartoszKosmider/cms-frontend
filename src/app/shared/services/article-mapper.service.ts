@@ -11,7 +11,8 @@ export class ArticleMapperService {
       title: dto.title,
       description: dto.description,
       definition: JSON.parse(dto.contents),
-      categoryId: 1,
+      categoryId: dto.categoryId,
+      isLiked: dto.isLiked,
     };
   }
 }

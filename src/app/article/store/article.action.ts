@@ -33,3 +33,13 @@ export class SaveArticleComment {
 export class ClearArticle {
   public static readonly type = '[Article] Clear article';
 }
+
+export class LikeArticle {
+  public static readonly type = '[Article] Like article';
+  constructor(public articleId: number) { }
+}
+
+export class DisLikeArticle {
+  public static readonly type = '[Article] DisLike article';
+  constructor(public articleId: number) { }
+}
