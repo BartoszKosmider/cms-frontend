@@ -10,7 +10,6 @@ import { Observable, Subject, filter, takeUntil } from 'rxjs';
 import { IArticle, ISaveArticle } from '../../shared/models/article.model';
 import { CategoryState } from 'src/app/user/category-list/store/category.state';
 import { ICategory } from 'src/app/shared/models/category.model';
-import { GetCategories } from 'src/app/user/category-list/store/category.action';
 
 @Component({
   selector: 'app-article',
@@ -56,13 +55,13 @@ export class ArticleComponent implements OnDestroy {
     this.route.params.subscribe(params => {
       const articleId = params['articleId']
       if (_.isNil(articleId) || articleId === 'new') {
-        this.store.dispatch([new GetCategories(), new ClearArticle()]);
+        this.store.dispatch(new ClearArticle());
 
         return;
       }
 
       this.articleId = +articleId;
-      this.store.dispatch([new GetArticle(this.articleId), new GetCategories()]);
+      this.store.dispatch(new GetArticle(this.articleId));
     });
 
     this.article$?.pipe(

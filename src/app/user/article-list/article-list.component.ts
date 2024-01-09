@@ -46,7 +46,7 @@ export class ArticleListComponent {
     private userInteractionsService: UserInteractionsService,
     private store: Store,
   ) {
-    this.store.dispatch([new GetArticles(SortingType.NameAscending), new GetCategories()]);
+    this.store.dispatch(new GetArticles(SortingType.NameAscending));
   }
 
   public deleteSelected(): void {
