@@ -7,6 +7,7 @@ import { MaterialModule } from '../modules/material.module';
 import { DialogComponent } from '../user-interactions/dialog/dialog.component';
 import { DialogQuestionComponent } from '../user-interactions/dialog-question/dialog-question.component';
 import { DialogImageComponent } from '../user-interactions/dialog-image/dialog-image.component';
+import { CopyButtonComponent } from './copy-button/copy-button.component';
 
 const sharedComponenets = [
   EditButtonComponent,
@@ -14,6 +15,7 @@ const sharedComponenets = [
   DialogComponent,
   DialogQuestionComponent,
   DialogImageComponent,
+  CopyButtonComponent,
 ];
 
 @NgModule({

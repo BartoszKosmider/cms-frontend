@@ -18,6 +18,8 @@
   [style.background-color]="component.enableBackgroundColor ? component.backgroundColor : null"
   [ngClass]="component.enableBackgroundPattern ? component.backgroundPattern : null"
   >
+  {{ refreshMicroArticle(component.articleId) }}
+
   @if (microArticle) {
     <div class="row mb-2">
       <div class="col-md-12">

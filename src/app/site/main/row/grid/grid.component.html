@@ -41,6 +41,10 @@
               [tooltip]="'Edit component'"
               [clickAction]="setComponentToEdit(component)">
             </app-edit-button>
+            <app-copy-button
+              [tooltip]="'Duplicate component'"
+              [clickAction]="duplicateComponent(grid.components, component)">
+            </app-copy-button>
             <app-delete-button
               [tooltip]="'Remove component'"
               [clickAction]="deleteComponent(component)">

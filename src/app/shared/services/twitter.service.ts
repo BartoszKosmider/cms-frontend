@@ -14,10 +14,10 @@ export class TwitterService {
 
   public getPost(url: string): Observable<any> {
     return of({
-      "url": "https://twitter.com/JKowalski_posel/status/1742218969061175725",
-      "author_name": "Janusz Kowalski 🇵🇱",
-      "author_url": "https://twitter.com/JKowalski_posel",
-      "html": "<blockquote class=\"twitter-tweet\"><p lang=\"pl\" dir=\"ltr\">W Sejmie nie ma już mniejszości niemieckiej. Jest większość, która myśli i działa po niemiecku. Odrzucenie przez rząd Tuska walki o przywrócenie polsko-niemieckiej symetrii to zgoda na dyskryminację Polaków w Niemczech i łamanie traktatu przez Berlin.<a href=\"https://t.co/NCNbcbToSH\">https://t.co/NCNbcbToSH</a></p>&mdash; Janusz Kowalski 🇵🇱 (@JKowalski_posel) <a href=\"https://twitter.com/JKowalski_posel/status/1742218969061175725?ref_src=twsrc%5Etfw\">January 2, 2024</a></blockquote>\n\n\n",
+      "url": "https://twitter.com/Magda_Gessler/status/361397351388172288",
+      "author_name": "Magda Gessler",
+      "author_url": "https://twitter.com/Magda_Gessler",
+      "html": "<blockquote class=\"twitter-tweet\"><p lang=\"pl\" dir=\"ltr\">z mojego telefonu:):):) <a href=\"http://t.co/uPcspH4hle\">pic.twitter.com/uPcspH4hle</a></p>&mdash; Magda Gessler (@Magda_Gessler) <a href=\"https://twitter.com/Magda_Gessler/status/361397351388172288?ref_src=twsrc%5Etfw\">July 28, 2013</a></blockquote>\n\n\n",
       "width": 550,
       "height": null,
       "type": "rich",

@@ -42,6 +42,14 @@ export class GridComponent {
     return () => this.store.dispatch(new SetComponentToEdit(component));
   }
 
+  public duplicateComponent(gridComponents: IBaseComponent[], component: IBaseComponent): () => void {
+    return () => {
+      const newComponent = _.cloneDeep(component);
+      newComponent.id = getNewGuid();
+      gridComponents.push(newComponent);
+    };
+  }
+
   public deleteComponent(component: IBaseComponent): () => void {
     return () => {
       this.grid.components = this.grid.components.filter(c => c.id !== component.id);
