@@ -47,7 +47,8 @@ export const getRow = (): IRow => <IRow>{
 export const getBlockComponent = (): IBlockComponent => <IBlockComponent>{
   ...getBaseComponent(ComponentType.Block),
   text: 'Wprowadź tekst',
-  backgroundColor: '#ffffff',
+  enableBackgroundColor: true,
+  backgroundColor: WHITE_COLOR,
   fontSize: 12,
   fontFamily: 'sans-serif',
   fontColor: BLACK_COLOR,
@@ -65,9 +66,13 @@ export const getMicroArticleComponent = (): IMicroArticleComponent => <IMicroArt
   ...getBaseComponent(ComponentType.MicroArticle),
   articleId: undefined,
   articleChanged$: new Subject<number>(),
+  enableBackgroundColor: true,
+  backgroundColor: WHITE_COLOR,
 };
 
 export const getTwitterComponent = (): ITwitterComponent => <ITwitterComponent>{
   ...getBaseComponent(ComponentType.Twitter),
   twitterPostHtml: 'dupa',
+  enableBackgroundColor: true,
+  backgroundColor: WHITE_COLOR,
 };

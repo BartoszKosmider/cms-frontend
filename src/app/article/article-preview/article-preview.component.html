@@ -11,13 +11,10 @@
         Description: {{article.description}}
       </div>
       <div>
-        Created: todo
+        Author: {{ article.authorName }}
       </div>
       <div>
-        Author: todo
-      </div>
-      <div>
-        Likes: todo
+        Likes: {{ article.likeCount }}
         <div appShowIfUserLogged>
           @if (article.isLiked) {
             <button mat-button
@@ -33,12 +30,10 @@
             </button>
           }
         </div>
-
       </div>
       <div [innerHTML]="editorXml(article.definition) | sanitizeHtml"></div>
     </div>
   </div>
-
   <div class="row">
     <div class="col">
       <app-article-comments

@@ -73,6 +73,11 @@
         <mat-cell *matCellDef="let element"> {{element.createdAt | appFormatDate}} </mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="likeCount">
+        <mat-header-cell *matHeaderCellDef> Likes </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.likeCount }} </mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="edit">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let element">

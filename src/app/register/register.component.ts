@@ -17,8 +17,8 @@ export class RegisterComponent {
   public registerForm = new FormGroup({
     username: new FormControl<string>('Admin', [Validators.required]),
     password: new FormControl<string>('Password#=123', [Validators.required]),
-    name: new FormControl<string>('dupa1', [Validators.required]),
-    email: new FormControl<string>('dupa2@chuj.pl', [Validators.required, Validators.email]),
+    name: new FormControl<string>('todo', [Validators.required]),
+    email: new FormControl<string>('aaa@bbb.com', [Validators.required, Validators.email]),
   });
 
   constructor(

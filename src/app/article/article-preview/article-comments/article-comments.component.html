@@ -5,7 +5,8 @@
         <div class="card-body p-4">
           @if(isAuthenticated) {
             <div class="form-outline mb-4">
-              <form [formGroup]="commentForm">
+              <form [formGroup]="commentForm"
+                (submit)="saveComment()">
                 <input type="text"
                   id="addANote"
                   formControlName="comment"
@@ -31,12 +32,9 @@
               <div class="card mb-4">
                 <div class="card-body">
                   <p>{{ comment.content }}</p>
-
                   <div class="d-flex justify-content-between">
                     <div class="d-flex flex-row align-items-center">
-                      <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp" alt="avatar" width="25"
-                        height="25" />
-                      <p class="small mb-0 ms-2">{{ comment.authorName }}</p>
+                      <p class="small mb-0 ms-2">Author: {{ comment.authorName }}</p>
                     </div>
                   </div>
                 </div>

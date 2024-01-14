@@ -7,6 +7,8 @@ export interface IArticle {
   definition: any;
   categoryId: number;
   isLiked: boolean;
+  likeCount: number;
+  authorName: string;
 }
 
 export interface IMicroArticle {
@@ -16,6 +18,8 @@ export interface IMicroArticle {
   categoryId: number;
   createdAt: string;
   authorId: string;
+  authorName: string;
+  likeCount: number;
 }
 
 export interface IGetArticleTitlesDto {
@@ -36,6 +40,8 @@ export interface IGetArticle {
   contents: string;
   categoryId: number;
   isLiked: boolean;
+  likeCount: number;
+  autorName: string;
 }
 
 export interface IComment {

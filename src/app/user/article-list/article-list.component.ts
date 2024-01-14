@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { ArticleFilterOption, IMicroArticle, SortingType } from 'src/app/shared/models/article.model';
 import { DeleteArticles, GetArticles } from '../store/user.action';
 import { SelectionModel } from '@angular/cdk/collections';
-import { GetCategories } from '../category-list/store/category.action';
 import { CategoryState } from '../category-list/store/category.state';
 import { ICategory } from 'src/app/shared/models/category.model';
 import { PageEvent } from '@angular/material/paginator';
@@ -19,7 +18,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrl: './article-list.component.scss',
 })
 export class ArticleListComponent {
-  public displayedColumns = ['id', 'title', 'category', 'createdAt', 'edit', 'select'];
+  public displayedColumns = ['id', 'title', 'category', 'createdAt', 'likeCount', 'edit', 'select'];
   public selection = new SelectionModel<IMicroArticle>(true, []);
   public filterOptions = [
     ArticleFilterOption.Like,

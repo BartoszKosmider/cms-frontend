@@ -63,15 +63,15 @@ export class ArticleService {
     return of([
       {
         id: 1,
-        content: 'chujowe',
+        content: 'nie podoba mi sie',
         authorId: 'guid1',
-        authorName: 'jebacz',
+        authorName: 'arturek69',
       },
       {
         id: 1,
-        content: 'zajebiste',
+        content: 'super!!!',
         authorId: 'guid2',
-        authorName: 'spocony_fanatyk2011pl',
+        authorName: 'ten_drugi_co_ukradł_księzyc',
       },
     ]);
   }

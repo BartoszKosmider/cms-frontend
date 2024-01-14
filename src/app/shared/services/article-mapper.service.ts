@@ -13,6 +13,8 @@ export class ArticleMapperService {
       definition: JSON.parse(dto.contents),
       categoryId: dto.categoryId,
       isLiked: dto.isLiked,
+      likeCount: dto.likeCount,
+      authorName: dto.autorName,
     };
   }
 }
