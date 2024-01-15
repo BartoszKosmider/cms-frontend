@@ -1,14 +1,15 @@
 import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import * as _ from "lodash";
-import { ClearArticle, DisLikeArticle, GetArticle, GetArticleComments, LikeArticle, SaveArticle, SaveArticleComment, UpdateArticle } from "./article.action";
+import { ClearArticle, DeleteArticleComment, DisLikeArticle, GetArticle, GetArticleComments, LikeArticle, SaveArticle, SaveArticleComment, UpdateArticle } from "./article.action";
 import { IArticle, IComment } from "src/app/shared/models/article.model";
 import { ArticleService } from '../../shared/services/article.service';
 import { Observable, exhaustMap, of } from "rxjs";
 import { ArticleMapperService } from "src/app/shared/services/article-mapper.service";
 import { UserInteractionsService } from "src/app/shared/user-interactions/user-interactions.service";
-import { insertItem, patch, updateItem } from "@ngxs/store/operators";
+import { insertItem, patch, removeItem, updateItem } from "@ngxs/store/operators";
 import { Navigate } from "@ngxs/router-plugin";
+import { AuthService } from "src/app/shared/auth/auth.service";
 
 export interface IArticleState {
   article?: IArticle,
@@ -28,6 +29,7 @@ export class ArticleState {
     private articleService: ArticleService,
     private articleMapperService: ArticleMapperService,
     private userInteractionsService: UserInteractionsService,
+    private authService: AuthService,
   ) { }
 
   @Selector()
@@ -81,10 +83,10 @@ export class ArticleState {
 
   @Action(GetArticleComments)
   public getArticleComments(ctx: StateContext<IArticleState>, action: GetArticleComments): Observable<any> {
-    return this.articleService.getArticleComments(action.articleId, action.timestamp, action.limit, action.offset).pipe(
-      exhaustMap(comments => {
+    return this.articleService.getArticleComments(action.articleId).pipe(
+      exhaustMap(result => {
         ctx.patchState({
-          comments: comments,
+          comments: result.commentList,
         });
 
         return of();
@@ -97,13 +99,31 @@ export class ArticleState {
     return this.articleService.saveArticleComment(action.articleId, action.dto).pipe(
       exhaustMap(comment => {
         ctx.setState(patch<IArticleState>({
-          comments: insertItem(comment),
+          comments: insertItem({
+            id: comment,
+            contents: action.dto.contents,
+            author: <string>this.authService.getUserName(),
+          }),
         }));
 
         return of();
       }),
     );
   }
+
+  @Action(DeleteArticleComment)
+  public deleteArticleComment(ctx: StateContext<IArticleState>, action: DeleteArticleComment): Observable<any> {
+    return this.articleService.deleteArticleComment(action.commentId).pipe(
+      exhaustMap(() => {
+        ctx.setState(patch<IArticleState>({
+          comments: removeItem(x => x.id === action.commentId),
+        }));
+
+        return of();
+      }),
+    );
+  }
+
 
   @Action(ClearArticle)
   public clearArticle(ctx: StateContext<IArticleState>): void{

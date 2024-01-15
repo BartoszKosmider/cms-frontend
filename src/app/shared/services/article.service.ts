@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IComment, IGetArticle, IGetArticleTitlesDto, IGetMicroArticlesList, IMicroArticle, ISaveArticle, ISaveArticleComment, SortingType } from '../models/article.model';
+import { IComment, IGetArticle, IGetArticleTitlesDto, IGetComments, IGetMicroArticlesList, IMicroArticle, ISaveArticle, ISaveArticleComment, SortingType } from '../models/article.model';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
-  private baseArticlePath = 'api/article'
-  private baseArticleLikePath = 'api/likes'
+  private baseArticlePath = 'api/article';
+  private baseArticleLikePath = 'api/likes';
+  private baseArticleCommentPath = 'api/comment';
 
   constructor(
     private http: HttpClient,
@@ -59,34 +60,16 @@ export class ArticleService {
     return this.http.put<any>(this.baseArticlePath + '/' + articleId, article);
   }
 
-  public getArticleComments(articleId: number, timestamp: string, limit: number, offset: number): Observable<IComment[]> {
-    return of([
-      {
-        id: 1,
-        content: 'nie podoba mi sie',
-        authorId: 'guid1',
-        authorName: 'arturek69',
-      },
-      {
-        id: 1,
-        content: 'super!!!',
-        authorId: 'guid2',
-        authorName: 'ten_drugi_co_ukradł_księzyc',
-      },
-    ]);
+  public getArticleComments(articleId: number): Observable<IGetComments> {
+    return this.http.get<IGetComments>(this.baseArticleCommentPath + '/' + articleId);
   }
 
-  public saveArticleComment(articleId: number, dto: ISaveArticleComment): Observable<IComment> {
-    // return this.http.post<any>(this.basePath + '/' + articleId + '/comment', <ISaveArticleComment>{
-    //   content: content,
-    // });
+  public saveArticleComment(articleId: number, dto: ISaveArticleComment): Observable<number> {
+    return this.http.post<number>(this.baseArticleCommentPath + '/' + articleId, dto);
+  }
 
-    return of({
-      id: 2137,
-      content: dto.content,
-      authorId: '<guid>',
-      authorName: '<authorName>',
-    },);
+  public deleteArticleComment(commentId: number): Observable<any> {
+    return this.http.delete<any>(this.baseArticleCommentPath + '/' + commentId);
   }
 
   public likeArticle(articleId: number): Observable<any> {

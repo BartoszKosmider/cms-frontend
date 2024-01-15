@@ -46,13 +46,16 @@ export interface IGetArticle {
 
 export interface IComment {
   id: number;
-  content: string;
-  authorId: string;
-  authorName: string;
+  contents: string;
+  author: string;
+}
+
+export interface IGetComments {
+  commentList: IComment[];
 }
 
 export interface ISaveArticleComment {
-  content: string;
+  contents: string;
 }
 
 export interface IGetMicroArticlesList {

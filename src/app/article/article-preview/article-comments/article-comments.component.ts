@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { GetArticleComments, SaveArticleComment } from '../../store/article.action';
+import { DeleteArticleComment, GetArticleComments, SaveArticleComment } from '../../store/article.action';
 import * as moment from 'moment';
 import { ArticleState } from '../../store/article.state';
 import { Observable, Subject, distinctUntilChanged, takeUntil } from 'rxjs';
@@ -18,9 +18,8 @@ export class ArticleCommentsComponent implements OnInit, OnDestroy {
     comment: new FormControl<string>('', [Validators.required])
   });
   public isAuthenticated = false;
+  public authorName?;
 
-  private limit = 20;
-  private offset = 0;
   private destroy$ = new Subject<void>();
 
   @Input()
@@ -34,10 +33,11 @@ export class ArticleCommentsComponent implements OnInit, OnDestroy {
     private authService: AuthService,
   ) {
     this.isAuthenticated = this.authService.isAuthenticated();
+    this.authorName = this.authService.getUserName();
   }
 
   public ngOnInit(): void {
-    this.store.dispatch(new GetArticleComments(this.articleId, moment().toString(), this.limit, this.offset));
+    this.store.dispatch(new GetArticleComments(this.articleId));
   }
 
   public ngOnDestroy(): void {
@@ -51,12 +51,16 @@ export class ArticleCommentsComponent implements OnInit, OnDestroy {
     }
 
     this.store.dispatch(new SaveArticleComment(this.articleId, <ISaveArticleComment>{
-      content: this.commentForm.controls.comment.value,
+      contents: this.commentForm.controls.comment.value,
     })).pipe(
       takeUntil(this.destroy$),
       distinctUntilChanged(),
     ).subscribe(() => {
       this.commentForm.reset();
     });
+  }
+
+  public deleteComment(commentId: number): void {
+    this.store.dispatch(new DeleteArticleComment(commentId));
   }
 }

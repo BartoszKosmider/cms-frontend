@@ -17,17 +17,17 @@ export class UpdateArticle {
 
 export class GetArticleComments {
   public static readonly type = '[Article] Get article comments';
-  constructor(
-    public articleId: number,
-    public timestamp: string,
-    public limit: number,
-    public offset: number,
-  ) { }
+  constructor(public articleId: number) { }
 }
 
 export class SaveArticleComment {
   public static readonly type = '[Article] Save article comment';
   constructor(public articleId: number, public dto: ISaveArticleComment) { }
+}
+
+export class DeleteArticleComment {
+  public static readonly type = '[Article] Delete article comment';
+  constructor(public commentId: number) { }
 }
 
 export class ClearArticle {
