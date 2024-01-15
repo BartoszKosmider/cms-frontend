@@ -58,3 +58,13 @@ export class DeletePage {
   public constructor(public pageId: string) { }
 }
 
+export class SaveComponentToMove {
+  public static readonly type = '[Site] Save component to move';
+  public constructor(
+    public pageId: string,
+    public rowId: string,
+    public gridId: string,
+    public componentId: string,
+  ) { }
+}
+
