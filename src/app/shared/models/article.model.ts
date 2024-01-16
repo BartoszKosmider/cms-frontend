@@ -23,7 +23,12 @@ export interface IMicroArticle {
 }
 
 export interface IGetArticleTitlesDto {
-  articlesIdToTitleMap: NumericDictionary<string>;
+  articles: IArticleIdTitle[];
+}
+
+export interface IArticleIdTitle {
+  id: number,
+  title: string;
 }
 
 export interface ISaveArticle {

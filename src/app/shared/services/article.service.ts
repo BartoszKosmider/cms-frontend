@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IComment, IGetArticle, IGetArticleTitlesDto, IGetComments, IGetMicroArticlesList, IMicroArticle, ISaveArticle, ISaveArticleComment, SortingType } from '../models/article.model';
-import { Observable, of } from 'rxjs';
+import { IGetArticle, IGetArticleTitlesDto, IGetComments, IGetMicroArticlesList, IMicroArticle, ISaveArticle, ISaveArticleComment, SortingType } from '../models/article.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,16 +24,11 @@ export class ArticleService {
   }
 
   public getArticlesByTitle(title: string): Observable<IGetArticleTitlesDto> {
-    // return this.http.get<IMicroArticle>(this.basePath + articleId);
+    const params = {
+      title: title,
+    };
 
-    return of(<IGetArticleTitlesDto>{
-      articlesIdToTitleMap: {
-        0: 'nazwa 1',
-        1: 'nazwa 2 ',
-        2: 'nazwa 3 ',
-        3: 'nazwa 4 ',
-      }
-    });
+    return this.http.get<IGetArticleTitlesDto>(this.baseArticlePath + '/id-title-map/' + 5, {params: params});
   }
 
   public getMicroArticles(sortingType: SortingType, numberOfElements = 20): Observable<IGetMicroArticlesList> {

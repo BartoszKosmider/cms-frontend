@@ -1,7 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Validators } from 'ngx-editor';
+import { ICategory } from 'src/app/shared/models/category.model';
+import { duplicateNameValidator } from 'src/app/shared/validation/form-validators/form-validators';
 
 @Component({
   selector: 'app-new-category-dialog',
@@ -9,19 +11,23 @@ import { Validators } from 'ngx-editor';
   styleUrl: './new-category-dialog.component.scss',
 })
 export class NewCategoryDialogComponent {
-  public categoryControl = new FormControl<string>('', [Validators.required()]);
+  public categoryForm = new FormGroup({
+    newCategory: new FormControl<string>('',
+      [Validators.required(), duplicateNameValidator(this.data.map(c => c.category))]),
+  });
 
   constructor(
     public dialogRef: MatDialogRef<NewCategoryDialogComponent, string>,
-    @Inject(MAT_DIALOG_DATA) public data: string[],
+    @Inject(MAT_DIALOG_DATA) public data: ICategory[],
   ) {
 
     console.log('todo walidacja zeby nie dodac 2 tych samych kategorii', this.data);
    }
 
   public save(): void {
-    if (!this.categoryControl.invalid) {
-      this.dialogRef.close(<string>this.categoryControl.value)
+    this.categoryForm.markAllAsTouched();
+    if (!this.categoryForm.invalid) {
+      this.dialogRef.close(<string>this.categoryForm.controls.newCategory.value)
     }
   }
 

@@ -20,8 +20,8 @@
             <mat-autocomplete #auto="matAutocomplete"
               (optionSelected)="onSelect($event)"
               [displayWith]="showTitle">
-              @for (title of articlesIdToTitleMap | keyvalue; track title) {
-                <mat-option [value]="title">{{title.value}}</mat-option>
+              @for (entry of articlesIdToTitleMap; track entry) {
+                <mat-option [value]="entry">{{entry.title}}</mat-option>
               }
             </mat-autocomplete>
           </div>

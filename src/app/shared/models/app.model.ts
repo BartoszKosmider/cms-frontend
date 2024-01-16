@@ -73,6 +73,7 @@ export enum BackgroundPattern {
 
 export interface IBaseDialogData {
   title: string;
+  message?: string;
 }
 
 export interface IBaseQuestionDialogData {

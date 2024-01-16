@@ -1,8 +1,23 @@
-<div>
+<div class="container">
   <h1 mat-dialog-title>Add new category</h1>
   <div mat-dialog-content>
-    <input
-      [formControl]="categoryControl">
+    <form [formGroup]="categoryForm"
+      (submit)="save()">
+      <div class="mb-3">
+        <label for="newCategory">New category</label>
+        <input class="form-control form-control-sm"
+          #newCategory
+          id="newCategory"
+          type="text"
+          formControlName="newCategory">
+
+        <app-form-control-validation
+          [form]="categoryForm"
+          [controlName]="'newCategory'"
+          [controlRef]="newCategory">
+        </app-form-control-validation>
+      </div>
+    </form>
   </div>
 
   <div mat-dialog-actions>

@@ -72,7 +72,6 @@ export class ArticleListComponent {
   }
 
   public pageChanged($event: PageEvent) {
-    console.log('changed', $event)
   }
 
   public refreshArticles(): void {

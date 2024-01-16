@@ -5,9 +5,9 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { ArticleService } from 'src/app/shared/services/article.service';
-import { NumericDictionary } from 'lodash';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Subject } from 'rxjs';
+import { IArticleIdTitle } from 'src/app/shared/models/article.model';
 
 @Component({
   selector: 'app-micro-article-editor',
@@ -17,7 +17,7 @@ import { Subject } from 'rxjs';
 })
 export class MicroArticleEditorComponent extends BaseEditor<IMicroArticleComponent> implements OnInit, OnDestroy {
   public articleTitle = new FormControl();
-  public articlesIdToTitleMap?: NumericDictionary<string>;
+  public articlesIdToTitleMap?: IArticleIdTitle[];
 
   private destroy$ = new Subject<void>();
 
@@ -28,9 +28,9 @@ export class MicroArticleEditorComponent extends BaseEditor<IMicroArticleCompone
   }
 
   public ngOnInit(): void {
-    this.articleTitle.setValue({
-      key: this.value.articleId,
-      value: this.value.articleTitle,
+    this.articleTitle.setValue(<IArticleIdTitle>{
+      id: this.value.articleId,
+      title: this.value.articleTitle,
     });
     this.articleTitle.updateValueAndValidity();
 
@@ -40,8 +40,10 @@ export class MicroArticleEditorComponent extends BaseEditor<IMicroArticleCompone
       debounceTime(500),
       takeUntil(this.destroy$),
     ).subscribe(title => {
-      this.articleService.getArticlesByTitle(title).subscribe(model => {
-        this.articlesIdToTitleMap = model.articlesIdToTitleMap;
+      this.articleService.getArticlesByTitle(title).pipe(
+        takeUntil(this.destroy$),
+      ).subscribe(model => {
+        this.articlesIdToTitleMap = model.articles;
       });
     });
   }
@@ -52,11 +54,11 @@ export class MicroArticleEditorComponent extends BaseEditor<IMicroArticleCompone
   }
 
   public onSelect($event: MatAutocompleteSelectedEvent): void {
-    const value = Number($event.option.value.key);
-    this.value.articleId = value;
+    const value = <IArticleIdTitle>$event.option.value;
+    this.value.articleId = value.id;
   }
 
-  public showTitle(value: any): string {
-    return value.value;
+  public showTitle(value: IArticleIdTitle): string {
+    return value.title;
   }
 }

@@ -44,7 +44,6 @@ export interface IBlockComponent extends IBaseComponent, IBaseGridComponent {
 
 export interface IImageComponent extends IBaseComponent, IBaseGridComponent {
   imgPath?: string;
-  description?: string;
 }
 
 export interface IMicroArticleComponent extends IBaseComponent, IBaseGridComponent {

@@ -43,6 +43,9 @@ export class FormControlValidationComponent {
     if (errors['email']) {
       return 'E-mail is invalid';
     }
+    if (errors['duplicate']) {
+      return 'Name: ' + errors['duplicate'].value + ' exists';
+    }
 
     return;
   }
