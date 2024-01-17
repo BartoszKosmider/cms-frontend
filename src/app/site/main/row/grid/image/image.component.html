@@ -19,12 +19,9 @@
   [ngClass]="component.enableBackgroundPattern ? component.backgroundPattern : null"
   >
   <div>
-    <figure>
-      <img
-        class="figure-img img-fluid rounded"
-        [src]="component.imgPath"
-        style="width: 100%; height: auto;"
-        (click)="isEditMode ? null : openInDialog()"/>
-    </figure>
+    <img
+      [src]="component.imgPath"
+      style="width: 100%; height: auto;"
+      (click)="isEditMode ? null : openInDialog()"/>
   </div>
 </div>

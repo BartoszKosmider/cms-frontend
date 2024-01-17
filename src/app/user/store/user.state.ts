@@ -18,6 +18,7 @@ import { AuthService } from "src/app/shared/auth/auth.service";
 export interface IUserState {
   categories?: ICategory[];
   articles?: IMicroArticle[];
+  totalArticleCount?: number;
   admins?: string[]
   token?: string;
 }
@@ -56,12 +57,22 @@ export class UserState {
     return state.admins;
   }
 
+  @Selector()
+  public static totalArticleCount(state: IUserState): number | undefined {
+    return state.totalArticleCount;
+  }
+
   @Action(GetArticles)
   public getArticles(ctx: StateContext<IUserState>, action: GetArticles): Observable<any> {
-    return this.articleService.getMicroArticles(action.sortingType).pipe(
-      exhaustMap(({articles}) => {
+    return this.articleService.getMicroArticles(
+      action.sortingType,
+      action.numberOfElements,
+      action.pageIndex,
+    ).pipe(
+      exhaustMap(({articles, totalArticleCount}) => {
         ctx.patchState({
           articles: articles,
+          totalArticleCount: totalArticleCount,
         });
 
         return of();

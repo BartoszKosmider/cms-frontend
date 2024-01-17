@@ -65,6 +65,7 @@ export interface ISaveArticleComment {
 
 export interface IGetMicroArticlesList {
   articles: IMicroArticle[];
+  totalArticleCount: number;
 }
 
 export enum SortingType {

@@ -28,6 +28,7 @@ export interface IRow extends IBaseComponent {
 export interface IGrid extends IBaseComponent {
   components: GridComponentType[];
   width: number;
+  widthMobile: number;
 }
 
 export type GridComponentType = IBlockComponent | IImageComponent | IMicroArticleComponent | ITwitterComponent;

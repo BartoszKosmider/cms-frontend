@@ -45,6 +45,7 @@
           </div>
 
           <div>
+            <h4>Desktop</h4>
             @for (item of getRange(); track $index) {
                 <label for="columnRange">Column Width {{ item + 1 }}</label>
                 <div class="input-group mb-3">
@@ -59,6 +60,27 @@
                   <div class="input-group-append column-width-container"
                     id="columnRange-described"
                     >{{value.gridItems[item].width}}
+                  </div>
+                </div>
+            }
+          </div>
+
+          <div>
+            <h4>Mobile</h4>
+            @for (item of getRange(); track $index) {
+                <label for="columnRangeMobile">Column Width {{ item + 1 }}</label>
+                <div class="input-group mb-3">
+                  <input type="range"
+                    class="form-control form-control-sm form-range"
+                    [min]="1"
+                    [max]="12"
+                    id="columnRangeMobile"
+                    [(ngModel)]="value.gridItems[item].widthMobile"
+                    aria-describedby="columnRangeMobile-described">
+
+                  <div class="input-group-append column-width-container"
+                    id="columnRangeMobile-described"
+                    >{{value.gridItems[item].widthMobile}}
                   </div>
                 </div>
             }

@@ -19,10 +19,7 @@ export class NewCategoryDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<NewCategoryDialogComponent, string>,
     @Inject(MAT_DIALOG_DATA) public data: ICategory[],
-  ) {
-
-    console.log('todo walidacja zeby nie dodac 2 tych samych kategorii', this.data);
-   }
+  ) { }
 
   public save(): void {
     this.categoryForm.markAllAsTouched();

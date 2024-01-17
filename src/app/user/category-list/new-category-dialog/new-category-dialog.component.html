@@ -22,13 +22,14 @@
 
   <div mat-dialog-actions>
     <button mat-button
+      cdkFocusInitial
       (click)="close()"
       >Cancel
     </button>
     <button mat-raised-button
       [color]="'primary'"
       (click)="save()"
-      cdkFocusInitial
+      [disabled]="categoryForm.invalid"
       >Save
     </button>
   </div>

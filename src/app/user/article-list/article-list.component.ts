@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { UserInteractionsService } from 'src/app/shared/user-interactions/user-interactions.service';
 import { UserState } from '../store/user.state';
@@ -8,7 +8,7 @@ import { DeleteArticles, GetArticles } from '../store/user.action';
 import { SelectionModel } from '@angular/cdk/collections';
 import { CategoryState } from '../category-list/store/category.state';
 import { ICategory } from 'src/app/shared/models/category.model';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { OrderBy } from 'src/app/shared/models/app.model';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -29,6 +29,7 @@ export class ArticleListComponent {
     OrderBy.ASC,
     OrderBy.DESC,
   ];
+  public pageSize = 10;
 
   public filterForm = new FormGroup({
     option: new FormControl(ArticleFilterOption.Name),
@@ -41,11 +42,17 @@ export class ArticleListComponent {
   @Select(CategoryState.categories)
   public categories$?: Observable<ICategory[]>;
 
+  @Select(UserState.totalArticleCount)
+  public totalArticleCount$?: Observable<number>;
+
+  @ViewChild('paginator')
+  public paginator?: MatPaginator;
+
   constructor(
     private userInteractionsService: UserInteractionsService,
     private store: Store,
   ) {
-    this.store.dispatch(new GetArticles(SortingType.NameAscending));
+    this.store.dispatch(new GetArticles(SortingType.NameAscending, this.pageSize, 0));
   }
 
   public deleteSelected(): void {
@@ -71,7 +78,9 @@ export class ArticleListComponent {
       : this.selection.setSelection(...articles);
   }
 
-  public pageChanged($event: PageEvent) {
+  public pageChanged() {
+    this.refreshArticles();
+    this.selection.clear();
   }
 
   public refreshArticles(): void {
@@ -92,6 +101,8 @@ export class ArticleListComponent {
       sortingType = SortingType.LikeDescending;
     }
 
-    this.store.dispatch(new GetArticles(sortingType));
+    const pageSize = this.paginator?.pageSize;
+    const pageIndex = this.paginator?.pageIndex;
+    this.store.dispatch(new GetArticles(sortingType, <number>pageSize, <number>pageIndex));
   }
 }

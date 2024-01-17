@@ -22,7 +22,7 @@
   [ngClass]="row.enableBackgroundPattern ? row.backgroundPattern : null"
   >
   <div
-    [class]="'col-' + grid.width + ' ' + row.verticalAlignment"
+    [class]="'col-lg-' + grid.width + ' ' + row.verticalAlignment + ' col-sm-' + grid.widthMobile"
     *ngFor="let grid of row.gridItems; trackBy: trackByIndex">
 
     <app-grid

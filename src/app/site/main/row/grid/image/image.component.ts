@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { Select } from '@ngxs/store';
 import * as _ from 'lodash';
-import { Observable, Subject, distinctUntilChanged, takeUntil, tap } from 'rxjs';
+import { Observable, Subject, distinctUntilChanged, takeUntil } from 'rxjs';
 import { IImageDialogData } from 'src/app/shared/models/app.model';
 import { IImageComponent } from 'src/app/shared/models/site.model';
 import { DialogImageComponent } from 'src/app/shared/user-interactions/dialog-image/dialog-image.component';

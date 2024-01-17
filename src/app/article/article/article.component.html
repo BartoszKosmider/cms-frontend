@@ -17,22 +17,21 @@
 
     @if(categories$ | async; as categories) {
       <div class="mb-3">
-        <label for="category">Category</label>
+        <label for="categoryId">Category</label>
         <select class="form-select form-select-sm"
-          #category
-          id="category"
+          #categoryId
+          id="categoryId"
           formControlName="categoryId">
 
           @for (category of categories; track category) {
             <option [value]="category.id">{{category.category}}</option>
           }
-
-          <app-form-control-validation
-            [form]="form"
-            [controlName]="'category'"
-            [controlRef]="category">
-          </app-form-control-validation>
         </select>
+        <app-form-control-validation
+            [form]="form"
+            [controlName]="'categoryId'"
+            [controlRef]="categoryId">
+          </app-form-control-validation>
       </div>
     }
 

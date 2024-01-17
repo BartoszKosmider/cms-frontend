@@ -57,8 +57,6 @@ export class GridComponent {
   }
 
   public drop(event: CdkDragDrop<GridComponentType[]>) {
-    console.log('drop', event.previousContainer, event.container)
-
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -80,9 +78,5 @@ export class GridComponent {
         );
       }
     }
-  }
-
-  public startDragging($event: any): void {
-    console.log('start dragging', $event);
   }
 }

@@ -35,6 +35,7 @@ export const getGrid = (): IGrid => <IGrid>{
   ...getBaseComponent(ComponentType.Grid),
   components: [],
   width: 12,
+  widthMobile: 12,
 };
 
 export const getRow = (): IRow => <IRow>{

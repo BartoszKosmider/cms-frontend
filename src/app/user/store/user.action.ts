@@ -3,7 +3,7 @@ import { ILoginDto, IRegisterUserDto } from "src/app/shared/models/user.model";
 
 export class GetArticles {
   public static readonly type = '[User] Get articles';
-  constructor(public sortingType: SortingType) { }
+  constructor(public sortingType: SortingType, public numberOfElements: number, public pageIndex: number) { }
 }
 
 export class DeleteArticles {

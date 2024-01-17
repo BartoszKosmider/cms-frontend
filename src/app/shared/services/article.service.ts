@@ -31,9 +31,10 @@ export class ArticleService {
     return this.http.get<IGetArticleTitlesDto>(this.baseArticlePath + '/id-title-map/' + 5, {params: params});
   }
 
-  public getMicroArticles(sortingType: SortingType, numberOfElements = 20): Observable<IGetMicroArticlesList> {
+  public getMicroArticles(sortingType: SortingType, numberOfElements: number, pageIndex: number): Observable<IGetMicroArticlesList> {
     const params = {
       order: sortingType,
+      page: pageIndex,
     }
 
     return this.http.get<IGetMicroArticlesList>(this.baseArticlePath + '/list/' + numberOfElements, {params: params});

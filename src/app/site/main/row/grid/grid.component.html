@@ -26,8 +26,7 @@
 
   @for (component of grid.components; track $index) {
     <div cdkDrag
-      [cdkDragDisabled]="!(isEditMode$ | async)"
-      (started)="startDragging($event)">
+      [cdkDragDisabled]="!(isEditMode$ | async)">
       <div class="cms-example-custom-placeholder"
         *cdkDragPlaceholder>
       </div>
