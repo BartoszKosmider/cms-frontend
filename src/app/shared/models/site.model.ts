@@ -39,7 +39,7 @@ export interface IBlockComponent extends IBaseComponent, IBaseGridComponent {
   fontFamily?: string;
   fontColor?: string;
   textAlign?: string;
-  verticalAlign?: string;
+  // verticalAlign?: string;
   link?: string;
 }
 

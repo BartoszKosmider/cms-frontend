@@ -54,7 +54,7 @@ export const getBlockComponent = (): IBlockComponent => <IBlockComponent>{
   fontFamily: 'sans-serif',
   fontColor: BLACK_COLOR,
   textAlign: 'center',
-  verticalAlign: 'middle',
+  // verticalAlign: 'middle',
 };
 
 export const getImageComponent = (): IImageComponent => <IImageComponent>{
