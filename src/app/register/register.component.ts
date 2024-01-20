@@ -5,6 +5,7 @@ import { RegisterAdmin, RegisterUser } from '../user/store/user.action';
 import { IRegisterUserDto } from '../shared/models/user.model';
 import { AuthService } from '../shared/auth/auth.service';
 import { Navigate } from '@ngxs/router-plugin';
+import { digitCharacterRequired, lowerCharacterRequired, specialCharacterRequired, upperCharacterRequired } from '../shared/validation/form-validators/form-validators';
 
 @Component({
   selector: 'app-register',
@@ -15,10 +16,11 @@ export class RegisterComponent {
   private isRegisterAdmin = false;
 
   public registerForm = new FormGroup({
-    username: new FormControl<string>('Admin', [Validators.required]),
-    password: new FormControl<string>('Password#=123', [Validators.required]),
-    name: new FormControl<string>('todo', [Validators.required]),
-    email: new FormControl<string>('aaa@bbb.com', [Validators.required, Validators.email]),
+    username: new FormControl<string>('', [Validators.required]),
+    password: new FormControl<string>('', [Validators.required, Validators.minLength(6), digitCharacterRequired(),
+      upperCharacterRequired(), lowerCharacterRequired(), specialCharacterRequired()]),
+    name: new FormControl<string>('', [Validators.required]),
+    email: new FormControl<string>('', [Validators.required, Validators.email]),
   });
 
   constructor(

@@ -46,6 +46,21 @@ export class FormControlValidationComponent {
     if (errors['duplicate']) {
       return 'Name: ' + errors['duplicate'].value + ' exists';
     }
+    if (errors['minlength']) {
+      return 'Min value length: ' + errors['minlength'].requiredLength;
+    }
+    if (errors['digit']) {
+      return 'At least one digit is required';
+    }
+    if (errors['specialCharacter']) {
+      return 'At least one special character is required';
+    }
+    if (errors['lowerCharacter']) {
+      return 'At least one lowercase letter is required';
+    }
+    if (errors['upperCharacter']) {
+      return 'At least one uppercase letter is required';
+    }
 
     return;
   }

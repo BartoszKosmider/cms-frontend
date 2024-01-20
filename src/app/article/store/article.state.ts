@@ -141,6 +141,7 @@ export class ArticleState {
           article: <IArticle>{
             ...article,
             isLiked: true,
+            likeCount: (article?.likeCount ?? 0) + 1
           }
         })
         return of();
@@ -157,6 +158,7 @@ export class ArticleState {
           article: <IArticle>{
             ...article,
             isLiked: false,
+            likeCount: (article?.likeCount ?? 0) - 1
           }
         });
 

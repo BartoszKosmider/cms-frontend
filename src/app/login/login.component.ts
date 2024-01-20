@@ -12,8 +12,8 @@ import { ILoginDto } from '../shared/models/user.model';
 })
 export class LoginComponent {
   public loginForm = new FormGroup({
-    username: new FormControl<string>('Admin', [Validators.required]),
-    password: new FormControl<string>('Password#=123', [Validators.required]),
+    username: new FormControl<string>('', [Validators.required]),
+    password: new FormControl<string>('', [Validators.required]),
   });
 
   constructor(
