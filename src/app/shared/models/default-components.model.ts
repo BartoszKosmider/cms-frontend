@@ -73,7 +73,7 @@ export const getMicroArticleComponent = (): IMicroArticleComponent => <IMicroArt
 
 export const getTwitterComponent = (): ITwitterComponent => <ITwitterComponent>{
   ...getBaseComponent(ComponentType.Twitter),
-  twitterPostHtml: 'dupa',
+  twitterPostHtml: 'Insert twitter post URL...',
   enableBackgroundColor: true,
   backgroundColor: WHITE_COLOR,
 };

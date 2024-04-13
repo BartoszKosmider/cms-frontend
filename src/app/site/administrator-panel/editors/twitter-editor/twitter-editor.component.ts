@@ -34,7 +34,6 @@ export class TwitterEditorComponent extends BaseEditor<ITwitterComponent> implem
         takeUntil(this.destroy$),
         map(response => response.html.replace('<script async src=\"https://platform.twitter.com/widgets.js\" charset=\"utf-8\"></script>', ''))
       ).subscribe(html => {
-        console.log('html', html);
         this.value.twitterPostHtml = html;
         (<any>window).twttr.widgets.load();
       })
