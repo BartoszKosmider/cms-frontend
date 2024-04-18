@@ -1,4 +1,6 @@
 URUCHOMIENIE APLIKACJI PRZY UŻYCIU DOCKERA
+
+WINDOWS + MAC
 ```
 services:
 
@@ -21,6 +23,35 @@ services:
     ports:
       - "80:80"
 ```
+LINUX
+https://github.com/docker/for-linux/issues/264#issuecomment-784985736
+```
+services:
+
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+    extra_hosts:
+     - "host.docker.internal:host-gateway"
+  cms-app:
+    image: bartoszprogramista/cms-server
+    ports:
+      - "5000:5000"
+    environment:
+      DB_CONNECTION_STRING: Host=host.docker.internal;Database=dupa;Username=postgres;Password=postgres
+      ASPNETCORE_URLS: http://+:5000
+    extra_hosts:
+     - "host.docker.internal:host-gateway"
+  cms-ui:
+    image: bartoszprogramista/cms-ui
+    ports:
+      - "80:80"
+    extra_hosts:
+     - "host.docker.internal:host-gateway"
+```
 zapisanie to w jakimś pliku yml i uruchomienei komendy
 ```
 docker compose -f <nazwa pliku>.yml up
@@ -42,7 +73,7 @@ jak chcecie zmieniać porty to należy również zmienić konfigurację nginx w 
 ```
 i zrestartować kontenery
 
-jak nie macie ustawionego host.docker.internal w pliku hosts to go dodajcie i ustawicie
+jak nie macie ustawionego host.docker.internal w pliku hosts to go dodajcie i ustawicie (rozwiązanie dla windowsa, dla linuxa lepiej w docker compose jak wyżej dodać extra_hosts)
 ```
 <adres ip pc> host.docker.internal 
 np. 192.168.1.103 host.docker.internal
