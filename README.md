@@ -85,6 +85,7 @@ dump znajduje się w tym repo pod plikiem db_dump.rar
 ```
 docker exec -i <nazwa kontenera pg> /bin/bash -c "PGPASSWORD=postgres psql --username postgres dupa" < db_dump.sql
 ```
+Dump nie zawiera tworzenia bazy, bazę danych należy samemu utworzyć zgodnie z nazwą podaną w konfiguracji
 Domyślne konto administratora:
 
 Login
